@@ -4,7 +4,7 @@ import RbacRouter from './rabc.routers'
 Vue.use(Router)
 
 const Home = resolve => require(['@/views/Home.vue'],resolve);
-const Login = resolve => require(['@views/Login'],resolve);
+const Login = resolve => require(['@/views/Login'],resolve);
 
  
 const baseRoutes  = [

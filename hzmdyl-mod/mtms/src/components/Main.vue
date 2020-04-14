@@ -50,23 +50,26 @@ export default {
         padding: 0;
         margin:0;
         border:0;
+        
     }
 
     .el-col-contentDiv-header{
         border:1px solid #99bbe8;
         height: 100%;
-        
+        background-color: #303133;
    }
     .el-col-contentDiv-footer{
         border:1px solid #99bbe8;
         height: 100%;
-        
+        background-color: #303133;
    }
     .el-col-contentDiv-left{
         border-left:1px solid #99bbe8;
         height: 100%;
-        
+        background-color: #303133;
+        padding-left:5px;
    }
+ 
     .el-col-contentDiv-right{
         border-right:1px solid #99bbe8;
         border-left:1px solid #99bbe8;

@@ -98,4 +98,49 @@ export default {
      -webkit-transform: rotate(0deg); 
      transform: rotate(0deg);
   }
+  
+  .leftTree .el-tree {
+    position: relative;
+    cursor: default;
+    background: #3f4043;
+    color: #ffffff;
+}
+  .leftTree .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+    background-color: #3f4043;
+}
+ 
+
+.leftTree .el-tree-node__content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 26px;
+    cursor: pointer;
+    background-color: #3f4043;
+}
+.leftTree .el-tree-node__content:hover {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 26px;
+    cursor: pointer;
+    background-color: #313335;
+}
+.leftTree .el-tree-node__content:active {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 26px;
+    cursor: pointer;
+    background-color: #3a3c3f;
+}
 </style>

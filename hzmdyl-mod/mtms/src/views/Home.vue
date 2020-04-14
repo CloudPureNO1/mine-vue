@@ -8,7 +8,20 @@
 import Mian from '@/components/Main'
 export default {
     components:{
-        'mtms-home':Mian
+        'mtms-main':Mian
     }
 }
 </script>
+
+<style scoped lang="scss">
+  .mtms-home {
+    font-size:  0.75rem;
+    height:100%;
+  }
+
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+
+    min-width: 200px;
+    min-height: 400px;
+  }
+</style>
