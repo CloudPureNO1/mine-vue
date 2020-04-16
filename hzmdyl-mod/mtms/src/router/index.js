@@ -8,12 +8,12 @@ const Login = resolve => require(['@/views/Login'],resolve);
 
  
 const baseRoutes  = [
-  {path : '/' , name : 'Home' , component : Home , meta : {title : '首页' , sign : 'Home'}},
+  {path : '/' , name : 'Home' , component : Home , meta : {title : '首页' , sign : 'Home'},children:RbacRouter},
   {path : '/login' , name : 'Login' , component : Login , meta : {title : '登录' , sign : 'Login'}} 
 ]
 
-const routes = baseRoutes.concat(RbacRouter);
-
+//const routes = baseRoutes.concat(RbacRouter);
+const routes=baseRoutes;
 export default new Router({
 routes
 })

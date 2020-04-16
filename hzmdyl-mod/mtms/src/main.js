@@ -6,6 +6,9 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+//引入阿里矢量图标
+import './assets/iconfont/iconfont.css'
+
 //引入Element UI
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';

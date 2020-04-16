@@ -8,3 +8,8 @@ body, html {
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
 }
+
+.icon-class{
+    font-size:22px;
+    color:#96989c
+}
