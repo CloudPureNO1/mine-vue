@@ -23,12 +23,11 @@
 </template>
 
 <script>
-import Collapse from '@/components/Collapse'
-import NavMenu from '@/components/NavMenu'
-import WorkSpace from '@/components/WorkSpace'
+import NavMenu from '@/components/layout/NavMenu'
+import WorkSpace from '@/components/layout/WorkSpace'
 export default {
+    name:'Main',
     components:{
-        'mtms-collapse':Collapse,
         'mtms-menu':NavMenu,
         'mtms-work':WorkSpace
     },

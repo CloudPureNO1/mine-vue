@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Mian from '@/components/Main'
+import Mian from '@/components/layout/Main'
 export default {
     components:{
         'mtms-main':Mian
