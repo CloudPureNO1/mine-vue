@@ -6,11 +6,46 @@
             </el-aside>
             <el-main class="cls-main">
                 <el-container class="cls-main-container">
-                    <el-header class="header">
-                        <div @click="exchange"  style="text-align: left;">
-                            <span v-show="isShow"   class="icon iconfont icon-zhankai icon-style"/>
-                            <span v-show="!isShow"  class="icon iconfont icon-shouqi icon-style"/>
-                        </div>
+                    <el-header class="header" style="text-align:right;"  ref="headerRef">
+                        <section @click="exchange"  style="text-align: center; float:left;width:40px;height:100%; background-color:#dfffff;display: flex;">
+                            <span v-show="isShow"   class="icon iconfont icon-zhankai icon-style" style="align-self: center;"/>
+                            <span v-show="!isShow"  class="icon iconfont icon-shouqi icon-style" />
+                        </section>
+                        <section style="float:left;height:100%;display: flex;">
+                            <el-breadcrumb separator-class="el-icon-arrow-right" style="align-self: center;">
+                            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+                            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+                            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+                            </el-breadcrumb>
+                        </section>
+                        <section style="height:100%;">
+                             <section style="float:right;height:100%;">
+                                <section style="height:50%;"> 
+                                    <el-dropdown>
+                                        <i class="el-icon-setting" style="margin-right: 15px"></i>
+                                        <el-dropdown-menu slot="dropdown">
+                                        <el-dropdown-item>查看</el-dropdown-item>
+                                        <el-dropdown-item>新增</el-dropdown-item>
+                                        <el-dropdown-item>删除</el-dropdown-item>
+                                        </el-dropdown-menu>
+                                    </el-dropdown>
+                                 </section>
+                                 <section style="height:50%;" >
+                                    <el-dropdown>
+                                        <i class="el-icon-caret-bottom" style="margin-right: 15px"></i>
+                                        <el-dropdown-menu slot="dropdown">
+                                        <el-dropdown-item>查看</el-dropdown-item>
+                                        <el-dropdown-item>新增</el-dropdown-item>
+                                        <el-dropdown-item>删除</el-dropdown-item>
+                                        </el-dropdown-menu>
+                                    </el-dropdown>
+                                 </section>
+                            </section>
+                            <section style="float:right;padding-right:10px;height:100%;">
+                                <el-avatar shape="circle" :size="avatarSize" :fit="fit" :src="avatarData.url"></el-avatar>
+                            </section>
+                        </section>
                     </el-header>
                     <el-main class="middler">
                          <mtms-work/>
@@ -34,7 +69,12 @@ export default {
     data(){
         return {
             asideWidth:'20%', 
-            isShow:false
+            isShow:false,
+            fit:'fill',
+            avatarSize:40,//默认
+            avatarData:{
+                url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+            }
         }
     },
     methods:{
@@ -45,8 +85,16 @@ export default {
             }else{
                 this.asideWidth='20%';
             }
-        }
+        },
+    },
+    created(){
+        this.$nextTick(function () {
+                // Code that will run only after the
+                // entire view has been rendered
+            this.avatarSize = Number.parseFloat(this.$refs.headerRef.height.replace('px',''))-5;
+        })
     } 
+    
 }
 </script>
 
@@ -107,7 +155,8 @@ export default {
    }
    .main .cls-main,.cls-main-container{
        height:100%;
-       padding-left:0px;
+      // padding-left:0px;
+        padding:0px 0px 0px 0px;
    }
    .cls-main-container .header{
        height:10%;
@@ -121,6 +170,7 @@ export default {
    }
    .cls-main-container .footer{
        height: 5%;
+       
    }
    .main .icon-style{
         font-size:30px;

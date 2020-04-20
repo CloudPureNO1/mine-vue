@@ -14,6 +14,10 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
+//虚拟标签
+import Fragment from 'vue-fragment'
+Vue.use(Fragment.Plugin)
+
 //全局引入css
 import '@/assets/css/home.css'
 /* eslint-disable no-new */

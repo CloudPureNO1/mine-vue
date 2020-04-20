@@ -3,20 +3,27 @@ Mock.setup({
     timeout: '200-600'
 });
 
-const rootData=[
-    {nodeId:'1001',nodeTitle:'系统管理',isLeaf:false,icon:'el-icon-menu',url:'', parent:'root'},
-    {nodeId:'1005',nodeTitle:'申报业务',isLeaf:false,icon:'el-icon-menu',url:'',parent:'root'}
-];
 
 const sysData=[
-        {nodeId:'1002',nodeTitle:'用户管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacUsers',parent:'1001'},
-        {nodeId:'1003',nodeTitle:'角色管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacRoles',parent:'1001'},
-        {nodeId:'1004',nodeTitle:'外部链接',isLeaf:true,icon:'el-icon-s-custom',url:'http://www.baidu.com/',parent:'1001'},
+    {nodeId:'1002',nodeTitle:'用户管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacUsers',parent:'1001'},
+    {nodeId:'1003',nodeTitle:'角色管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacRoles',parent:'1001'},
+    {nodeId:'1004',nodeTitle:'外部链接',isLeaf:true,icon:'el-icon-s-custom',url:'http://www.baidu.com/',parent:'1001'},
 ];
 
 const bizData=[
-   {nodeId:'1006',nodeTitle:'单位申报',isLeaf:true,icon:'el-icon-s-custom',url:'/dw',parent:'1005'},
-   {nodeId:'1007',nodeTitle:'人员申报',isLeaf:true,icon:'el-icon-s-custom',url:'/ry',parent:'1005'} 
+{nodeId:'1006',nodeTitle:'单位申报',isLeaf:true,icon:'el-icon-s-custom',url:'/dw',parent:'1005'},
+{nodeId:'1007',nodeTitle:'人员申报',isLeaf:true,icon:'el-icon-s-custom',url:'/ry',parent:'1005'} 
+];
+
+// const rootData=[
+//     {nodeId:'1001',nodeTitle:'系统管理',isLeaf:false,icon:'el-icon-menu',url:'', parent:'root',children:sysData},
+//     {nodeId:'1005',nodeTitle:'申报业务',isLeaf:false,icon:'el-icon-menu',url:'',parent:'root',children:bizData}
+// ];
+
+//采用异步加载
+const rootData=[
+    {nodeId:'1001',nodeTitle:'系统管理',isLeaf:false,icon:'el-icon-menu',url:'/sysManageRoot', parent:'root'},
+    {nodeId:'1005',nodeTitle:'申报业务',isLeaf:false,icon:'el-icon-menu',url:'/bizManageRoot',parent:'root'}
 ];
 
 let navData=(req)=>{

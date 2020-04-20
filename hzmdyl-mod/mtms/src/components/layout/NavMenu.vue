@@ -7,14 +7,12 @@
                 background-color="#545c64"
                 active-text-color="#ffd04b"
                 text-color="#ffffff"
-                :default-active="$route.path"
+                :default-active="this.$route.path"
                 @open="handleOpen"
                 @select="handleSelect"
                 > 
                    <nav-menu-item :menuDatas="navDatas"></nav-menu-item>  
-             
                </el-menu>
- 
            </el-col>
        </el-row>
    </div> 
@@ -42,13 +40,14 @@ export default {
     },
     methods:{
         handleOpen(index,indexPath){
-            console.log('open：>>>>index='+index+'>>>>indexPath='+indexPath);
+            //console.log('open：>>>>index='+index+'>>>>indexPath='+indexPath);
             this.loadNavData(index); 
-            console.log(this.navDatas);
+            //console.log(this.navDatas);
              
         },
         handleSelect(index,indexPath){
             console.log('select：>>>>index='+index+'>>>>indexPath='+indexPath);
+            this.$router.push(index);
         },
         handleUrl(url){
            // window.location.href=url;

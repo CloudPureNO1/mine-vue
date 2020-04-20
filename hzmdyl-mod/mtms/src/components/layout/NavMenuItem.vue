@@ -1,7 +1,7 @@
 <template>
-    <section>
-        <span v-for="item in menuDatas" :key="item.nodeId">
-            <el-menu-item v-if="item.isLeaf" :index="item.nodeId">
+    <fragment>
+        <fragment v-for="item in menuDatas" :key="item.nodeId">
+            <el-menu-item v-if="item.isLeaf" :index="item.url">
                 <template slot="title">
                     <i :class="item.icon"></i>
                     <span>{{item.nodeTitle}}</span>
@@ -18,8 +18,8 @@
                     <nav-menu-item :menuDatas="item.children"></nav-menu-item>      
                 </span>
             </el-submenu>
-        </span>
-    </section>
+        </fragment>
+    </fragment>
 </template>
 
 <script>
@@ -43,7 +43,8 @@ export default {
           console.log('>>>>>>>>>>>'+(len>0));
         return  len>0
       }
-    },
+    }
+    ,
     watch:{
         //应用类型
         menuDatas:{
