@@ -10,20 +10,99 @@
 //import  RbacUsers from '@/views/rbac/Users';
 
 const RbacUsers = resolve => require(['@/views/rbac/Users.vue'], resolve);
-const RbacRoles = resolve => require(['@/views/rbac/Roles.vue'],resolve);
-const RbacGroups = resolve => require(['@/views/rbac/Groups.vue'],resolve);
-const RbacResources = resolve => require(['@/views/rbac/Resources.vue'],resolve);
-const RbacCompany = resolve => require(['@/views/rbac/Company.vue'],resolve);
-const RbacDept = resolve => require(['@/views/rbac/Dept.vue'],resolve);
+const RbacRoles = resolve => require(['@/views/rbac/Roles.vue'], resolve);
+const RbacGroups = resolve => require(['@/views/rbac/Groups.vue'], resolve);
+const RbacResources = resolve => require(['@/views/rbac/Resources.vue'], resolve);
+const RbacCompany = resolve => require(['@/views/rbac/Company.vue'], resolve);
+const RbacDept = resolve => require(['@/views/rbac/Dept.vue'], resolve);
+
+const UserAdd = resolve => require(['@/views/rbac/users/UserAdd.vue'], resolve);
+const UserEdit = resolve => require(['@/views/rbac/users/UserEdit.vue'], resolve);
 
 const rbacRouters = [
-    {path : '/rbacUsers' , name : 'RbacUsers' , component : RbacUsers , meta : {title : '权限系统>用户', sign : 'RbacUsesrss'}},
-    {path : '/rbacRoles' , name : 'RbacRoles' , component : RbacRoles , meta : {title : '权限系统>角色', sign : 'RbacRoles'}},
-    {path : '/rbacGroups' , name : 'RbacGroups' , component : RbacGroups , meta : {title : '权限系统>用户组' , sign : 'RbacGroups'}},
-    {path : '/rbacResources' , name : 'RbacResources' , component : RbacResources , meta : {title : '权限系统>资源' , sign : 'RbacResources'}},
-    {path : '/rbacCompany' , name : 'RbacCompany' , component : RbacCompany , meta : {title : '权限系统>用户组' , sign : 'RbacCompany'}},
-    {path : '/rbacDept' , name : 'RbacDept' , component : RbacDept , meta : {title : '权限系统>用户组' , sign : 'RbacDept'}}
+  {
+    path: '/rbacUsers',
+    name: 'RbacUsers',
+    component: RbacUsers,
+    meta: {
+      title: '用户管理',
+      sign: 'RbacUsesrss',
+      data: ['系统管理']
+    },
+    children:[
+        {
+            path: '/userAdd',
+            name: 'UserAdd',
+            component: UserAdd,
+            meta: {
+            title: '新增用户',
+            sign: 'RbacUsesrss' 
+            }
+        },
+        {
+            path: '/userEdit',
+            name: 'userEdit',
+            component: UserEdit,
+            meta: {
+            title: '编辑用户',
+            sign: 'RbacUsesrss' 
+            }
+        }
+    ]
+  },
+  {
+    path: '/rbacRoles',
+    name: 'RbacRoles',
+    component: RbacRoles,
+    meta: {
+      title: '角色管理',
+      sign: 'RbacRoles',
+      data: ['系统管理']
+    }
+  },
+  {
+    path: '/rbacGroups',
+    name: 'RbacGroups',
+    component: RbacGroups,
+    meta: {
+      title: '用户组管理',
+      sign: 'RbacGroups',
+      data: ['系统管理']
+    }
+  },
+  {
+    path: '/rbacResources',
+    name: 'RbacResources',
+    component: RbacResources,
+    meta: {
+      title: '资源管理',
+      sign: 'RbacResources',
+      data: ['系统管理']
+    }
+  },
+  {
+    path: '/rbacCompany',
+    name: 'RbacCompany',
+    component: RbacCompany,
+    meta: {
+      title: '机构管理',
+      sign: 'RbacCompany',
+      data: ['系统管理']
+    }
+  },
+  {
+    path: '/rbacDept',
+    name: 'RbacDept',
+    component: RbacDept,
+    meta: {
+      title: '部门管理',
+      sign: 'RbacDept',
+      data: ['系统管理']
+    }
+  }
 
 ];
+
+ 
 
 export default rbacRouters;

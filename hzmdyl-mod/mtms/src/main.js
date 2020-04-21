@@ -4,6 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+/** 此处引入，解决报错问题，新版中已经修复*/
+import Router from 'vue-router'
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+ 
 Vue.config.productionTip = false
 
 //引入阿里矢量图标

@@ -8,25 +8,12 @@
       </el-row>
       <el-row>
         <el-col :span="24">
-          <div
-            @click="exchange"
-            style="float:left;margin-right: 10px;height:100%;background-color:#dfffff;"
-          >
-            <span
-              v-show="isShow"
-              class="icon iconfont icon-zhankai icon-style"
-            />
-            <span
-              v-show="!isShow"
-              class="icon iconfont icon-shouqi icon-style"
-            />
+          <div @click="exchange" class="main-exchange" >
+            <span v-show="isShow" class="icon iconfont icon-zhankai icon-style" />
+            <span v-show="!isShow" class="icon iconfont icon-shouqi icon-style"  />
           </div>
-          <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-          </el-breadcrumb>
+          <!--面包屑-->
+          <mtms-breadcrumb></mtms-breadcrumb>
         </el-col>
       </el-row>
     </el-col>
@@ -66,8 +53,12 @@
   </el-row>
 </template>
 
- <<script>
+ <script>
+ import MainHeaderBreadcrumb from '@/components/layout/MainHeaderBreadcrumb' 
  export default {
+     components:{
+       'mtms-breadcrumb':MainHeaderBreadcrumb
+     },
      data(){
          return{
              isShow:false,
@@ -94,3 +85,14 @@
      }
  }
  </script>
+
+<style>
+   .main-exchange{
+    float:left;
+    margin-right: 10px;
+    height:100%;
+  }
+   .main-exchange:hover{
+    background-color:#dfffff;
+  }
+</style>

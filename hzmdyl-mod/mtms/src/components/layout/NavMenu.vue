@@ -43,10 +43,12 @@ export default {
             //console.log('open：>>>>index='+index+'>>>>indexPath='+indexPath);
             this.loadNavData(index); 
             //console.log(this.navDatas);
+            
              
         },
         handleSelect(index,indexPath){
             console.log('select：>>>>index='+index+'>>>>indexPath='+indexPath);
+ 
             this.$router.push(index);
         },
         handleUrl(url){

@@ -8,7 +8,8 @@ const Login = resolve => require(['@/views/Login'],resolve);
 const NotFound = resolve => require(['@/views/404'],resolve);
  
 const baseRoutes  = [
-  {path : '/' , name : 'Home' , component : Home , meta : {title : '首页' , sign : 'Home'},children:RbacRouter},
+  {path:  '/', redirect: '/home' },
+  {path : '/Home' , name : 'Home' , component : Home , meta : {title : '首页' , sign : 'Home'},children:RbacRouter},
   {path : '/login' , name : 'Login' , component : Login , meta : {title : '登录' , sign : 'Login'}}
 ]
 const notFoundRouter=[
@@ -17,5 +18,6 @@ const notFoundRouter=[
 ]
 const routes = baseRoutes.concat(notFoundRouter);
 export default new Router({
-routes
+  mode: 'history',
+  routes
 })

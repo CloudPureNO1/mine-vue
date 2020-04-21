@@ -10,7 +10,7 @@
                         <mtms-header @getShow="getIsShow"></mtms-header>
                     </el-header>
                     <el-main class="middler">
-                         <mtms-work/>
+                         <mtms-work></mtms-work>
                     </el-main>
                     <!-- <el-footer class="footer">底部</el-footer> -->
                 </el-container>
