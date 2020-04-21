@@ -6,46 +6,8 @@
             </el-aside>
             <el-main class="cls-main">
                 <el-container class="cls-main-container">
-                    <el-header class="header" style="text-align:right;"  ref="headerRef">
-                        <section @click="exchange"  style="text-align: center; float:left;width:40px;height:100%; background-color:#dfffff;display: flex;">
-                            <span v-show="isShow"   class="icon iconfont icon-zhankai icon-style" style="align-self: center;"/>
-                            <span v-show="!isShow"  class="icon iconfont icon-shouqi icon-style" />
-                        </section>
-                        <section style="float:left;height:100%;display: flex;">
-                            <el-breadcrumb separator-class="el-icon-arrow-right" style="align-self: center;">
-                            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-                            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-                            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-                            </el-breadcrumb>
-                        </section>
-                        <section style="height:100%;">
-                             <section style="float:right;height:100%;">
-                                <section style="height:50%;"> 
-                                    <el-dropdown>
-                                        <i class="el-icon-setting" style="margin-right: 15px"></i>
-                                        <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item>查看</el-dropdown-item>
-                                        <el-dropdown-item>新增</el-dropdown-item>
-                                        <el-dropdown-item>删除</el-dropdown-item>
-                                        </el-dropdown-menu>
-                                    </el-dropdown>
-                                 </section>
-                                 <section style="height:50%;" >
-                                    <el-dropdown>
-                                        <i class="el-icon-caret-bottom" style="margin-right: 15px"></i>
-                                        <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item>查看</el-dropdown-item>
-                                        <el-dropdown-item>新增</el-dropdown-item>
-                                        <el-dropdown-item>删除</el-dropdown-item>
-                                        </el-dropdown-menu>
-                                    </el-dropdown>
-                                 </section>
-                            </section>
-                            <section style="float:right;padding-right:10px;height:100%;">
-                                <el-avatar shape="circle" :size="avatarSize" :fit="fit" :src="avatarData.url"></el-avatar>
-                            </section>
-                        </section>
+                    <el-header class="header"   ref="headerRef" >
+                        <mtms-header @getShow="getIsShow"></mtms-header>
                     </el-header>
                     <el-main class="middler">
                          <mtms-work/>
@@ -60,32 +22,26 @@
 <script>
 import NavMenu from '@/components/layout/NavMenu'
 import WorkSpace from '@/components/layout/WorkSpace'
+import MainHeader from '@/components/layout/MainHeader'
 export default {
     name:'Main',
     components:{
         'mtms-menu':NavMenu,
-        'mtms-work':WorkSpace
+        'mtms-work':WorkSpace,
+        'mtms-header':MainHeader
     },
     data(){
         return {
             asideWidth:'20%', 
-            isShow:false,
-            fit:'fill',
-            avatarSize:40,//默认
-            avatarData:{
-                url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-            }
+            isShow:false
         }
     },
     methods:{
-        exchange(){
-            this.isShow=!this.isShow;
-            if(this.isShow){
-                this.asideWidth='5%';
-            }else{
-                this.asideWidth='20%';
-            }
-        },
+        //获取子组件的值
+        getIsShow(data){
+            this.isShow=data.isShow;
+            this.asideWidth=data.asideWidth;
+        }
     },
     created(){
         this.$nextTick(function () {
@@ -173,7 +129,7 @@ export default {
        
    }
    .main .icon-style{
-        font-size:30px;
+        // font-size:20px;
         color:#303133
     }
 

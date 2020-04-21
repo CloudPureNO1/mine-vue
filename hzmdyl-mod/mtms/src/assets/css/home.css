@@ -9,7 +9,113 @@ body, html {
     -webkit-tap-highlight-color: transparent;
 }
 
-.icon-class{
-    font-size:22px;
-    color:#96989c
+.main-header-title{
+    text-align:left;
+    font-weight: 500;
+    font-size:1.50rem;
+    padding:5px;
+}
+
+ 
+/*垂直居中，flex布局  目前兼容性不是很好*/
+/*
+* 1、flexbox 布局
+*/
+.parent-cls{
+    display:flex;
+}
+.child-cls{
+    align-self: center;
+}
+
+/*或者*/
+.parent {
+    display:flex;
+    align-items: center;/*垂直居中*/
+    justify-content: center;/*水平居中*/
+    width:100%;
+    height:100%; 
+   }
+
+/*
+*2、translate 布局
+*/
+.parent-translate-cls{
+    position:relative;
+}
+/*水平垂直居中*/
+.child-translate-cls{
+    left:50%; 
+    top:50%; 
+    transform:translate(-50%,-50%);
+    -webkit-transform:translate(-50%,-50%);
+    position:absolute;
+}
+/*垂直居中*/
+.child-translate-vertical-cls{
+    top:50%; 
+    transform:translate(-50%);
+    -webkit-transform:translate(-50%);
+    position:absolute;
+}
+
+
+/*
+transform 水平垂直居中 不需要固定宽度的
+推荐
+<div class="parent">
+  <div class="children">
+    <div class="children-inline">我是水平垂直居中噢！</div>
+  </div>
+</div>
+*/
+.parent-transform{
+    float: left;
+    width: auto;
+    height: 100%; 
+   }
+
+
+.children-transform {
+    float:left;
+    position:relative;
+    top:50%;
+    left:50%;
+   }
+.children-inline-transform {
+    position: relative;
+    -webkit-transform : translate3d(0, -50%, 0);
+    transform : translate3d(0, -50%, 0);  
+}
+ 
+/*
+transform 垂直居中 不需要固定宽度的
+parent-transform
+ */
+ 
+.children-transform-vertical {
+    float:left;
+    position:relative;
+    top:50%;
+   }
+.children-inline-transform-vertical {
+    position: relative;
+    -webkit-transform : translate3d(0, -50%, 0);
+    transform : translate3d(0, -50%, 0);  
+}
+
+/*
+transform 水平居中 不需要固定宽度的
+parent-transform
+ */
+ 
+ .children-transform-margin {
+    float:left;
+    position:relative;
+    left:50%;
+   }
+.children-inline-transform-margin {
+    position: relative;
+    -webkit-transform : translate3d(0, -50%, 0);
+    transform : translate3d(0, -50%, 0);  
 }

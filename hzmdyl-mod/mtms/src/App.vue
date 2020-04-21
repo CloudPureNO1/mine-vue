@@ -22,7 +22,6 @@ export default {
  html,body,#app{
    height: 100%;
    padding:0;
-   margin:0;
-   color:orange!important;
+   margin:0; 
  }
 </style>
