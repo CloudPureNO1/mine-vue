@@ -27,6 +27,8 @@ Vue.use(Fragment.Plugin)
 
 //全局引入css
 import '@/assets/css/home.css'
+import './styles/index.scss'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -13,9 +13,11 @@ body, html {
     text-align:left;
     font-weight: 500;
     font-size:1.50rem;
-    padding:5px;
+    padding-left:5px;
 }
-
+.icon-style{
+    font-size:26px;
+}
  
 /*垂直居中，flex布局  目前兼容性不是很好*/
 /*
@@ -28,38 +30,7 @@ body, html {
     align-self: center;
 }
 
-/*或者*/
-.parent {
-    display:flex;
-    align-items: center;/*垂直居中*/
-    justify-content: center;/*水平居中*/
-    width:100%;
-    height:100%; 
-   }
-
-/*
-*2、translate 布局
-*/
-.parent-translate-cls{
-    position:relative;
-}
-/*水平垂直居中*/
-.child-translate-cls{
-    left:50%; 
-    top:50%; 
-    transform:translate(-50%,-50%);
-    -webkit-transform:translate(-50%,-50%);
-    position:absolute;
-}
-/*垂直居中*/
-.child-translate-vertical-cls{
-    top:50%; 
-    transform:translate(-50%);
-    -webkit-transform:translate(-50%);
-    position:absolute;
-}
-
-
+ 
 /*
 transform 水平垂直居中 不需要固定宽度的
 推荐
@@ -70,7 +41,7 @@ transform 水平垂直居中 不需要固定宽度的
 </div>
 */
 .parent-transform{
-    float: left;
+    /* float: left; */
     width: auto;
     height: 100%; 
    }
@@ -119,3 +90,29 @@ parent-transform
     -webkit-transform : translate3d(0, -50%, 0);
     transform : translate3d(0, -50%, 0);  
 }
+
+
+/* 内容块都设置为display: table-cell;然后vertical-align: middle; 
+或者display:inline-block
+*/
+
+.outer-cls{
+     display: table;
+ }
+.inner-cls{
+    display: table-cell;
+    vertical-align: middle;
+}
+ 
+
+/*伪元素*/
+.outer-vertical:before{
+    display: inline-block;
+    vertical-align: middle;
+}
+.inner-vertical{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+ 

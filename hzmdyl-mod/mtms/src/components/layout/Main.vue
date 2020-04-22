@@ -32,7 +32,7 @@ export default {
     },
     data(){
         return {
-            asideWidth:'20%', 
+            asideWidth:'17%', 
             isShow:false
         }
     },
@@ -63,6 +63,9 @@ export default {
         margin:0;
         border:0;
         
+    }
+    .main .el-main{
+        padding:1px;
     }
     //  .main .el-main,.mian .el-header{
     //      padding-left:0px;
@@ -107,7 +110,8 @@ export default {
    }
    .main .main-asider{
        height:100%;
-       background-color:#545c64;
+       color:#b8bcd8;
+       background-color:#314358;
    }
    .main .cls-main,.cls-main-container{
        height:100%;
@@ -117,12 +121,14 @@ export default {
    .cls-main-container .header{
        height:10%;
        padding:0px;
+       box-shadow:0 1px 4px #5b5e6126;
+       background-color:#f5f7fa;
    }
    .cls-main-container .middler{
        height:85%;
-       border-bottom: solid 1px #dfffff;
-       border-top: solid 1px #dfffff;
-       padding:20px;
+    //    border-bottom: solid 1px #dfffff;
+    //    border-top: solid 1px #dfffff;
+       padding:1px;
    }
    .cls-main-container .footer{
        height: 5%;

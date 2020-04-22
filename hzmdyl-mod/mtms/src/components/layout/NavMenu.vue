@@ -4,9 +4,9 @@
            <el-col :span="span">
                <el-menu 
                 :collapse="isCollapse"
-                background-color="#545c64"
-                active-text-color="#ffd04b"
-                text-color="#ffffff"
+                background-color="#314358"
+                active-text-color="#409eff"
+                text-color="#b8bcd8"
                 :default-active="this.$route.path"
                 @open="handleOpen"
                 @select="handleSelect"
@@ -40,15 +40,9 @@ export default {
     },
     methods:{
         handleOpen(index,indexPath){
-            //console.log('open：>>>>index='+index+'>>>>indexPath='+indexPath);
             this.loadNavData(index); 
-            //console.log(this.navDatas);
-            
-             
         },
         handleSelect(index,indexPath){
-            console.log('select：>>>>index='+index+'>>>>indexPath='+indexPath);
- 
             this.$router.push(index);
         },
         handleUrl(url){
