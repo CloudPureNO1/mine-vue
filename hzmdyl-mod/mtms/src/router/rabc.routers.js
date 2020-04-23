@@ -9,15 +9,15 @@
 // 而用require会将component分别打包成不同的js，按需加载，访问此路由时才会加载这个js，所以就避免进入首页时加载内容过多。
 //import  RbacUsers from '@/views/rbac/Users';
 
-const RbacUsers = resolve => require(['@/views/rbac/Users.vue'], resolve);
-const RbacRoles = resolve => require(['@/views/rbac/Roles.vue'], resolve);
-const RbacGroups = resolve => require(['@/views/rbac/Groups.vue'], resolve);
-const RbacResources = resolve => require(['@/views/rbac/Resources.vue'], resolve);
-const RbacCompany = resolve => require(['@/views/rbac/Company.vue'], resolve);
-const RbacDept = resolve => require(['@/views/rbac/Dept.vue'], resolve);
+const RbacRoles = resolve => require(['@/views/rbac/role/Roles.vue'], resolve);
+const RbacGroups = resolve => require(['@/views/rbac/group/Groups.vue'], resolve);
+const RbacResources = resolve => require(['@/views/rbac/resource/Resources.vue'], resolve);
+const RbacCompany = resolve => require(['@/views/rbac/company/Company.vue'], resolve);
+const RbacDept = resolve => require(['@/views/rbac/dept/Dept.vue'], resolve);
 
-const UserAdd = resolve => require(['@/views/rbac/users/UserAdd.vue'], resolve);
-const UserEdit = resolve => require(['@/views/rbac/users/UserEdit.vue'], resolve);
+const RbacUsers = resolve => require(['@/views/rbac/user/Users.vue'], resolve);
+const UserAdd = resolve => require(['@/views/rbac/user/UserAdd.vue'], resolve);
+const UserEdit = resolve => require(['@/views/rbac/user/UserEdit.vue'], resolve);
 
 const rbacRouters = [{
     path: '/rbacUsers',
@@ -25,7 +25,7 @@ const rbacRouters = [{
     component: RbacUsers,
     meta: {
       title: '用户管理',
-      sign: ['rbac', 'users'],
+      sign: ['rbac', 'user'],
       data: ['系统管理']
     },
     children: [{
@@ -34,7 +34,7 @@ const rbacRouters = [{
         component: UserAdd,
         meta: {
           title: '新增用户',
-          sign: ['rbac', 'users']//对应内容组价（tab)的路径  @/components/tabs/rbac/users/UserAdd.vue
+          sign: ['rbac', 'user'] //对应内容组价（tab)的路径  @/components/tabs/rbac/users/UserAdd.vue
         }
       },
       {
@@ -43,7 +43,7 @@ const rbacRouters = [{
         component: UserEdit,
         meta: {
           title: '编辑用户',
-          sign: ['rbac', 'users']
+          sign: ['rbac', 'user']
         }
       }
     ]
@@ -54,7 +54,7 @@ const rbacRouters = [{
     component: RbacRoles,
     meta: {
       title: '角色管理',
-      sign: ['rbac', 'roles'],
+      sign: ['rbac', 'role'],
       data: ['系统管理']
     }
   },
@@ -64,7 +64,7 @@ const rbacRouters = [{
     component: RbacGroups,
     meta: {
       title: '用户组管理',
-      sign: ['rbac', 'groups'],
+      sign: ['rbac', 'group'],
       data: ['系统管理']
     }
   },
@@ -74,7 +74,7 @@ const rbacRouters = [{
     component: RbacResources,
     meta: {
       title: '资源管理',
-      sign: ['rbac', 'resources'],
+      sign: ['rbac', 'resource'],
       data: ['系统管理']
     }
   },

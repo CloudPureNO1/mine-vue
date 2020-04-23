@@ -9,7 +9,7 @@
   </el-button>
 </div>
 -->
-<el-tabs v-model="activeName" type="border-card" closable @tab-remove="removeTab">
+<el-tabs v-model="activeName" type="border-card" closable @tab-remove="removeTab" @tab-click="choseTab">
     <el-tab-pane label="欢迎" name="Welcome"  :closable ="false" >
       <mtms-welcome></mtms-welcome>
     </el-tab-pane>
@@ -31,6 +31,22 @@ export default {
             activeName: "Welcome", //默认激活
             tabs: [] 
         };
+    },
+    mounted(){
+      //刷新前存储打开的tab，也可以在created 中存放
+      window.addEventListener('beforeunload',e=>{
+        sessionStorage.setItem("tabs",this.tabs);
+        sessionStorage.setItem("activeName",this.activeName);
+      });
+    },
+    created(){
+      //加载打开的tab
+      this.tabs=this.$isEmptyArray(sessionStorage.getItem("tabs"))?[]:sessionStorage.getItem("tabs");
+      this.activeName=this.$isEmptyString(sessionStorage.getItem("activeName"))?"Welcome":sessionStorage.getItem("activeName");
+    },
+    destroyed() {
+      //界面销毁时，取消监听beforeunload
+      window.removeEventListener('beforeunload',e=>{});
     },
     watch:{
       $route(){
@@ -82,6 +98,9 @@ export default {
                 });
             }
             this.tabs =this.tabs.filter(tab => tab.name !== targetName);
+        },
+        choseTab(tab){
+            this.$router.push(tab.name);
         }
     }
 };

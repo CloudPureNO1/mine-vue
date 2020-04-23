@@ -29,6 +29,14 @@ Vue.use(Fragment.Plugin)
 import '@/assets/css/home.css'
 import './styles/index.scss'
 
+//引入全局方法
+import GlobleFun from '@/utils/global_fun.js'
+Vue.use(GlobleFun);
+
+//引入全局变量
+import GlobleVariable from '@/utils/global_variable.js'
+Vue.prototype.$_G_VARIABLE=GlobleVariable;
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
