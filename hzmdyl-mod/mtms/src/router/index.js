@@ -9,11 +9,11 @@ const NotFound = resolve => require(['@/views/404'],resolve);
  
 const baseRoutes  = [
   {path:  '/', redirect: '/home' },
-  {path : '/Home' , name : 'Home' , component : Home , meta : {title : '首页' , sign : 'Home'},children:RbacRouter},
-  {path : '/login' , name : 'Login' , component : Login , meta : {title : '登录' , sign : 'Login'}}
+  {path : '/Home' , name : 'Home' , component : Home , meta : {title : '首页' , sign : ['Home']},children:RbacRouter},
+  {path : '/login' , name : 'Login' , component : Login , meta : {title : '登录' , sign : ['Login']}}
 ]
 const notFoundRouter=[
-  {path : '/404' , name : 'NotFound' , component : NotFound , meta : {title : 'NotFound', sign : '404'}},
+  {path : '/404' , name : 'NotFound' , component : NotFound , meta : {title : 'NotFound', sign : ['404']}},
   {path : '*' ,redirect: "/404"}
 ]
 const routes = baseRoutes.concat(notFoundRouter);

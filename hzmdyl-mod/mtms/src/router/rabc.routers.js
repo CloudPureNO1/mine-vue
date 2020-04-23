@@ -19,35 +19,33 @@ const RbacDept = resolve => require(['@/views/rbac/Dept.vue'], resolve);
 const UserAdd = resolve => require(['@/views/rbac/users/UserAdd.vue'], resolve);
 const UserEdit = resolve => require(['@/views/rbac/users/UserEdit.vue'], resolve);
 
-const rbacRouters = [
-  {
+const rbacRouters = [{
     path: '/rbacUsers',
     name: 'RbacUsers',
     component: RbacUsers,
     meta: {
       title: '用户管理',
-      sign: 'RbacUsesrss',
+      sign: ['rbac', 'users'],
       data: ['系统管理']
     },
-    children:[
-        {
-            path: '/userAdd',
-            name: 'UserAdd',
-            component: UserAdd,
-            meta: {
-            title: '新增用户',
-            sign: 'RbacUsesrss' 
-            }
-        },
-        {
-            path: '/userEdit',
-            name: 'userEdit',
-            component: UserEdit,
-            meta: {
-            title: '编辑用户',
-            sign: 'RbacUsesrss' 
-            }
+    children: [{
+        path: '/userAdd',
+        name: 'UserAdd',
+        component: UserAdd,
+        meta: {
+          title: '新增用户',
+          sign: ['rbac', 'users']//对应内容组价（tab)的路径  @/components/tabs/rbac/users/UserAdd.vue
         }
+      },
+      {
+        path: '/userEdit',
+        name: 'userEdit',
+        component: UserEdit,
+        meta: {
+          title: '编辑用户',
+          sign: ['rbac', 'users']
+        }
+      }
     ]
   },
   {
@@ -56,7 +54,7 @@ const rbacRouters = [
     component: RbacRoles,
     meta: {
       title: '角色管理',
-      sign: 'RbacRoles',
+      sign: ['rbac', 'roles'],
       data: ['系统管理']
     }
   },
@@ -66,7 +64,7 @@ const rbacRouters = [
     component: RbacGroups,
     meta: {
       title: '用户组管理',
-      sign: 'RbacGroups',
+      sign: ['rbac', 'groups'],
       data: ['系统管理']
     }
   },
@@ -76,7 +74,7 @@ const rbacRouters = [
     component: RbacResources,
     meta: {
       title: '资源管理',
-      sign: 'RbacResources',
+      sign: ['rbac', 'resources'],
       data: ['系统管理']
     }
   },
@@ -86,7 +84,7 @@ const rbacRouters = [
     component: RbacCompany,
     meta: {
       title: '机构管理',
-      sign: 'RbacCompany',
+      sign: ['rbac', 'company'],
       data: ['系统管理']
     }
   },
@@ -96,13 +94,13 @@ const rbacRouters = [
     component: RbacDept,
     meta: {
       title: '部门管理',
-      sign: 'RbacDept',
+      sign: ['rbac', 'dept'],
       data: ['系统管理']
     }
   }
 
 ];
 
- 
+
 
 export default rbacRouters;

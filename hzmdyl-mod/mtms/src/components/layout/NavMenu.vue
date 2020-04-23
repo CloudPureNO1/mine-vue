@@ -43,7 +43,8 @@ export default {
             this.loadNavData(index); 
         },
         handleSelect(index,indexPath){
-            this.$router.push(index);
+            //this.$router.push(index);
+            this.handleUrl(index);
         },
         handleUrl(url){
            // window.location.href=url;
