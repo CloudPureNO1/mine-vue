@@ -13,7 +13,7 @@ const homeChildrenRoutes=[
 
 const baseRoutes  = [
   {path : '/', redirect: '/home' },
-  {path : '/welcome' , redirect : '/home'},
+  {path : '/welcome' ,name:'Welcome', redirect : '/home'},
   {path : '/Home' , name : 'Home' , component : Home , meta : {title : '首页' , sign : ['home']},children:homeChildrenRoutes},
   {path : '/login' , name : 'Login' , component : Login , meta : {title : '登录' , sign : ['Login']}}
 ]

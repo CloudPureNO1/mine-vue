@@ -26,20 +26,16 @@ export default {
     components:{
         'nav-menu-item':NavMenuItem
     },
+    props:{
+        isCollapse:{
+            type:Boolean,
+            required:true
+        }
+    },
     data(){
         return{
             span:24,
             navDatas:[]  
-        }
-    },
-    computed:{
-        isCollapse:{
-            get(){
-                return this.$store.state.layout.isCollapse;
-            },
-            set(nVal){
-                this.$store.state.layout.isCollapse=nVal;
-            }
         }
     },
     methods:{

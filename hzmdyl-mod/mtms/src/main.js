@@ -37,10 +37,14 @@ Vue.use(GlobleFun);
 import GlobleVariable from '@/utils/global_variable.js'
 Vue.prototype.$_G_VARIABLE=GlobleVariable;
 
+//Vuex 
+import store from './store'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,//这个store  store下面的index.js  Vuex
   components: { App },
   template: '<App/>'
 })
