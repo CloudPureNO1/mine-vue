@@ -63,7 +63,8 @@ export default {
         loadNavData(nodeId){
             let params={};
             params.nodeId=nodeId;
-            axios.post('/mtms/api/loadNavData',params)
+           // axios.post('/mtms/api/loadNavData',params)
+           this.$axiosPost('loadNavData',params)
             .then((resp)=>{
                 if(resp.data.code=='0'){
                     let subData=resp.data.body;

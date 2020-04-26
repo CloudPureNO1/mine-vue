@@ -1,10 +1,10 @@
 //1、定义全局方法，自定义全局方法以$开头，以免冲突
 //2、main.js 中，引入js  import fun from ''
+ 
 
  
 //3、main.js 中， Vue.use(fun)
 //4、this.方法
-
  
 
 export default { 
@@ -23,7 +23,7 @@ export default {
         }
         Vue.prototype.$sayHello=(msg)=>{
             console.log('>>>>>>>>>>>>>>>>'+msg);
-        }
+        } 
     }
     
 }

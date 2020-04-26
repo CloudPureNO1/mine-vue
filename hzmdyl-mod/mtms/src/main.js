@@ -29,13 +29,19 @@ Vue.use(Fragment.Plugin)
 import '@/assets/css/home.css'
 import './styles/index.scss'
 
-//引入全局方法
+/**全局引入方法1 ,直接用 this.$axiosGet 调用， */
+import {$get,$post,$postForm,$postformData} from '@/utils/axios_util.js'
+Vue.prototype.$axiosGet=$get;
+Vue.prototype.$axiosPost=$post;
+Vue.prototype.$axiosPostform=$postForm;
+Vue.prototype.$axiospostformData=$postformData;
+// //引入全局方法2
 import GlobleFun from '@/utils/global_fun.js'
 Vue.use(GlobleFun);
 
 //引入全局变量
 import GlobleVariable from '@/utils/global_variable.js'
-Vue.prototype.$_G_VARIABLE=GlobleVariable;
+Vue.prototype._$G_VARIABLE=GlobleVariable;
 
 //Vuex 
 import store from './store'

@@ -9,6 +9,7 @@
   </el-button>
 </div>
 -->
+<div class="tab-main"  >
 <el-tabs v-model="activeName" type="border-card" closable @tab-remove="removeTab" @tab-click="chooseTab">
     <el-tab-pane label="首页" name="Home" :closable="false">
         <mtms-home></mtms-home>
@@ -18,6 +19,7 @@
         <component :is="item.component"></component>
     </el-tab-pane>
 </el-tabs>
+</div>
 </template>
 
 <script>
@@ -40,6 +42,7 @@ export default {
         });
     },
     created() {
+        
         //加载打开的tab
         let obj = sessionStorage.getItem("tabs");
         let obj2 = sessionStorage.getItem("activeName")
@@ -127,3 +130,19 @@ export default {
     }
 };
 </script>
+<style >
+ .tab-main{
+     height:100%;
+     width:100%;
+     padding: 0;
+     margin:0;
+ }
+ .tab-main>.el-tabs--border-card>.el-tabs__content{
+     padding:5px;
+    
+ }
+ 
+ .tab-main>.el-tab-pane{
+     height: 100%;
+ }
+</style>
