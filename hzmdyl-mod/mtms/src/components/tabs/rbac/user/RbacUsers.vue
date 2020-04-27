@@ -61,7 +61,6 @@ export default {
     },
     created() {
         this.$nextTick(function(){
-                        debugger;
             let tabH=this.$el.parentElement.parentElement.parentElement.offsetHeight;
             let tabHeaderH=document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
             let paginationH=43;

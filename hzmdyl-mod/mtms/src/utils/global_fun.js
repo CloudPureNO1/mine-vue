@@ -16,6 +16,7 @@ export default {
              return false;
         };
         Vue.prototype.$isEmptyArray=(ary)=>{
+            debugger;
             if(!ary||!Array.isArray(ary)||ary.length<1){
                 return true;
             }

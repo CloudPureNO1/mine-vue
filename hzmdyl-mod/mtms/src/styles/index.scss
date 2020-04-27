@@ -60,3 +60,21 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+fieldset{
+  border: solid 1px #c4d2e6;
+  padding:10px;
+}
+
+legend{
+   
+    color: #409eff;
+    text-align: left;
+    margin-left: 15px;
+   
+}
+
+.el-select .el-input {
+  width: 100%;
+   
+}
