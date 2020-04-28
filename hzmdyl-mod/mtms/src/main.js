@@ -35,6 +35,12 @@ Vue.prototype.$axiosGet=$get;
 Vue.prototype.$axiosPost=$post;
 Vue.prototype.$axiosPostform=$postForm;
 Vue.prototype.$axiospostformData=$postformData;
+
+//引入全屏js
+import {$launchFullScreen,$exitFullScreen} from '@/utils/browser.js'
+Vue.prototype.$launchFullScreen=$launchFullScreen;
+Vue.prototype.$exitFullScreen=$exitFullScreen;
+
 // //引入全局方法2
 import GlobleFun from '@/utils/global_fun.js'
 Vue.use(GlobleFun);
