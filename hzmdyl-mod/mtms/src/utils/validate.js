@@ -7,7 +7,7 @@ let validate = {
    * @param {*} passwd
    */
   validatePasswd: function (passwd) {
-    const reg = /(?!^(\d+[a-zA-Z]+[~!@#$%^&*?]+)$)^[\w~!@#$%^&*?]{8,20}$/
+    const reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>,.\/]).{8,20}/
     return reg.test(passwd);
   },
 

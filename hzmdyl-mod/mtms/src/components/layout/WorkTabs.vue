@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import Home from '@/components/tabs/home/Home'
 export default {
     components: {
@@ -41,28 +42,30 @@ export default {
             sessionStorage.setItem("activeName", this.activeName);
         });
     },
+     
     created() {
-        
         //加载打开的tab
         let obj = sessionStorage.getItem("tabs");
         let obj2 = sessionStorage.getItem("activeName")
         this.tabs = this.$isEmptyString(obj) ? [] : JSON.parse(obj);
-        this.activeName = this.$isEmptyString(obj2) ? "Home" : obj2;
+        //this.activeName = this.$isEmptyString(obj2) ? "Home" : obj2;
+        this.activeName=this.$route.name;
         //箭头函数this  
         let _that=this;
         this.tabs.forEach(item=>{
-          let _router_obj=_that.$router.resolve(item.name);
-          if(_router_obj&&_router_obj.route){
-              let meta = _router_obj.route.meta;
-                if (meta.sign) {
-                    let filePath = '';
-                    meta.sign.forEach(item => {
-                        filePath = (filePath == '' ? '' : filePath + '/') + item;
-                    });
-                    var MyComponent = resolve => require([`@/components/tabs/${filePath}/${item.name}`], resolve);
-                    item.component=MyComponent
+                let _router_obj=_that.$router.resolve(item.name);
+                if(_router_obj&&_router_obj.route){
+                    let meta = _router_obj.route.meta;
+                        if (meta.sign) {
+                            let filePath = '';
+                            meta.sign.forEach(item => {
+                                filePath = (filePath == '' ? '' : filePath + '/') + item;
+                            });
+                            var MyComponent = resolve => require([`@/components/tabs/${filePath}/${item.name}`], resolve);
+                            item.component=MyComponent
+                        }
                 }
-          }
+               
         });
          
     },
@@ -74,6 +77,11 @@ export default {
         $route() {
             this.addTab();
         }
+    },
+    computed:{
+        ...mapState({
+            isReload:state=>state.layout.isReload
+        })
     },
     methods: {
         addTab() {
@@ -126,7 +134,8 @@ export default {
             this.$router.push({
                 name: tab.name
             });
-        }
+        } 
+
     }
 };
 </script>

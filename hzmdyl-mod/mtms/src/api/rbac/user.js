@@ -31,6 +31,9 @@ let $saveUser = function (vue, param) {
     .then(resp => {
       if(resp.data.code==0){
         vue.$alert('保存成功', '温馨提示', { type: 'success' }).then(()=>{
+            //刷新 给父组件传入隐藏
+            vue.$emit('isShow',false);
+            //加载
             let obj={};
             obj.pageSize=vue.$store.state.user.pageSize;
             obj.currentPage=vue.$store.state.user.currentPage;

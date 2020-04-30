@@ -9,7 +9,7 @@ const state = {
 
 // getters
 const getters = {
-
+   
 }
 
 // actions
@@ -19,16 +19,12 @@ const actions = {
 
 // mutations 不能异步，异步在actions
 const mutations = {
-  getMsg(state,param){//如果是对象，则param.字段  否则param
-    state.msg=layoutApi._$showMsg(param.name);
-   //console.log(state.msg);
-  }, 
-  
+  setReload(state,flag){
+    state.isReload=flag;
+  },
   togleShow(state){
     state.isCollapse=!state.isCollapse;
-    //.log(">>isCollapse>>>"+state.isCollapse);
     state.asideWidth=state.isCollapse?'5%':'17%';
-    //console.log(">>asideWidth>>>"+state.asideWidth);
   }
 }
 

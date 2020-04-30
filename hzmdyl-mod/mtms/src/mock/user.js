@@ -67,7 +67,7 @@ let saveUser=(req)=>{
         return result;
     }
     if(req.body){
-        debugger;
+       // debugger;
         let userList=[];
         let param=JSON.parse(req.body);
         console.log(param);
