@@ -100,7 +100,7 @@
             <el-row>
                 <el-col :span="7">
                     <el-form-item label="创建者" prop="creator">
-                        <el-input v-model="userForm.creator"></el-input>
+                        <el-input v-model="userForm.creator" readonly ></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="7" :offset="1">
@@ -169,7 +169,9 @@
 </template>
 
 <script>
-import validate from '@/utils/validate.js'
+import userApi from '@/api/rbac/user.js'
+import userValidate from './userValidate.js'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
     name: "UserAdd",
     data() {
@@ -193,9 +195,9 @@ export default {
                 userId: Math.random() * 10,
                 userName: '',
                 passwd: '',
-                userRate: '',
+                userRate: '9',
                 createTime: '',
-                creator: '',
+                creator: 'wangsm',
                 updateTime: '',
                 userDesc: '',
 
@@ -248,12 +250,16 @@ export default {
             ],
             rules: {
                 userName: [
-                    { required: true, message: '请输用户名', trigger: 'blur' },
-                    { min: 3, max: 18, message: '长度在 3 到 18 个数字或字符', trigger: ['blur','change'] }
+                    { required: true, message: '请输入用户名', trigger: ['blur','change'] },
+                    { validator:userValidate.validateUsername,trigger: ['blur','change']}
                 ],
                 passwd:[
-                    { required: true, message: '请输用户名', trigger: 'blur' },
-                    { validator:validate.validatePasswd,trigger:'blur'}
+                    { required: true, message: '请输入密码', trigger: ['blur','change'] },
+                    { validator:userValidate.validatePasswd,trigger: ['blur','change'] }
+                ],
+                userRealName:[
+                    { required: true, message: '请输入真实姓名', trigger: ['blur','change'] },
+                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: ['blur','change'] }
                 ]
             }
         }
@@ -264,34 +270,25 @@ export default {
             let tabHeaderH = document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
             let paginationH = 13;
             this.userAddHeight = tabH - tabHeaderH - paginationH + 'px';
-
-            //form label
-            //let formItems=document.getElementsByClassName('el-form-item form-label-local el-form-item--medium');
-            // let formItems=document.getElementsByClassName('el-form-item form-label-local1 el-form-item--medium');
-            // if(formItems){
-            //     let items=Array.from(formItems);
-            //     items.forEach(item=>{
-            //         //只有 label 和value 两个主div
-            //         let first=item.firstElementChild;
-            //         let last=item.lastElementChild;
-            //         if(first){
-            //             first.style.marginLeft=0;
-            //         }
-            //         if(first&&last){
-            //             last.style.marginLeft=first.offsetWidth+'px';
-            //         }
-            //     });
-            // }
         });
     },
 
     methods: {
+        ...mapActions({
+            loadUserList:'loadUserList'//this.loadUserList =>this.$store.dispatch('loadUserList')
+        }),
         submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
+            this.$refs[formName].validate((valid,data) => {
+                //debugger;
                 if (valid) {
-                    alert('submit!');
+                    let vue=this;
+                    userApi.$saveUser(vue,this.userForm);
                 } else {
-                    console.log('error submit!!');
+                    let objs= Object.values(data);//值得数组
+                    let errorMsg=objs.map(item=>{
+                        return item[0].message;
+                    });
+                    this.$alert(errorMsg.join(','),'温馨提示',{type:'warning'});
                     return false;
                 }
             });

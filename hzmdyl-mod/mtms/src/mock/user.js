@@ -1,6 +1,9 @@
 import Mockjs from 'mockjs'
+let total=20;
 
-let user = {
+let user0=[];
+
+let user1 = {
     userId: 10001,
     userName: 'wangsm',
     passwd: '123456',
@@ -24,25 +27,26 @@ let loadUsers=(req)=>{
     //debugger;
     let result={};
     result.code=0;
+    result.body={}
     let type=req.type;
     if(type!='POST'){
         result.code=-9;
         result.msg='请使用POST请求';
-        return map;
+        return result;
     }
     if(req.body){
         //debugger;
         let userList=[];
         let param=JSON.parse(req.body);
         if(param.currentPage==1){
-            userList=new Array(param.pageSize).fill(user);
+            userList=new Array(param.pageSize-user0.length).fill(user1).concat(user0);
         }
         if(param.currentPage==2){
             userList=new Array(param.pageSize).fill(user2);
         }
-
-        result.body=userList;
-        result.total=20;
+ 
+        result.body.data=userList;
+        result.body.total=total;
     }
 
     return result;
@@ -50,3 +54,28 @@ let loadUsers=(req)=>{
 
 Mockjs.mock(/\/mtms\/api\/loadUsers/,loadUsers);
 
+
+//saveUser
+let saveUser=(req)=>{
+    //debugger;
+    let result={};
+    result.code=0;
+    let type=req.type;
+    if(type!='POST'){
+        result.code=-9;
+        result.msg='请使用POST请求';
+        return result;
+    }
+    if(req.body){
+        debugger;
+        let userList=[];
+        let param=JSON.parse(req.body);
+        console.log(param);
+        user0.push(param);
+        total=total+1;
+        result.msg="成功";
+    }
+
+    return result;
+}
+Mockjs.mock(/\/mtms\/api\/saveUser/,saveUser); 

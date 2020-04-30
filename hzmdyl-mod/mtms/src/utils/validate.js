@@ -1,14 +1,13 @@
 let validate = {
   /**
    * 密码校验：
-   *1、密码至少包含大小写字母和数字
-   *2、以字母开头
-   *3、长度大于等于8位
+   *1、密码至少包含大小写字母、数字和特殊字符
+   *3、长度大于等于8-20位
    * @export
    * @param {*} passwd
    */
   validatePasswd: function (passwd) {
-    const reg = /^[A-Za-z]([A-Z]+[a-z]+[0-9]){7,}$/;
+    const reg = /(?!^(\d+[a-zA-Z]+[~!@#$%^&*?]+)$)^[\w~!@#$%^&*?]{8,20}$/
     return reg.test(passwd);
   },
 
@@ -21,7 +20,8 @@ let validate = {
    * @param {*} username
    */
   validateUsername: function (username) {
-    const reg = /^[A-Za-z](\\w){5,}$/;
+    const reg = /^[A-Za-z][\w]{5,}$/;
+    return reg.test(username);
   }
 }
 

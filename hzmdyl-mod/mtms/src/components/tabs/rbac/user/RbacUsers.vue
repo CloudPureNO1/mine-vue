@@ -3,6 +3,7 @@
     <!--只要在el-table元素中定义了height属性，即可实现固定表头的表格，而不需要额外的代码。-->
     <el-table :data="userList" :max-height="maxHeight">
         <!-- <el-table :data="userList" :border="true">-->
+        <el-table-column label="序号" type="index"></el-table-column>
         <el-table-column label="用户ID" prop="userId" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
         <el-table-column label="用户名" prop="userName" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
         <el-table-column label="密码" prop="passwd" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
@@ -42,6 +43,7 @@
 
 <script>
 import userApi from '@/api/rbac/user.js'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
     data() {
         return {
@@ -50,11 +52,11 @@ export default {
             fixed: 'right',
             opWidth: '200',
             align: 'center',
-            userList: [],
-            currentPage: 1, //当前页码
+            //userList: [],
+            //currentPage: 1, //当前页码
             pageSizes: [10, 20, 50, 100, 200, 300, 400, 500], //每页记录数选项
-            pageSize: 10, //当前每页记录数
-            total: 0, //总记录数 
+            //pageSize: 10, //当前每页记录数
+            //total: 0, //总记录数 
             isSiglePageHide: true, //如果只有一页时，隐藏pagination,
             pglayout: 'total, sizes, prev, pager,  next, jumper' //分页工具栏上显示的内容
         }
@@ -66,31 +68,24 @@ export default {
             let paginationH=43;
             this.maxHeight=tabH-tabHeaderH-paginationH;
         });
-        //调用全局方法，此处采用api 统一管理
-        /*   this.$axiosPost('loadUsers', {currentPage:this.currentPage,pageSize:this.pageSize})
-              .then(resp => {
-                  //debugger;
-                  if (resp.data.code != 0) {
-                      this.$alert(resp.data.msg);
-                      return
-                  }
-                  if (resp.data.body) {
-                      this.userList = resp.data.body;
-                      this.total=resp.data.total;
-                  }
-              })
-              .catch(err => {
-                  console.log('接口调用异常：' + err);
-                  this.$alert(err);
-              }) */
-            
-        userApi.$loadUsers(this, {
-            currentPage: this.currentPage,
-            pageSize: this.pageSize
-        });
+        let vue=this;
+        userApi.$loadUsers(vue, {currentPage:this.currentPage,pageSize:this.pageSize});
         
     },
+    computed:{
+        ...mapState({
+            pageSize:state=>state.user.pageSize,
+            currentPage:state=>state.user.currentPage,
+            userList:state=>state.user.userList,
+            total:state=>state.user.total
+        })
+    },
     methods: {
+        ...mapActions({
+            setPageSize:'user/setPageSize',
+            setCurrentPage:'user/setCurrentPage' ,
+            loadUserList:'user/setUsersData'
+        }),
         handleAdd() {
             this.$router.push('/userAdd');
         },
@@ -104,17 +99,16 @@ export default {
             console.log(index, row);
         },
         handleSizeChange(val) {
-            this.pageSize = val;
-            userApi.$loadUsers(this, {
-                currentPage: this.currentPage,
-                pageSize: this.pageSize
+            let vue=this;
+            this.setPageSize(val)
+            .then(()=>{
+                userApi.$loadUsers(vue, {currentPage:this.currentPage,pageSize:this.pageSize});
             });
         },
         handleCurrentChange(val) {
-            this.currentPage = val;
-            userApi.$loadUsers(this, {
-                currentPage: this.currentPage,
-                pageSize: this.pageSize
+            let vue=this;
+            this.setCurrentPage(val).then(()=>{
+                 userApi.$loadUsers(vue, {currentPage:this.currentPage,pageSize:this.pageSize});
             });
         }
     }
