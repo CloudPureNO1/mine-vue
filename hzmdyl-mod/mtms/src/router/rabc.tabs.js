@@ -9,16 +9,17 @@
 // 而用require会将component分别打包成不同的js，按需加载，访问此路由时才会加载这个js，所以就避免进入首页时加载内容过多。
 //import  RbacUsers from '@/views/rbac/Users';
 
-const RbacRoles = resolve => require(['@/views/rbac/role/Roles.vue'], resolve);
-const RbacGroups = resolve => require(['@/views/rbac/group/Groups.vue'], resolve);
-const RbacResources = resolve => require(['@/views/rbac/resource/Resources.vue'], resolve);
-const RbacCompany = resolve => require(['@/views/rbac/company/Company.vue'], resolve);
-const RbacDept = resolve => require(['@/views/rbac/dept/Dept.vue'], resolve);
+const RbacRoles = resolve => require(['@/components/tabs/rbac/role/RbacRoles.vue'], resolve);
+const RbacGroups = resolve => require(['@/components/tabs/rbac/group/RbacGroups.vue'], resolve);
+const RbacResources = resolve => require(['@/components/tabs/rbac/resource/RbacResources.vue'], resolve);
+const RbacCompany = resolve => require(['@/components/tabs/rbac/company/Company.vue'], resolve);
+const RbacDept = resolve => require(['@/components/tabs/rbac/dept/Depts.vue'], resolve);
 
 
 const RbacUsers = resolve => require(['@/components/tabs/rbac/user/RbacUsers.vue'], resolve);
 const UserAdd = resolve => require(['@/components/tabs/rbac/user/UserAdd.vue'], resolve);
 const UserEdit = resolve => require(['@/components/tabs/rbac/user/UserEdit.vue'], resolve);
+const UserInfo = resolve => require(['@/components/tabs/rbac/user/UserInfo.vue'], resolve);
 
 const rbacRouters = [{
     path: '/rbacUsers',
@@ -46,7 +47,8 @@ const rbacRouters = [{
           title: '编辑用户',
           sign: ['rbac', 'user']
         }
-      }
+      },
+      {path:'/userInfo',name:'UserInfo', component:UserInfo,meta:{title:'用户信息',sign:['rbac','user']}}
     ]
   },
   {

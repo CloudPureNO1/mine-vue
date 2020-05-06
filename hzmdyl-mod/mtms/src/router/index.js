@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import RbacRouter from './rabc.routers' 
+import RbacRouter from './rabc.tabs' 
 Vue.use(Router)
 
 const Home = resolve => require(['@/views/Home.vue'],resolve);

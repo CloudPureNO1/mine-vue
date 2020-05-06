@@ -103,7 +103,7 @@ export default {
             this.$router.push('/userAdd');
         },
         handleClick(index, row) { //index 从0开始
-            console.log(index, row);
+            this.$router.push({path:'/userInfo',query:{userData:row}});
         },
         handleEdit(index, row) {
            this.$router.push({path:'/userEdit',query:{userData:row}});
