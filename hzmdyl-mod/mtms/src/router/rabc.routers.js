@@ -15,9 +15,10 @@ const RbacResources = resolve => require(['@/views/rbac/resource/Resources.vue']
 const RbacCompany = resolve => require(['@/views/rbac/company/Company.vue'], resolve);
 const RbacDept = resolve => require(['@/views/rbac/dept/Dept.vue'], resolve);
 
-const RbacUsers = resolve => require(['@/views/rbac/user/Users.vue'], resolve);
-const UserAdd = resolve => require(['@/views/rbac/user/UserAdd.vue'], resolve);
-const UserEdit = resolve => require(['@/views/rbac/user/UserEdit.vue'], resolve);
+
+const RbacUsers = resolve => require(['@/components/tabs/rbac/user/RbacUsers.vue'], resolve);
+const UserAdd = resolve => require(['@/components/tabs/rbac/user/UserAdd.vue'], resolve);
+const UserEdit = resolve => require(['@/components/tabs/rbac/user/UserEdit.vue'], resolve);
 
 const rbacRouters = [{
     path: '/rbacUsers',
@@ -39,7 +40,7 @@ const rbacRouters = [{
       },
       {
         path: '/userEdit',
-        name: 'userEdit',
+        name: 'UserEdit',
         component: UserEdit,
         meta: {
           title: '编辑用户',

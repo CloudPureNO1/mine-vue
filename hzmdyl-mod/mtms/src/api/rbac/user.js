@@ -7,7 +7,33 @@ import {
   $postformData
 } from '@/utils/axios_util.js'
 
- 
+
+let $deleteUser=function(vue,param){
+  $post('deleteUser',param)
+  .then(resp=>{
+    if(resp.data.code==0){
+      vue.$alert('删除成功', '温馨提示', { type: 'success' }).then(()=>{
+          //刷新 给父组件传入隐藏
+          vue.$emit('isShow',false);
+          //加载
+          let obj={};
+          obj.pageSize=vue.$store.state.user.pageSize;
+          obj.currentPage=vue.$store.state.user.currentPage;
+          $loadUsers(vue,obj);
+      }) ;
+    }else{
+       vue.$alert(resp.data.msg, '温馨提示', {
+          type: 'warning'
+        });
+       return
+    }
+  })
+  .catch(err=>{
+    console.log('接口调用异常：' + err);
+    vue.$alert(err,"温馨提示",{type:'error'});
+  })
+}
+
 let $loadUsers = function(vue,param){
     //debugger
    $post('loadUsers', param)
@@ -54,7 +80,37 @@ let $saveUser = function (vue, param) {
     })
 }
 
+let $updateUser = function (vue, param) {
+  $post('updateUser', param)
+    .then(resp => {
+      if(resp.data.code==0){
+        vue.$alert('修改成功', '温馨提示', { type: 'success' }).then(()=>{
+            //刷新 给父组件传入隐藏
+            vue.$emit('isShow',false);
+            //加载
+            let obj={};
+            obj.pageSize=vue.$store.state.user.pageSize;
+            obj.currentPage=vue.$store.state.user.currentPage;
+            $loadUsers(vue,obj);
+        }) ;
+      }else{
+         vue.$alert(resp.data.msg, '温馨提示', {
+            type: 'warning'
+          });
+         return
+      }
+    })
+    .catch(err => {
+      console.log('接口调用异常：' + err);
+      vue.$alert(err, "温馨提示", {
+        type: 'error'
+      });
+    })
+}
+
 export default {
   $loadUsers,
-  $saveUser
+  $saveUser,
+  $deleteUser,
+  $updateUser
 }
