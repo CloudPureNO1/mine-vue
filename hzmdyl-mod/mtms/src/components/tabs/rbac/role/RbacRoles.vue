@@ -1,26 +1,57 @@
 <template>
     <div>
-        <el-table :data="roleList">
-            <el-table-column prop="roleId" label="角色ID"></el-table-column>
-            <el-table-column prop="roleName" label="角色名称"></el-table-column>
-            <el-table-column prop="creator" label="创建者"></el-table-column>
-            <el-table-column prop="mark" label="备注"></el-table-column>
-        </el-table>
+        <el-row>
+            <el-col :span="24">
+                <mtms-echars-stack></mtms-echars-stack>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="12">
+                <ve-line :data="chartData" :settings="chartSettings" height="300px"></ve-line>
+            </el-col>
+            <el-col :span="12">
+                <ve-line :data="chartData" :extend="extend" height="300px"></ve-line>
+            </el-col>
+        </el-row>
     </div>
+
+  
 </template>
 
 <script>
-export default {
-    data(){
-        let role={
-            roleId:'10001',
-            roleName:'测试角色',
-            creator:'admin',
-            mark:'测试用户对应角色'
+import Stack from './stack'
+  export default {
+      components:{
+          "mtms-echars-stack":Stack
+      },
+    data () {
+      this.chartSettings = {
+        axisSite: { right: ['下单率'] },
+        yAxisType: ['KMB', 'percent'],
+        yAxisName: ['数值', '比率']
+      },
+      this.extend = {
+        series: {
+          label: {
+            normal: {
+              show: true
+            }
+          }
         }
-        return{
-            roleList:new Array(10).fill(role)
-        }
+      }
+      return { 
+        chartData: {
+                columns: ['日期', '访问用户', '下单用户', '下单率'],
+                rows: [
+                    { '日期': '1/1', '访问用户': 1393, '下单用户': 1093, '下单率': 0.32 },
+                    { '日期': '1/2', '访问用户': 3530, '下单用户': 3230, '下单率': 0.26 },
+                    { '日期': '1/3', '访问用户': 2923, '下单用户': 2623, '下单率': 0.76 },
+                    { '日期': '1/4', '访问用户': 1723, '下单用户': 1423, '下单率': 0.49 },
+                    { '日期': '1/5', '访问用户': 3792, '下单用户': 3492, '下单率': 0.323 },
+                    { '日期': '1/6', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78 }
+                ]
+          }
+      }
     }
-}
+  }
 </script>
