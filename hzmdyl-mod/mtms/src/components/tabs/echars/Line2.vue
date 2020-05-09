@@ -22,7 +22,7 @@
         }  ,
          axisSite: { right: ['下单率'] },
         yAxisType: ['KMB', 'percent'],
-        yAxisName: ['金额' ],
+        yAxisName: ['人数'],
         selectedMode: 'single',
         hoverAnimation: false
       }
@@ -39,17 +39,17 @@
         series: {
           label: { show: true, position: "top" }
         },
-        // title:{
-        //   text:'基金收缴按年龄段分类',
-        //   textStyle:{
-        //      color : '#333',
-        //      fontStyle :'italic',
-        //      fontSize:12,
-        //      textAlign:'center'
-        //   },
-        //   bottom:0
+        title:{
+          text:'基金收缴按年龄段分类',
+          textStyle:{
+             color : '#333',
+             fontStyle :'italic',
+             fontSize:12,
+             textAlign:'center'
+          },
+          bottom:0
 
-        // }
+        }
       }
        
       return {
@@ -59,9 +59,9 @@
           rows: [
             { 'age': '[6,0]', 'zh': 1111, 'zgyb': 0, 'czjmyb':1232,'xnh':343},
             { 'age': '(16,6)', 'zh': 6234, 'zgyb': 0, 'czjmyb':3434,'xnh':1343},
-            { 'age': '男(~,60)女(~,50)', 'zh': 9999, 'zgyb': 3333, 'czjmyb':4000,'xnh':2222},
-            { 'age': '男(50,16]女(40,16]','zh': 23456, 'zgyb': 8090, 'czjmyb':4567,'xnh':6789},
-            { 'age': '男(60,50]女(50,40]','zh': 12312, 'zgyb': 7890, 'czjmyb':4567,'xnh':3245},
+            { 'age': '男(50,16]女(40,16]','zh': 5678, 'zgyb': 1212, 'czjmyb':4567,'xnh':2345},
+            { 'age': '男(60,50]女(50,40]','zh': 12312, 'zgyb': 1233, 'czjmyb':1123,'xnh':1231},
+            { 'age': '男(~,60)女(~,50)', 'zh': 9999, 'zgyb': 5555, 'czjmyb':3333,'xnh':2222},
           ]
            
         } ,

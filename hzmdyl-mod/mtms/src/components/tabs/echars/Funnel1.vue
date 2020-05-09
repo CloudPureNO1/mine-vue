@@ -22,7 +22,7 @@
              itemHeight :8
         },
          title: {
-            text: '总缴费年龄分析', 
+            text: '总人数年龄分析', 
             left: 'center' ,
             bottom:5,
             //left:'24%',
@@ -42,7 +42,7 @@
             calculable : true,
              tooltip : {
                 trigger: 'item' ,
-                formatter: "{b}:<br>金额：{c}<br/>占比：{d}%"
+                formatter: "{b}:<br>人数：{c}<br/>占比：{d}%"
             },
         series:{
           //sort: 'descending',
@@ -71,7 +71,7 @@
             { 'age': '男(60,50]女(50,40]', 'total': 700 },
             { 'age': '男(50,16]女(40,16]', 'total': 500 },
             { 'age': '(16,6)', 'total': 200 },
-            { 'age': '[6,0]', 'total': 100 }
+            { 'age': '[6,0]', 'total': 1001}
           ]
         }
       }
