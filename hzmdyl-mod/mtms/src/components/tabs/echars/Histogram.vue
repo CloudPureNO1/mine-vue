@@ -14,25 +14,62 @@
                 <template slot="title">
                   <span style="color:#0284e0;">人员参保分类</span> 
                 </template>
-                <div  class="mtms-collapse-content">城镇职工医保：￥3434343 </div>
-                <div  class="mtms-collapse-content">城镇居民医保：￥123123 </div>
-                <div  class="mtms-collapse-content">新农合：￥34333</div>
+                <div  class="mtms-collapse-content">城镇职工医保：
+                  <div  class="mtms-collapse-content">总金额：￥3434343 </div>
+                  <div  class="mtms-collapse-content">同比增长：100% </div>
+                  <div  class="mtms-collapse-content">环比增长：50%</div>
+                </div>
+                <div  class="mtms-collapse-content">城镇居民医保：
+                  <div  class="mtms-collapse-content">总金额：￥123123  </div> 
+                  <div  class="mtms-collapse-content">同比增长：100% </div>
+                  <div  class="mtms-collapse-content">环比增长：50%</div>
+                </div>
+                <div  class="mtms-collapse-content">新农合： 
+                  <div  class="mtms-collapse-content">总金额：￥123123  </div> 
+                  <div  class="mtms-collapse-content">同比增长：100% </div>
+                  <div  class="mtms-collapse-content">环比增长：50%</div>
+                </div>
+                
               </el-collapse-item>
               <el-collapse-item  name="2">
                 <template slot="title">
                   <span style="color:#0284e0;">年龄分类</span> 
                 </template>
-                <div class="mtms-collapse-content">学生儿童：￥2323232 </div>
-                <div class="mtms-collapse-content">老年人：￥234234234</div>
-                <div class="mtms-collapse-content">其他：￥12312312312313</div>
+                <div class="mtms-collapse-content">学生儿童：
+                  <div  class="mtms-collapse-content">总金额：￥123123  </div> 
+                  <div  class="mtms-collapse-content">同比增长：100% </div>
+                  <div  class="mtms-collapse-content">环比增长：50%</div>
+                </div>
+                <div class="mtms-collapse-content">老年人：
+                   <div  class="mtms-collapse-content">总金额：￥123123  </div> 
+                  <div  class="mtms-collapse-content">同比增长：100% </div>
+                  <div  class="mtms-collapse-content">环比增长：50%</div>
+                </div>
+                <div class="mtms-collapse-content">其他：
+                   <div  class="mtms-collapse-content">总金额：￥123123  </div> 
+                  <div  class="mtms-collapse-content">同比增长：100% </div>
+                  <div  class="mtms-collapse-content">环比增长：50%</div>
+                </div>
               </el-collapse-item>
               <el-collapse-item  name="3">
                 <template slot="title">
                   <span style="color:#0284e0;">在职分类</span> 
                 </template>
-                <div class="mtms-collapse-content">在职：￥2342342342342 </div>
-                <div class="mtms-collapse-content">退休：￥123123123</div>
-                <div class="mtms-collapse-content">其他：￥0</div>
+                <div class="mtms-collapse-content">在职：
+                  <div  class="mtms-collapse-content">总金额：￥123123  </div> 
+                  <div  class="mtms-collapse-content">同比增长：100% </div>
+                  <div  class="mtms-collapse-content">环比增长：50%</div>
+                 </div>
+                <div class="mtms-collapse-content">退休：
+                   <div  class="mtms-collapse-content">总金额：￥123123  </div> 
+                  <div  class="mtms-collapse-content">同比增长：100% </div>
+                  <div  class="mtms-collapse-content">环比增长：50%</div>
+                </div>
+                <div class="mtms-collapse-content">其他：
+                  <div  class="mtms-collapse-content">总金额：￥123123  </div> 
+                  <div  class="mtms-collapse-content">同比增长：100% </div>
+                  <div  class="mtms-collapse-content">环比增长：50%</div>
+                </div>
               </el-collapse-item>
             </el-collapse>
         </div>

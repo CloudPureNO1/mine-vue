@@ -7,7 +7,9 @@ Mock.setup({
 const sysData=[
     {nodeId:'1002',nodeTitle:'用户管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacUsers',parent:'1001'},
     {nodeId:'1003',nodeTitle:'角色管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacRoles',parent:'1001'},
-    {nodeId:'1005',nodeTitle:'图表',isLeaf:true,icon:'el-icon-s-custom',url:'/mtmsEchars',parent:'1001'},
+    {nodeId:'1005',nodeTitle:'医保基金收缴',isLeaf:true,icon:'el-icon-s-custom',url:'/mtmsEcharsIn',parent:'1001'},
+    {nodeId:'1006',nodeTitle:'医保基金支付',isLeaf:true,icon:'el-icon-s-custom',url:'/mtmsEcharsOut',parent:'1001'},
+    {nodeId:'1007',nodeTitle:'辖区人员',isLeaf:true,icon:'el-icon-s-custom',url:'/mtmsPersons',parent:'1001'},
     {nodeId:'1004',nodeTitle:'外部链接',isLeaf:true,icon:'el-icon-s-custom',url:'http://www.baidu.com/',parent:'1001'},
 ];
 

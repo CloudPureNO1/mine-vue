@@ -16,7 +16,35 @@
 
         <el-row>
           <el-col :span="24">
+            <el-card shadow="always">
+              总是显示
+            </el-card>
+            <div>2019年医保基金收缴情况   总金额：￥1233333333.34,同比增长：100%,环比增长：50%</div>
+            <el-row>
+              <el-col :span="12">            
+                <div :v-show="showMonth">
+                  <div  class="mtms-collapse-content">2019年1月
+                     总金额：￥3434343 , 同比增长：100%  , 环比增长：50% 
+                  </div>
+                </div>
+               </el-col>
+              <el-col :span="12">
+                <div :v-show="showJd">
+                      <div  class="mtms-collapse-content">2019年第一季度
+                       总金额：￥3434343  , 同比增长：100%  , 环比增长：50% 
+                    </div>
+                </div>
+              </el-col>
+            </el-row>
+
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="15">
             <mtms-echars-line3></mtms-echars-line3>
+          </el-col>
+          <el-col :span="9">
+            <mtms-echars-line4></mtms-echars-line4>
           </el-col>
         </el-row>
         <div style="height:5px;"><span></span></div>
@@ -71,6 +99,7 @@
     import Line from './Line'
     import Line2 from './Line2'
     import Line3 from './Line3'
+    import Line4 from './Line4'
     import Bar from './Bar'
     import Pie1 from './Pie1'
     import Funnel from './Funnel'
@@ -89,6 +118,7 @@ import HistogramByYearVue from './HistogramByYear.vue'
           "mtms-echars-line":Line,
           "mtms-echars-line2":Line2,
           "mtms-echars-line3":Line3,
+          "mtms-echars-line4":Line4,
           "mtms-echars-bar":Bar,
           "mtms-echars-pie1":Pie1,
           "mtms-echars-funnel":Funnel,
@@ -103,7 +133,9 @@ import HistogramByYearVue from './HistogramByYear.vue'
     data () {
       return { 
           userAddHeight: '450px' ,
-          todayPlan:true
+          todayPlan:true,
+          showMonth:true,
+          showJd:true
       }
     },
     created() {
@@ -128,4 +160,10 @@ import HistogramByYearVue from './HistogramByYear.vue'
   }
 </script>
 
- 
+ <style  scoped>
+ .mtms-collapse-content{
+  font-size:0.75rem;
+  text-align:left;
+  padding-left:22px;
+}
+ </style>
