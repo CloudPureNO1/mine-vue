@@ -10,6 +10,8 @@ const sysData=[
     {nodeId:'1005',nodeTitle:'医保基金收缴',isLeaf:true,icon:'el-icon-s-custom',url:'/mtmsEcharsIn',parent:'1001'},
     {nodeId:'1006',nodeTitle:'医保基金支付',isLeaf:true,icon:'el-icon-s-custom',url:'/mtmsEcharsOut',parent:'1001'},
     {nodeId:'1007',nodeTitle:'辖区人员',isLeaf:true,icon:'el-icon-s-custom',url:'/mtmsPersons',parent:'1001'},
+    {nodeId:'1008',nodeTitle:'结余留用、超支分担',isLeaf:true,icon:'el-icon-s-custom',url:'/ytgOuter',parent:'1001'},
+    {nodeId:'1009',nodeTitle:'费用结算',isLeaf:true,icon:'el-icon-s-custom',url:'/expenseSettlement',parent:'1001'},
     {nodeId:'1004',nodeTitle:'外部链接',isLeaf:true,icon:'el-icon-s-custom',url:'http://www.baidu.com/',parent:'1001'},
 ];
 

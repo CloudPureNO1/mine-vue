@@ -1,5 +1,5 @@
 <template>
-  <div clss="mtms-e-p-main">
+  <div clss="mtms-e-p-main" :style="{height:userAddHeight,overflow:'auto'}">
      <el-card shadow="always">
           <div slot="header" class="clearfix">
             <span>2019年辖区内基本医疗保险参保人员</span>
@@ -106,13 +106,23 @@
             { 'mth': '11月','uebmi': 78905, 'urbmi': 12312},
             { 'mth': '12月','uebmi': 99999, 'urbmi': 90177}
           ]
-        }
+        },
+        userAddHeight: '450px' ,
       }
+    },
+    created(){
+              this.$nextTick(function () {
+            let tabH = this.$el.parentElement.parentElement.parentElement.offsetHeight;
+            let tabHeaderH = document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
+            let paginationH = 13;
+            this.userAddHeight = tabH - tabHeaderH - paginationH + 'px';
+ 
+        });
     }
   }
 </script>
 
-<style scoped>
+<style >
 .mtms-e-p-main .el-card__header{
   padding:9px 20px;
 }
