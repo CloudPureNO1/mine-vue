@@ -58,8 +58,8 @@ export default {
                     let meta = _router_obj.route.meta;
                         if (meta.sign) {
                             let filePath = '';
-                            meta.sign.forEach(item => {
-                                filePath = (filePath == '' ? '' : filePath + '/') + item;
+                            meta.sign.forEach(itemP => {
+                                filePath = (filePath == '' ? '' : filePath + '/') + itemP;
                             });
                             var MyComponent = resolve => require([`@/components/tabs/${filePath}/${item.name}`], resolve);
                             item.component=MyComponent

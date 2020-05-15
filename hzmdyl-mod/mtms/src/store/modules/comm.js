@@ -1,9 +1,12 @@
+import comm from "../../api/comm";
+
  /**
   * 公共数据，系统参数，性别等
   */
  const state={
      sexList:[],
-     rates:[]
+     rates:[],
+     roleTypes:[]
  }
 
  const getters={
@@ -16,6 +19,9 @@
     },
     setRates(state,payload){
         state.rates=payload.body.data;
+    },
+    setRoleTypes(state,payload){
+        state.roleTypes=payload.body.data;
     }
  }
 
@@ -25,6 +31,9 @@
     },
     setRates({commit},payload){
         commit('setRates',payload);
+    },
+    setRoleTypes({commit},payload){
+        commit('setRoleTypes',payload);
     }
  }
 

@@ -96,6 +96,9 @@ export default {
 </script>
 
 <style>
+    .exp-sett-main{
+        background-color:#fbfbfb
+    }
     .exp-sett-main .el-col{
         padding:3px;
     }

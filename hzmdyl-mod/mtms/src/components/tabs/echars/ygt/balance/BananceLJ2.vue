@@ -1,6 +1,15 @@
 <template>
-    <div>
-        <ve-line :data="chartData" :settings="chartSettings" :extend="extend" :height="heightLj"></ve-line>
+    <div >
+        <div style="padding: 10px;  text-align: left;coloe:#a6a5b1;">
+            <div>总结余</div>
+            <div style="padding: 5px 0px 5px 0px; font-weight: 600; font-size: 1.75rem;">99999999999999</div>
+        </div>
+        <hr style="border: 1px solid #fbfbfb;  width: 96%;">
+        <div :style="{height:heightLj}">
+           <ve-line :data="chartData" :settings="chartSettings" :extend="extend" height="100%"></ve-line>
+        </div>
+        <hr style="border: 1px solid #fbfbfb;  width: 96%;">
+        <div style="padding: 5px 0px 5px 10px; text-align: left;">当月结余：777777777777777</div>
     </div>
 </template>
 
@@ -18,9 +27,17 @@
           legend:{
               show:false
           },
-        //   grid:{
-        //       bottom:0
-        //   }
+          grid:{
+              bottom:0,
+              top:0,
+              left:'-10%' 
+          } ,
+          xAxis:{
+            show:false
+          },
+          yAxis:{
+            show:false
+          }
       }
       return {
         chartData: {
@@ -59,9 +76,19 @@
             { '日期': '31', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78 },
           ]
         },
-        heightLj:'200px'
+        heightLj:''
       }
-      
     }
+    ,
+      created(){
+        this.$nextTick(function () {
+          debugger
+            let tabH = this.$el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.offsetHeight;
+            let tabHeaderH = parent.document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
+            let paginationH = 13;
+            let userAddHeight = tabH - tabHeaderH - paginationH ;
+            this.heightLj=userAddHeight*1/7+'px';
+        });
+      }
   }
 </script>

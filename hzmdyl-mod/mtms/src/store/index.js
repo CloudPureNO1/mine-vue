@@ -4,6 +4,8 @@ import comm from '@/store/modules/comm'
 import layout from '@/store/modules/layout'
 import user from '@/store/modules/user'
 import dept from '@/store/modules/dept'
+import role from '@/store/modules/role'
+
 
 Vue.use(Vuex)
 
@@ -14,7 +16,8 @@ const store=new Vuex.Store({
         comm,
         layout,
         user,
-        dept
+        dept,
+        role
     },
 
     strict: debug 

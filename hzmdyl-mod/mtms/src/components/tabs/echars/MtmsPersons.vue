@@ -49,9 +49,14 @@
               'mth':'年月',
               'insuredPeurbmions':'辖区参保总人数',
               'uebmi':'城镇职工基本医疗',
-              'urbmi':'城镇居民基本医疗'
+              'urbmi':'城镇居民基本医疗',
+              'tbzz' :'总人数同比增长率'
           },
           stack: { 'insuredPeurbmions': ['uebmi', 'urbmi'] },
+          showLine:['tbzz'],
+          axisSite: { right: ['tbzz' ] },
+          yAxisType: ['KMB'],
+          yAxisName: ['总人数','同比增长率'],
 
       },
       this.extend={
@@ -65,7 +70,7 @@
         color:[ "#fa6e86", "#75c2ef"],    
          grid:{
             bottom:20 ,
-            top:20
+            top:35
         },
         legend:{
             show:true,
@@ -91,20 +96,20 @@
         height:'200px',
         width:'auto', 
         chartData: {
-          columns: ['mth', 'uebmi', 'urbmi'],
+          columns: ['mth', 'uebmi', 'urbmi','tbzz'],
           rows: [
-            { 'mth': '1月', 'uebmi': 99999, 'urbmi': 90187},
-            { 'mth': '2月','uebmi': 234234, 'urbmi': 12234},
-            { 'mth': '3月','uebmi': 45645, 'urbmi': 77727},
-            { 'mth': '4月', 'uebmi': 3312, 'urbmi': 99399},
-            { 'mth': '5月', 'uebmi': 77777, 'urbmi': 44445},
-            { 'mth': '6月', 'uebmi': 88888, 'urbmi': 64789},
-            { 'mth': '7月','uebmi': 98764, 'urbmi': 12354},
-            { 'mth': '8月','uebmi': 34567, 'urbmi': 34653},
-            { 'mth': '9月','uebmi': 12344, 'urbmi': 45564},
-            { 'mth': '10月','uebmi': 56789, 'urbmi': 56657},
-            { 'mth': '11月','uebmi': 78905, 'urbmi': 12312},
-            { 'mth': '12月','uebmi': 99999, 'urbmi': 90177}
+            { 'mth': '1月', 'uebmi': 99999, 'urbmi': 90187,'tbzz':12.4},
+            { 'mth': '2月','uebmi': 234234, 'urbmi': 12234,'tbzz':11.4},
+            { 'mth': '3月','uebmi': 45645, 'urbmi': 77727,'tbzz':9.4},
+            { 'mth': '4月', 'uebmi': 3312, 'urbmi': 99399,'tbzz':5.4},
+            { 'mth': '5月', 'uebmi': 77777, 'urbmi': 44445,'tbzz':8.4},
+            { 'mth': '6月', 'uebmi': 88888, 'urbmi': 64789,'tbzz':12.4},
+            { 'mth': '7月','uebmi': 98764, 'urbmi': 12354,'tbzz':3.4},
+            { 'mth': '8月','uebmi': 34567, 'urbmi': 34653,'tbzz':1.4},
+            { 'mth': '9月','uebmi': 12344, 'urbmi': 45564,'tbzz':2.4},
+            { 'mth': '10月','uebmi': 56789, 'urbmi': 56657,'tbzz':4.4},
+            { 'mth': '11月','uebmi': 78905, 'urbmi': 12312,'tbzz':7.4},
+            { 'mth': '12月','uebmi': 99999, 'urbmi': 90177,'tbzz':3.4}
           ]
         },
         userAddHeight: '450px' ,

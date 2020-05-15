@@ -11,6 +11,31 @@ let rates=[
     {label:'铂金会员',value:'8'},
     {label:'钻石会员',value:'9'}
 ]
+let roleTypes=[
+    {label:'超级管理员',value:"admin"},
+    {label:'普通管理员',value:"manager"},
+    {label:'普通用户',value:"user"}
+]
+
+let getRoleTypes=(req)=>{
+    //debugger;
+    let result={};
+    result.code=0;
+    result.body={}
+    let type=req.type;
+    if(type!='POST'){
+        result.code=-9;
+        result.msg='请使用POST请求';
+        return result;
+    }
+    if(req.body){
+        result.body.data=roleTypes;
+        result.body.total=roleTypes.length;
+    }
+
+    return result;
+}
+
 let getRates=(req)=>{
      //debugger;
      let result={};
@@ -49,5 +74,6 @@ let getSexList=(req)=>{
      return result;
 }
 
+Mockjs.mock(/\/mtms\/api\/getRoleTypes/,getRoleTypes);
 Mockjs.mock(/\/mtms\/api\/getRates/,getRates);
 Mockjs.mock(/\/mtms\/api\/getSexList/,getSexList);
