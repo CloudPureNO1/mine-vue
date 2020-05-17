@@ -6,7 +6,8 @@ import comm from "../../api/comm";
  const state={
      sexList:[],
      rates:[],
-     roleTypes:[]
+     roleTypes:[],
+     groupTypes:[]
  }
 
  const getters={
@@ -22,6 +23,9 @@ import comm from "../../api/comm";
     },
     setRoleTypes(state,payload){
         state.roleTypes=payload.body.data;
+    },
+    setGroupTypes(state,payload){
+        state.groupTypes=payload.body.data;
     }
  }
 
@@ -34,6 +38,9 @@ import comm from "../../api/comm";
     },
     setRoleTypes({commit},payload){
         commit('setRoleTypes',payload);
+    },
+    setGroupTypes({commit},payload){
+        commit('setGroupTypes',payload);
     }
  }
 

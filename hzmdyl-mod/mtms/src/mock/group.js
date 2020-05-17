@@ -1,38 +1,38 @@
 import Mockjs from 'mockjs'
 let total=20;
 
-let role0=[];
+let group0=[];
 
-let role1 = {
-    roleId: 10001,
-    roleName: '超级管理员角色',
-    roleType: 'admin',
+let group1 = {
+    groupId: 10001,
+    groupName: '超级管理员用户组',
+    groupType: 'admin',
     createTime: '2020-02-02 02:02:02',
     creator: 'admin',
     updateTime: '2020-02-02 02:02:02',
-    roleDesc: '超级管理员角色'
+    groupDesc: '超级管理员用户组'
 }
-let role2 = {
-    roleId: 10002,
-    roleName: '普通管理员角色',
-    roleType: 'manager',
+let group2 = {
+    groupId: 10002,
+    groupName: '普通管理员用户组',
+    groupType: 'manager',
     createTime: '2020-02-02 02:02:02',
     creator: 'admin',
     updateTime: '2020-02-02 02:02:02',
-    roleDesc: '普通管理员角色'
+    groupDesc: '普通管理员用户组'
 }
-let roleDelete = {
-    roleId: 10003,
-    roleName: '用户',
-    roleType: 'user',
+let groupDelete = {
+    groupId: 10003,
+    groupName: '用户组',
+    groupType: 'user',
     createTime: '2020-02-02 02:02:02',
     creator: 'admin',
     updateTime: '2020-02-02 02:02:02',
-    roleDesc: '用户'
+    groupDesc: '用户组'
 }
-role0.push(roleDelete);
+group0.push(groupDelete);
 
-let loadRoles=(req)=>{
+let loadGroups=(req)=>{
     //debugger;
     let result={};
     result.code=0;
@@ -45,29 +45,29 @@ let loadRoles=(req)=>{
     }
     if(req.body){
         //debugger;
-        let roleList=[];
+        let groupList=[];
         let param=JSON.parse(req.body);
         
         if(param.currentPage==1){
            
-            roleList=new Array(param.pageSize-role0.length).fill(role1).concat(role0);
+            groupList=new Array(param.pageSize-group0.length).fill(group1).concat(group0);
         }
         if(param.currentPage==2){
-            roleList=new Array(param.pageSize-role0.length).fill(role2).concat(role0);
+            groupList=new Array(param.pageSize-group0.length).fill(group2).concat(group0);
         }
  
-        result.body.data=roleList;
+        result.body.data=groupList;
         result.body.total=total;
     }
 
     return result;
 }
 
-Mockjs.mock(/\/mtms\/api\/loadRoles/,loadRoles);
+Mockjs.mock(/\/mtms\/api\/loadGroups/,loadGroups);
 
 
 //saveUser
-let saveRole=(req)=>{
+let saveGroup=(req)=>{
     //debugger;
     let result={};
     result.code=0;
@@ -78,22 +78,21 @@ let saveRole=(req)=>{
         return result;
     }
     if(req.body){
-        debugger;
-        let roleList=[];
+        let groupList=[];
         let param=JSON.parse(req.body);
         console.log(param);
-        role0.push(param);
+        group0.push(param);
         total=total+1;
         result.msg="成功";
     }
 
     return result;
 }
-Mockjs.mock(/\/mtms\/api\/saveRole/,saveRole); 
+Mockjs.mock(/\/mtms\/api\/saveGroup/,saveGroup); 
 
 
 //deleteUser
-let deleteRole=(req)=>{
+let deleteGroup=(req)=>{
     //debugger;
     let result={};
     result.code=0;
@@ -105,21 +104,21 @@ let deleteRole=(req)=>{
     }
     if(req.body){
        // debugger;
-        let roleList=[];
+        let groupList=[];
         let param=JSON.parse(req.body);
         console.log(param);
-        role0.pop(param);
+        group0.pop(param);
         total=total-1;
         result.msg="成功";
     }
 
     return result;
 }
-Mockjs.mock(/\/mtms\/api\/deleteRole/,deleteRole); 
+Mockjs.mock(/\/mtms\/api\/deleteGroup/,deleteGroup); 
 
 
 //updateUser
-let updateRole=(req)=>{
+let updateGroup=(req)=>{
     //debugger;
     let result={};
     result.code=0;
@@ -133,10 +132,10 @@ let updateRole=(req)=>{
        // debugger;
         let param=JSON.parse(req.body);
         console.log(param);
-        role1=param;
+        group1=param;
         result.msg="成功";
     }
 
     return result;
 }
-Mockjs.mock(/\/mtms\/api\/updateRole/,updateRole); 
+Mockjs.mock(/\/mtms\/api\/updateGroup/,updateGroup); 

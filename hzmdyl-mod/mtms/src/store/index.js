@@ -5,6 +5,7 @@ import layout from '@/store/modules/layout'
 import user from '@/store/modules/user'
 import dept from '@/store/modules/dept'
 import role from '@/store/modules/role'
+import group from '@/store/modules/group'
 
 
 Vue.use(Vuex)
@@ -17,7 +18,8 @@ const store=new Vuex.Store({
         layout,
         user,
         dept,
-        role
+        role,
+        group
     },
 
     strict: debug 

@@ -7,7 +7,7 @@
                 <el-table-column label="序号" type="index" fixed="left"></el-table-column>
                 <el-table-column label="角色ID" prop="roleId" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
                 <el-table-column label="角色名称" prop="roleName" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
-                <el-table-column label="角色类型" prop="roleType" :align="align" :show-overflow-tooltip="showOverflowTooltip" :formatter="formatUserRate"></el-table-column>
+                <el-table-column label="角色类型" prop="roleType" :align="align" :show-overflow-tooltip="showOverflowTooltip" :formatter="formatRoleTypes"></el-table-column>
                 <el-table-column label="创建时间" prop="createTime" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
                 <el-table-column label="创建者" prop="creator" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
                 <el-table-column label="更新时间" prop="updateTime" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import roleApi from '@/api/rbac/role.js'
 import commApi from '@/api/comm.js'
 export default {
@@ -61,7 +61,7 @@ export default {
             pageSizes: [10, 20, 50, 100, 200, 300, 400, 500], //每页记录数选项
             //pageSize: 10, //当前每页记录数
             //total: 0, //总记录数 
-            isSiglePageHide: true, //如果只有一页时，隐藏pagination,
+            isSiglePageHide: false, //如果只有一页时，隐藏pagination,
             pglayout: 'total, sizes, prev, pager,  next, jumper' //分页工具栏上显示的内容 
     }
   },
@@ -72,11 +72,6 @@ export default {
             let paginationH=43;
             this.maxHeight=tabH-tabHeaderH-paginationH;
       });
-      let vue=this;
-     // if(this.roleList.length==0){
-        roleApi.$loadRoles(this,{pagesize:this.pageSize,currentPage:this.currentPage});
-      //}
-      
   },
   computed:{
     ...mapState({
@@ -87,13 +82,17 @@ export default {
       currentPage:state=>state.role.currentPage
     })
   },
+  mounted(){
+      if(this.roleList.length==0){
+        roleApi.$loadRoles(this,{pageSize:this.pageSize,currentPage:this.currentPage});
+      }
+  },
   methods: {
         ...mapActions({
-          setRoleList:'role/setRoleList',
-          setPageSize:'role/pageSize',
+          setPageSize:'role/setPageSize',
           setCurrentPage:'role/setCurrentPage'
         }),
-        formatUserRate(row, column){
+        formatRoleTypes(row, column){
             
             if(this.roleTypes.length==0){
                 commApi.$loadRoleTypes(this);
@@ -105,13 +104,13 @@ export default {
             return row.roleType;
         },
         handleAdd() {
-            this.$router.push('/roleAdd');
+            this.$router.push({path:'/roleAddEdit',query:{roleData:{}}});
         },
         handleClick(index, row) { //index 从0开始
             this.$router.push({path:'/roleInfo',query:{roleData:row}});
         },
         handleEdit(index, row) {
-           this.$router.push({path:'/roleEdit',query:{roleData:row}});
+           this.$router.push({path:'/roleAddEdit',query:{roleData:row}});
         },
         handleDelete(index, row) {
             roleApi.$deleteRole(this,row);
@@ -120,15 +119,15 @@ export default {
             let vue=this;
             this.setPageSize(val)
             .then(()=>{
-                userApi.$loadRoles(vue, {currentPage:this.currentPage,pageSize:this.pageSize});
+                roleApi.$loadRoles(vue, {currentPage:this.currentPage,pageSize:this.pageSize});
             });
         },
         handleCurrentChange(val) {
             let vue=this;
             this.setCurrentPage(val).then(()=>{
-                 userApi.$loadRoles(vue, {currentPage:this.currentPage,pageSize:this.pageSize});
+                 roleApi.$loadRoles(vue, {currentPage:this.currentPage,pageSize:this.pageSize});
             });
-        }
+        } 
     }
 }
 </script>

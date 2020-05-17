@@ -1,12 +1,12 @@
-import mockRole from '@/mock/role.js'
+import mockGroup from '@/mock/group.js'
 import { $post } from '@/utils/axios_util.js'
 
-let $loadRoles=(vue,param)=>{
-    $post('loadRoles',param)
+let $loadGroups=(vue,param)=>{
+    $post('loadGroups',param)
     .then(res=>{
        
         if(res.data.code==0){
-            vue.$store.dispatch('role/setRoleList',res.data.body);
+            vue.$store.dispatch('group/setGroupList',res.data.body);
         }else{
             console.log(res);
             vue.$alert(res.data.msg,'温馨提示',{type:'warning'});
@@ -21,8 +21,8 @@ let $loadRoles=(vue,param)=>{
 }
 
 
-let $saveRole = function (vue, param) {
-    $post('saveRole', param)
+let $saveGroup = function (vue, param) {
+    $post('saveGroup', param)
       .then(resp => {
         if(resp.data.code==0){
           vue.$alert('保存成功', '温馨提示', { type: 'success' }).then(()=>{
@@ -30,9 +30,9 @@ let $saveRole = function (vue, param) {
               vue.$emit('isShow',false);
               //加载
               let obj={};
-              obj.pageSize=vue.$store.state.role.pageSize;
-              obj.currentPage=vue.$store.state.role.currentPage;
-              $loadRoles(vue,obj);
+              obj.pageSize=vue.$store.state.group.pageSize;
+              obj.currentPage=vue.$store.state.group.currentPage;
+              $loadGroups(vue,obj);
           }) ;
         }else{
            vue.$alert(resp.data.msg, '温馨提示', {
@@ -49,8 +49,8 @@ let $saveRole = function (vue, param) {
       })
   }
   
-  let $updateRole = function (vue, param) {
-    $post('updateRole', param)
+  let $updateGroup = function (vue, param) {
+    $post('updateGroup', param)
       .then(resp => {
         if(resp.data.code==0){
           vue.$alert('修改成功', '温馨提示', { type: 'success' }).then(()=>{
@@ -58,9 +58,9 @@ let $saveRole = function (vue, param) {
               vue.$emit('isShow',false);
               //加载
               let obj={};
-              obj.pageSize=vue.$store.state.role.pageSize;
-              obj.currentPage=vue.$store.state.role.currentPage;
-              $loadRoles(vue,obj);
+              obj.pageSize=vue.$store.state.group.pageSize;
+              obj.currentPage=vue.$store.state.group.currentPage;
+              $loadGroups(vue,obj);
           }) ;
         }else{
            vue.$alert(resp.data.msg, '温馨提示', {
@@ -78,8 +78,8 @@ let $saveRole = function (vue, param) {
   }
   
   
-let $deleteRole=function(vue,param){
-    $post('deleteRole',param)
+let $deleteGroup=function(vue,param){
+    $post('deleteGroup',param)
     .then(resp=>{
       if(resp.data.code==0){
         vue.$alert('删除成功', '温馨提示', { type: 'success' }).then(()=>{
@@ -87,9 +87,9 @@ let $deleteRole=function(vue,param){
             vue.$emit('isShow',false);
             //加载
             let obj={};
-            obj.pageSize=vue.$store.state.role.pageSize;
-            obj.currentPage=vue.$store.state.role.currentPage;
-            $loadRoles(vue,obj);
+            obj.pageSize=vue.$store.state.group.pageSize;
+            obj.currentPage=vue.$store.state.group.currentPage;
+            $loadGroups(vue,obj);
         }) ;
       }else{
          vue.$alert(resp.data.msg, '温馨提示', {
@@ -105,8 +105,8 @@ let $deleteRole=function(vue,param){
   }
   
 export default {
-    $loadRoles,
-    $saveRole,
-    $updateRole,
-    $deleteRole
+    $loadGroups,
+    $saveGroup,
+    $updateGroup,
+    $deleteGroup
 }

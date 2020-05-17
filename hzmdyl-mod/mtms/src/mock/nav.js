@@ -5,9 +5,9 @@ Mock.setup({
 
 
 const sysData=[
-    {nodeId:'1002',nodeTitle:'用户管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacUsers',parent:'1001'},
+    {nodeId:'1001',nodeTitle:'用户管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacUsers',parent:'1001'},
+    {nodeId:'1002',nodeTitle:'用户组管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacGroups',parent:'1001'},
     {nodeId:'1003',nodeTitle:'角色管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacRoles',parent:'1001'},
-    {nodeId:'1004',nodeTitle:'外部链接',isLeaf:true,icon:'el-icon-s-custom',url:'http://www.baidu.com/',parent:'1001'},
 ];
 
 const bizData=[

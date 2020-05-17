@@ -18,7 +18,7 @@ const actions = {
                // debugger
                 commit('setUsersData',param)
                 resolve();
-            },200);
+            },10);
        });
    } ,
    setPageSize(context,param){
@@ -26,7 +26,7 @@ const actions = {
             setTimeout(()=>{
                 context.commit('setPageSize',param);
                 resolve();
-            },100);
+            },10);
         });
    } ,
    setCurrentPage({commit},param){
@@ -34,7 +34,7 @@ const actions = {
             setTimeout(()=>{
                 commit('setCurrentPage',param);
                 resolve();
-            },100);
+            },10);
         });
    }
 }

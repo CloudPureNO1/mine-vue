@@ -1,6 +1,6 @@
 const state={
     total:0,
-    roleList:[],
+    groupList:[],
     currentPage:1,
     pageSize:10
 }
@@ -16,9 +16,9 @@ const mutations={
     setPageSize(state,payLoad){
         state.pageSize=payLoad;
     },
-    setRoleList(state,payLoad){
+    setGroupList(state,payLoad){
       
-        state.roleList=payLoad.data;
+        state.groupList=payLoad.data;
         state.total=payLoad.total;
     }
 }
@@ -40,10 +40,10 @@ const actions={
             },10)
         });
     },
-    setRoleList({commit},payLoad){
+    setGroupList({commit},payLoad){
         return new Promise((resolve,reject)=>{
             setTimeout(()=>{
-                commit('setRoleList',payLoad);
+                commit('setGroupList',payLoad);
                 resolve();
             },10)
         });

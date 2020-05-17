@@ -58,7 +58,7 @@ export default {
             pageSizes: [10, 20, 50, 100, 200, 300, 400, 500], //每页记录数选项
             //pageSize: 10, //当前每页记录数
             //total: 0, //总记录数 
-            isSiglePageHide: true, //如果只有一页时，隐藏pagination,
+            isSiglePageHide: false, //如果只有一页时，隐藏pagination,
             pglayout: 'total, sizes, prev, pager,  next, jumper' //分页工具栏上显示的内容
         }
     },
@@ -69,8 +69,7 @@ export default {
             let paginationH=43;
             this.maxHeight=tabH-tabHeaderH-paginationH;
         });
-        let vue=this;
-        userApi.$loadUsers(vue, {currentPage:this.currentPage,pageSize:this.pageSize});
+     
         
     },
     computed:{
@@ -81,6 +80,11 @@ export default {
             total:state=>state.user.total,
             rates:state=>state.comm.rates
         })
+    },
+    mounted(){
+        if(this.userList.length==0){
+            userApi.$loadUsers(this, {currentPage:this.currentPage,pageSize:this.pageSize});
+        }
     },
     methods: {
         ...mapActions({

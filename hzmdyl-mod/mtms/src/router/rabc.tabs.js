@@ -9,8 +9,8 @@
 // 而用require会将component分别打包成不同的js，按需加载，访问此路由时才会加载这个js，所以就避免进入首页时加载内容过多。
 //import  RbacUsers from '@/views/rbac/Users';
 
-const RbacRoles = resolve => require(['@/components/tabs/rbac/role/RbacRoles.vue'], resolve);
-const RbacGroups = resolve => require(['@/components/tabs/rbac/group/RbacGroups.vue'], resolve);
+
+
 const RbacResources = resolve => require(['@/components/tabs/rbac/resource/RbacResources.vue'], resolve);
 const RbacCompany = resolve => require(['@/components/tabs/rbac/company/Company.vue'], resolve);
 const RbacDept = resolve => require(['@/components/tabs/rbac/dept/Depts.vue'], resolve);
@@ -20,6 +20,12 @@ const RbacUsers = resolve => require(['@/components/tabs/rbac/user/RbacUsers.vue
 const UserAdd = resolve => require(['@/components/tabs/rbac/user/UserAdd.vue'], resolve);
 const UserEdit = resolve => require(['@/components/tabs/rbac/user/UserEdit.vue'], resolve);
 const UserInfo = resolve => require(['@/components/tabs/rbac/user/UserInfo.vue'], resolve);
+
+const RbacRoles = resolve => require(['@/components/tabs/rbac/role/RbacRoles.vue'], resolve);
+const RoleAddEdit = resolve => require(['@/components/tabs/rbac/role/RoleAddEdit.vue'], resolve);
+
+const RbacGroups = resolve => require(['@/components/tabs/rbac/group/RbacGroups.vue'], resolve);
+const GroupAddEdit = resolve => require(['@/components/tabs/rbac/group/GroupAddEdit.vue'], resolve);
 
 const rbacRouters = [{
     path: '/rbacUsers',
@@ -59,7 +65,10 @@ const rbacRouters = [{
       title: '角色管理',
       sign: ['rbac', 'role'],
       data: ['系统管理']
-    }
+    },
+    children:[
+      {path : '/roleAddEdit' , name : 'RoleAddEdit' , component : RoleAddEdit ,meta:{title :'角色新增/编辑',sign:['rbac','role']}}
+    ]
   },
   {
     path: '/rbacGroups',
@@ -69,7 +78,10 @@ const rbacRouters = [{
       title: '用户组管理',
       sign: ['rbac', 'group'],
       data: ['系统管理']
-    }
+    },
+    children:[
+      {path : '/groupAddEdit' , name : 'GroupAddEdit' , component : GroupAddEdit ,meta:{title :'用户组新增/编辑',sign:['rbac','group']}}
+    ]
   },
   {
     path: '/rbacResources',
