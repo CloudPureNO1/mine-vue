@@ -1,86 +1,109 @@
 <template>
-    <div class="exp-sett-main" :style="{height:userAddHeight,overflow:'auto'}" >
-         
-            <div style="width:100%;text-align:right;">
-                <el-select v-model="defaultValue" placeholder="请选择" size="mini">
+    <div class="med-comm-person-main" :style="{height:userAddHeight,overflow:'auto'}">
+        <el-row>
+          <el-col :span="24" style="text-align:right;">
+              <el-select v-model="defaultValue" placeholder="请选择" size="mini">
                   <el-option v-for="item in options" :key="item.value" :value="item.value" :label="item.label"></el-option>
-                </el-select>
-            </div>
-
-            <el-row>
+               </el-select>
+          </el-col>
+        </el-row>
+        <div :style="{height:userAddHeight2,overflow:'auto'}">
+          <el-row>
+            <el-col :span="6">
+              <el-card>
+                  <med-comm-pserson-num></med-comm-pserson-num>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card>
+                  <med-comm-pretotal-num></med-comm-pretotal-num>
+              </el-card>
+            </el-col>
+            <el-col :span="12">
+              <el-card>
+                  <med-comm-bananceLJ></med-comm-bananceLJ>
+              </el-card>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="6">
+              <el-card>
+                  <med-comm-medical-income></med-comm-medical-income>
+              </el-card>
+            </el-col>
+            <el-col :span="9">
+              <el-card>
+                  <med-comm-uebmi-line></med-comm-uebmi-line>
+              </el-card>
+            </el-col>
+            <el-col :span="9">
+              <el-card>
+                  <med-comm-urbmi-line></med-comm-urbmi-line>
+              </el-card>
+            </el-col> 
+          </el-row>
+          <el-row>
+            <el-col :span="24">
+              <el-card>
+                  <el-row>
                     <el-col :span="6" >
-                        <el-card :shadow="shadow">
-                            <mtms-balance-line-lj></mtms-balance-line-lj>
-                        </el-card>
+                      <el-card>
+                        <div  style="height:300px;overflow:auto;">
+                           
+                        </div>
+                      </el-card>
                     </el-col>
-                    <el-col :span="6" >
-                        <el-card :shadow="shadow">
-                            <mtms-balance-line-lj1></mtms-balance-line-lj1>
-                        </el-card>
+                    <el-col :span="18" style="height:300px;">
+                      <el-card>
+                        <div  style="height:300px;overflow:auto;">
+                           
+                        </div>
+                      </el-card>
                     </el-col>
-                    <el-col :span="6">
-                        <el-card :shadow="shadow">
-                            <mtms-balance-line-lj2></mtms-balance-line-lj2>
-                        </el-card>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-card :shadow="shadow">
-                            <mtms-balance-line-lj3></mtms-balance-line-lj3>
-                        </el-card>
-                    </el-col>
-                    </el-row>
-                    <el-row>
-                    <el-col :span="12">
-                        <el-card :shadow="shadow">
-                            <el-row>
-                              <el-col :span="12">
-                                <mtms-balance-line-lj3></mtms-balance-line-lj3>
-                              </el-col>
-                              <el-col :span="12">
-                                <mtms-balance-line-lj3></mtms-balance-line-lj3>
-                              </el-col>
-                            </el-row>
-                            <el-row>
-                              <el-col :span="24">
-                                 <mtms-balance-table></mtms-balance-table>
-                              </el-col>
-                            </el-row>
-                        </el-card>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-card :shadow="shadow">
-                            <mtms-balance-echars></mtms-balance-echars>
-                        </el-card>
-                    </el-col>
-            </el-row>
-        
+                  </el-row>
+                  
+              </el-card>
+            </el-col>
+          </el-row>
+        </div>
     </div>
 </template>
 
-
 <script>
-import BlanceLine from './balance/BalanceLine'
-import BananceLJ from './balance/BananceLJ'
-import BananceLJ1 from './balance/BananceLJ1'
-import BananceLJ2 from './balance/BananceLJ2'
-import BananceLJ3 from './balance/BananceLJ3'
-import BalanceTable from './balance/BalanceTable'
-import BalanceEchars from './balance/BalanceEchars'
+ 
+ 
+ import UebmiHistogram from './UebmiLineHistogram'
+ import UebmiLine from './UebmiLine'
+ import UrbmiLine from './UrbmiLine'
+import PersonNum from './PersonNum'
+import PreTotalNum from './PreTotalNum'
+import MedicalIncome from './MedicalIncome'
+ 
+import BananceLJ from './BananceLJ'
+import MedTreateMent from './MedTreateMent'
 export default {
     components:{
-        'mtms-balance-line':BlanceLine,
-        'mtms-balance-line-lj':BananceLJ,
-        'mtms-balance-line-lj1':BananceLJ1,
-        'mtms-balance-line-lj2':BananceLJ2,
-        'mtms-balance-line-lj3':BananceLJ3,
-        'mtms-balance-table':BalanceTable,
-        'mtms-balance-echars':BalanceEchars,
+        'med-comm-uebmi-histogram':UebmiHistogram,
+     
+        'med-comm-uebmi-line':UebmiLine,
+        'med-comm-urbmi-line':UrbmiLine,
+        'med-comm-pserson-num':PersonNum,
+        'med-comm-medical-income':MedicalIncome,
+        'med-comm-pretotal-num':PreTotalNum,
+ 
+        'med-comm-treatement':MedTreateMent,
+        'med-comm-bananceLJ':BananceLJ,
     },
     data(){
         return{
+            searchCondition:'',//查询条件
             userAddHeight: '450px' ,
-            shadow:'never',
-            options:[{'label':'2019年9月','value':'201909'}],
+            userAddHeight2:'410px',
+            options:[
+              {'label':'2018年','value':'2018'},
+              {'label':'2019年','value':'2019'},
+              {'label':'2020年','value':'2020'}
+            ],
             defaultValue:''
         }
     },
@@ -90,16 +113,25 @@ export default {
             let tabHeaderH = document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
             let paginationH = 13;
             this.userAddHeight = tabH - tabHeaderH - paginationH + 'px';
+            this.userAddHeight2 = tabH - tabHeaderH - paginationH -40 + 'px';
         });
+    },
+    methods:{
+      searchPerson(){
+        console.log("查询人员：查询条件【"+this.searchCondition+"】");
+      }
     }
 }
 </script>
 
 <style>
-    .exp-sett-main{
-        background-color:#fbfbfb
-    }
-    .exp-sett-main .el-col{
+.med-comm-person-main{
+  background-color:#fbfbfb
+}
+.med-comm-person-main .el-col{
         padding:3px;
-    }
+}
+.med-comm-person-main .el-card__body{
+  padding:5px;
+}
 </style>

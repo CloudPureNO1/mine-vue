@@ -3,6 +3,7 @@
         <el-row>
           <el-col :span="12" style="text-align:left;">
             <el-button-group>
+                <el-button size="mini">全部</el-button>
                 <el-button size="mini">医共体一</el-button>
                 <el-button size="mini">医共体二</el-button>
                 <el-button size="mini">医共体三</el-button>
@@ -34,6 +35,18 @@
             </el-col>
           </el-row>
           <el-row>
+            <el-col :span="12">
+              <el-card>
+                  <med-comm-bananceLJ-uebmi></med-comm-bananceLJ-uebmi>
+              </el-card>
+            </el-col>
+            <el-col :span="12">
+              <el-card>
+                  <med-comm-bananceLJ-urbmi></med-comm-bananceLJ-urbmi>
+              </el-card>
+            </el-col>
+          </el-row>
+          <el-row>
             <el-col :span="6">
               <el-card>
                   <med-comm-medical-income></med-comm-medical-income>
@@ -57,8 +70,8 @@
             <el-col :span="24">
               <el-card>
                   <el-row>
-                    <el-col :span="24">
-                      <el-col :span="12" style="text-align:left;">
+                     
+                      <el-col :span="6" style="text-align:left;">
                         <el-button-group>
                             <el-button size="mini">全部</el-button>
                             <el-button size="mini">职工</el-button>
@@ -66,12 +79,18 @@
                         </el-button-group>
                   
                       </el-col>
-                      <el-col :span="12" style="text-align:right;">
+                      <el-col :span="6" style="text-align:left;">
+                          <el-input placeholder="姓名 / 身份证号码 / 社保编号" v-model="searchCondition" size="mini">
+                            <el-button slot="append" icon="el-icon-search" plain type="primary" @click="searchPerson" size="mini"></el-button>
+                          </el-input>
+                      </el-col>
+                      <!--
+                      <el-col :span="8" style="text-align:right;">
                           <el-select v-model="defaultValue" placeholder="请选择" size="mini">
                               <el-option v-for="item in options" :key="item.value" :value="item.value" :label="item.label"></el-option>
                           </el-select>
                       </el-col>
-                    </el-col>
+                    -->
                   </el-row>
                   <!--
                   <el-row>
@@ -115,6 +134,8 @@ import PreTotalNum from './PreTotalNum'
 import MedicalIncome from './MedicalIncome'
 import PersonList from './PersonList'
 import BananceLJ from './BananceLJ'
+import BananceLJUebmi from './BananceLJUebmi'
+import BananceLJUrbmi from './BananceLJUrbmi'
 import MedTreateMent from './MedTreateMent'
 export default {
     components:{
@@ -128,9 +149,12 @@ export default {
         'med-comm-pserson-list':PersonList,
         'med-comm-treatement':MedTreateMent,
         'med-comm-bananceLJ':BananceLJ,
+        'med-comm-bananceLJ-uebmi':BananceLJUebmi,
+        'med-comm-bananceLJ-urbmi':BananceLJUrbmi,
     },
     data(){
         return{
+            searchCondition:'',//查询条件
             userAddHeight: '450px' ,
             userAddHeight2:'410px',
             options:[
@@ -149,6 +173,11 @@ export default {
             this.userAddHeight = tabH - tabHeaderH - paginationH + 'px';
             this.userAddHeight2 = tabH - tabHeaderH - paginationH -40 + 'px';
         });
+    },
+    methods:{
+      searchPerson(){
+        console.log("查询人员：查询条件【"+this.searchCondition+"】");
+      }
     }
 }
 </script>

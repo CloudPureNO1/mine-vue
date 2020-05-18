@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <el-row>
       <el-col :span="24" >
         <ve-line :data="chartData" :settings="chartSettings" :extend="extend" height="170px" :events="chartEvents"></ve-line>
@@ -50,7 +50,7 @@
               //left:'50%'
         },
         title:{
-          text:'职工',
+          text:'城乡',
           left:'center',
           //bottom:10,
           textStyle:{
@@ -86,4 +86,15 @@
   }
 </script>
 
- 
+<style>
+.mtms-tb-main .el-collapse-item__header{
+  height:30px;
+  line-height:30px;
+}
+
+.mtms-tb-main .mtms-collapse-content{
+  font-size:0.75rem;
+  text-align:left;
+  padding-left:22px;
+}
+</style>

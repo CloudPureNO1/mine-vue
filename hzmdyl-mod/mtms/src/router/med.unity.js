@@ -6,7 +6,7 @@ const MedicalCommunityRouter = [
         path:'/unityPersonIndex',
         component:UnityPersonIndex,
         meta:{
-            title:'医共体人员情况',
+            title:'医共体信息',
             sign:['biz','medunity']
         }
     } 

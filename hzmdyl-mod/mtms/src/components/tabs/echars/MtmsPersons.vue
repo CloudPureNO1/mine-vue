@@ -1,38 +1,47 @@
 <template>
   <div clss="mtms-e-p-main" :style="{height:userAddHeight,overflow:'auto'}">
-     <el-card shadow="always">
-          <div slot="header" class="clearfix">
-            <span>2019年辖区内基本医疗保险参保人员</span>
-          </div>
-          <div>
-            <el-row>
-              <el-col :span="12">
-                  <div  class="mtms-collapse-content">2019年城镇职工基本医疗保险参保人数：3434343，同比增长：100% ，环比增长：50%
-                  </div>
-              </el-col>
-               <el-col :span="12">
-                  <div  class="mtms-collapse-content">2019年城乡居民基本医疗保险参保人数：3434343，同比增长：100% ，环比增长：50%
-                  </div>
-              </el-col>
-            </el-row>
-          </div>
-          <ve-histogram :data="chartData" :extend="extend" :settings="chartSettings" :height="height" :width="width" ></ve-histogram>
-<!--
-          <el-row>
-              <el-col :span="12">
-                  <div  class="mtms-collapse-content">2019年9月城镇职工基本医疗保险参保人数：3434343，同比增长：100% ，环比增长：50%
-                  </div>
-              </el-col>
-               <el-col :span="12">
-                  <div  class="mtms-collapse-content">2019年9月城乡居民基本医疗保险参保人数：3434343，同比增长：100% ，环比增长：50%
-                  </div>
-              </el-col>
-            </el-row>
-            -->
-     </el-card>
-    <el-card shadow="always">
-      <mtms-e-psersons></mtms-e-psersons>
-    </el-card>
+    <el-row>
+      <el-col :span="24" class="p-list-main">
+             <el-card shadow="always">
+                <div slot="header" class="clearfix">
+                  <span>2019年辖区内基本医疗保险参保人员</span>
+                </div>
+                <div>
+                  <el-row>
+                    <el-col :span="12">
+                        <div  class="mtms-collapse-content">2019年城镇职工基本医疗保险参保人数：3434343，同比增长：100% ，环比增长：50%
+                        </div>
+                    </el-col>
+                    <el-col :span="12">
+                        <div  class="mtms-collapse-content">2019年城乡居民基本医疗保险参保人数：3434343，同比增长：100% ，环比增长：50%
+                        </div>
+                    </el-col>
+                  </el-row>
+                </div>
+                <ve-histogram :data="chartData" :extend="extend" :settings="chartSettings" :height="height" :width="width" ></ve-histogram>
+      <!--
+                <el-row>
+                    <el-col :span="12">
+                        <div  class="mtms-collapse-content">2019年9月城镇职工基本医疗保险参保人数：3434343，同比增长：100% ，环比增长：50%
+                        </div>
+                    </el-col>
+                    <el-col :span="12">
+                        <div  class="mtms-collapse-content">2019年9月城乡居民基本医疗保险参保人数：3434343，同比增长：100% ，环比增长：50%
+                        </div>
+                    </el-col>
+                  </el-row>
+                  -->
+          </el-card>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="24" class="p-list-main">
+           <el-card shadow="always">
+              <mtms-e-psersons></mtms-e-psersons>
+          </el-card>
+      </el-col>
+    </el-row>
+
   </div>
 </template>
 
@@ -133,6 +142,12 @@
 }
 
 .mtms-e-p-main .el-card__body{
-  padding:9px 20px; 
+  padding:0px; 
+}
+.p-list-main{
+    padding:3px;
+}
+.p-list-main .el-card__body{
+  padding:0px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div sytle="padding-right:5px;height:170px;">
         <div style="padding: 5px 10px 10px 10px;  text-align: left;color:#a6a5b1;">
-            <div >累计结余（截止到当月）</div>
+            <div >累计结余（截止到当月）（职工）</div>
             <div style="padding:  10px 0px 0px 5px; font-weight: 600; font-size: 1.75rem;color:#333333;">99999999999999</div>
         </div>
         <hr style="border: 1px solid #fbfbfb;  width: 96%;">
