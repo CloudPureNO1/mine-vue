@@ -1,6 +1,6 @@
 <template>
-    <div class="main-breadcrumb" >
-        <el-breadcrumb separator-class="el-icon-arrow-right" >
+    <div class="box" style="height:26px;">
+        <el-breadcrumb separator-class="el-icon-arrow-right" class="item">
             <transition-group name="breadcrumb">
                 <el-breadcrumb-item v-for="item in levelList" :key="item.name">
                     <a v-if="isLeafPath(item)" @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
@@ -65,6 +65,20 @@
     }
 </script>
  
+
+ <style scoped>
+ .box{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.item{
+   align-self:center;
+
+}
+ </style>
 
  
  

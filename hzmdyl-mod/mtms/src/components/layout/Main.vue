@@ -6,7 +6,7 @@
         </el-aside>
         <el-main class="cls-main">
             <el-container class="cls-main-container">
-                <el-header class="header" ref="headerRef">
+                <el-header class="header" ref="headerRef" style="line-height:auto;">
                     <mtms-header></mtms-header>
                 </el-header>
                 <el-main class="middler">
@@ -139,16 +139,15 @@ export default {
 }
 
 .cls-main-container .middler {
-    height: 85%;
+    height: 95%;
     //    border-bottom: solid 1px #dfffff;
     //    border-top: solid 1px #dfffff;
     padding: 1px;
 }
 
-.cls-main-container .footer {
-    height: 5%;
-
-}
+ .cls-main-container .el-header ,.cls-main-container .el-footer{
+        line-height: 26px;
+ }
 
 .main .icon-style {
     // font-size:20px;

@@ -19,17 +19,7 @@ body, html {
     font-size:26px;
 }
  
-/*垂直居中，flex布局  目前兼容性不是很好*/
-/*
-* 1、flexbox 布局
-*/
-.parent-cls{
-    display:flex;
-}
-.child-cls{
-    align-self: center;
-}
-
+ 
  
 /*
 transform 水平垂直居中 不需要固定宽度的

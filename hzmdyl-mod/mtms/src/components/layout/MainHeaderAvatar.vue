@@ -1,6 +1,6 @@
 <template>
 <fragment>
-    <div style="float:right;height:100%;padding:5px;">
+    <div style="float:right;height:100%;padding-right:5px;padding-left:5px;">
         <div style="height:50%;">
             <el-dropdown>
                 <i class="el-icon-setting" style="margin-right: 15px"></i>

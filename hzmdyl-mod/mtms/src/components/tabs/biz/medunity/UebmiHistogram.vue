@@ -2,7 +2,7 @@
   <div >
     <el-row>
       <el-col :span="24" >
-        <ve-line :data="chartData" :settings="chartSettings" :extend="extend" height="170px" :events="chartEvents"></ve-line>
+        <ve-histogram :data="chartData" :settings="chartSettings" :extend="extend" height="170px" :events="chartEvents"></ve-histogram>
       </el-col>
     </el-row>
   </div>
@@ -21,7 +21,8 @@
         yAxisType: ['KMB', 'KMB'],
         yAxisName: ['收缴金额','缴费人数'],
         selectedMode: 'single',
-        hoverAnimation: false
+        hoverAnimation: false,
+        showLine:['rs']
       }
       var self = this
       this.chartEvents = {
@@ -35,7 +36,8 @@
       }
       this.extend = {
         series: {
-          label: { show: false, position: "bottom" }
+          label: { show: false, position: "bottom" } ,
+           barWidth:'12'
         },
         grid:{
           top:'20%',
@@ -48,6 +50,9 @@
               show:true,
               bottom:0,
               //left:'50%'
+              height :8,
+             padding:0,
+             itemHeight :8
         },
         title:{
           text:'职工',

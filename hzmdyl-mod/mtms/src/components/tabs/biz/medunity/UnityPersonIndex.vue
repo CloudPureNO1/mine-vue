@@ -54,12 +54,12 @@
             </el-col>
             <el-col :span="9">
               <el-card>
-                  <med-comm-uebmi-line></med-comm-uebmi-line>
+                  <med-comm-uebmi-histogram></med-comm-uebmi-histogram>
               </el-card>
             </el-col>
             <el-col :span="9">
               <el-card>
-                  <med-comm-urbmi-line></med-comm-urbmi-line>
+                  <med-comm-urbmi-histogram></med-comm-urbmi-histogram>
               </el-card>
             </el-col> 
           </el-row>
@@ -84,21 +84,9 @@
                             <el-button slot="append" icon="el-icon-search" plain type="primary" @click="searchPerson" size="mini"></el-button>
                           </el-input>
                       </el-col>
-                      <!--
-                      <el-col :span="8" style="text-align:right;">
-                          <el-select v-model="defaultValue" placeholder="请选择" size="mini">
-                              <el-option v-for="item in options" :key="item.value" :value="item.value" :label="item.label"></el-option>
-                          </el-select>
-                      </el-col>
-                    -->
+                
                   </el-row>
-                  <!--
-                  <el-row>
-                    <el-col :span="24">
-                       <med-comm-uebmi-histogram></med-comm-uebmi-histogram>
-                    </el-col>
-                  </el-row>
-                  -->
+                  
                   <el-row>
                     <el-col :span="6" >
                       <el-card>
@@ -124,11 +112,9 @@
 </template>
 
 <script>
- 
  import OrgsTree from './OrgsTree'
- import UebmiHistogram from './UebmiLineHistogram'
- import UebmiLine from './UebmiLine'
- import UrbmiLine from './UrbmiLine'
+ import UebmiHistogram from './UebmiHistogram'
+ import UrbmiHistogram from './UrbmiHistogram'
 import PersonNum from './PersonNum'
 import PreTotalNum from './PreTotalNum'
 import MedicalIncome from './MedicalIncome'
@@ -139,10 +125,9 @@ import BananceLJUrbmi from './BananceLJUrbmi'
 import MedTreateMent from './MedTreateMent'
 export default {
     components:{
-        'med-comm-uebmi-histogram':UebmiHistogram,
         'med-comm-orgs-tree':OrgsTree,
-        'med-comm-uebmi-line':UebmiLine,
-        'med-comm-urbmi-line':UrbmiLine,
+        'med-comm-uebmi-histogram':UebmiHistogram,
+        'med-comm-urbmi-histogram':UrbmiHistogram,
         'med-comm-pserson-num':PersonNum,
         'med-comm-medical-income':MedicalIncome,
         'med-comm-pretotal-num':PreTotalNum,

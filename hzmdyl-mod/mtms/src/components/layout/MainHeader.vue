@@ -6,14 +6,29 @@
                 <div class="children-inline-transform-vertical">浙江网新恩普软件有限公司</div>
             </el-col>
         </el-row>
-        <el-row style="height:45%;">
+        <el-row style="height:45%;" >
+        <!--
             <el-col :span="24" style="display:flex">
                 <div @click="exchange" class="main-exchange" style="align-self:center;">
                     <span v-show="this.isCollapse" class="icon iconfont icon-zhankai icon-style" />
                     <span v-show="!this.isCollapse" class="icon iconfont icon-shouqi icon-style" />
                 </div>
-                <!--面包屑-->
+                 
                 <mtms-breadcrumb style="align-self:center;"></mtms-breadcrumb>
+            </el-col>
+            -->
+            <el-col :span="24" >
+                <el-row  >
+                    <el-col :span="1" >
+                        <div @click="exchange" >
+                            <span v-show="this.isCollapse" class="icon iconfont icon-zhankai icon-style" />
+                            <span v-show="!this.isCollapse" class="icon iconfont icon-shouqi icon-style" />
+                        </div>
+                    </el-col>
+                    <el-col :span="22"  >
+                        <mtms-breadcrumb ></mtms-breadcrumb>
+                    </el-col> 
+                </el-row>
             </el-col>
         </el-row>
     </el-col>
@@ -77,5 +92,17 @@ export default {
 
 .main-exchange:hover {
     background-color: #dfffff;
+}
+
+.box{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.item{
+   align-self:center;
+
 }
 </style>

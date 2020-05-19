@@ -25,6 +25,6 @@ const notFoundRouter=[
 ]
 const routes = baseRoutes.concat(notFoundRouter);
 export default new Router({
-  mode: 'history',
+  //mode: 'history',
   routes
 })
