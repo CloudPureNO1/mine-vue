@@ -1,15 +1,16 @@
-const UnityPersonIndex=resolve=>require(['@/components/tabs/biz/medunity/UnityPersonIndex.vue'],resolve)
- 
-const MedicalCommunityRouter = [
-    {
-        name:'UnityPersonIndex',
-        path:'/unityPersonIndex',
-        component:UnityPersonIndex,
-        meta:{
-            title:'医共体信息',
-            sign:['biz','medunity']
-        }
-    } 
-]
+ const EchartsIn = resolve=>require(['@/components/tabs/echarts/EchartsIn.vue'],resolve)
 
-export default MedicalCommunityRouter;
+ let echartsRouter=[
+     {
+         path:'/echartsIn',
+         name:'EchartsIn',
+         component:EchartsIn,
+         meta:{
+             title:'医保基金征缴',
+             keepAlive:true,
+             sign:['echarts'],
+             data:['医共体分析']
+        },
+     }
+ ]
+ export default echartsRouter;

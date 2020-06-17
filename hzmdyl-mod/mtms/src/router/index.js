@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import RbacRouter from './rabc.tabs' 
-import VueEchars from './vue.echars' 
 import MedUnitRouter from './med.unity'
-import TestRouter from './test'
 Vue.use(Router)
 
 const Home = resolve => require(['@/views/Home.vue'],resolve);
@@ -12,7 +10,7 @@ const NotFound = resolve => require(['@/views/404'],resolve);
 
 const homeChildrenRoutes=[
   {path : '/404' , name : 'NotFound' , component : NotFound , meta : {title : '页面丢失', sign : ['404']}}
-].concat(RbacRouter).concat(VueEchars).concat(MedUnitRouter).concat(TestRouter);
+].concat(RbacRouter).concat(MedUnitRouter);
 
 const baseRoutes  = [
   {path : '/', redirect: '/home' },

@@ -16,35 +16,10 @@ Vue.config.productionTip = false
 //引入阿里矢量图标
 import './assets/iconfont/iconfont.css'
 
-//引入v-chars  echars 的封装
-import VCharts from 'v-charts'
-Vue.use(VCharts)
-/** 
- * v-charts的每种图表组件，都已经单独打包到lib文件夹下了
-
-|- lib/
-    |- line.common.js  -------------- 折线图
-    |- bar.common.js  --------------- 条形图
-    |- histogram.common.js  --------- 柱状图
-    |- pie.common.js  --------------- 饼图
-    |- ring.common.js  -------------- 环图
-    |- funnel.common.js  ------------ 漏斗图
-    |- waterfall.common.js  --------- 瀑布图
-    |- radar.common.js  ------------- 雷达图
-    |- map.common.js  --------------- 地图
-    |- sankey.common.js  ------------ 桑基图
-    |- heatmap.common.js  ----------- 热力图
-    |- scatter.common.js  ----------- 散点图
-    |- candle.common.js  ------------ k线图
-    |- gauge.common.js  ------------- 仪表盘
-    |- tree.common.js  -------------- 树图
-    |- bmap.common.js  -------------- 百度地图
-    |- amap.common.js  -------------- 高德地图
- * 
- *使用时，可以直接将单个图表引入到项目中
- * import VeLine from 'v-charts/lib/line.common'
- * Vue.component(VeLine.name, VeLine)
-*/
+ 
+ // 引入echarts
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts;
 
 
 //引入Element UI

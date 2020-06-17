@@ -11,11 +11,8 @@ const sysData=[
 ];
 
 const bizData=[
-    {nodeId:'2001',nodeTitle:'辖区人员',isLeaf:true,icon:'el-icon-s-custom',url:'/mtmsPersons',parent:'1005'},
-    {nodeId:'2002',nodeTitle:'医共体信息',isLeaf:true,icon:'el-icon-s-custom',url:'/unityPersonIndex',parent:'1005'},
-    {nodeId:'2003',nodeTitle:'结算信息',isLeaf:true,icon:'el-icon-s-custom',url:'/expenseSettlement',parent:'1005'},
-    {nodeId:'2004',nodeTitle:'医保基金收缴',isLeaf:true,icon:'el-icon-s-custom',url:'/mtmsEcharsIn',parent:'1005'},
-    {nodeId:'2005',nodeTitle:'医保基金支付',isLeaf:true,icon:'el-icon-s-custom',url:'/mtmsEcharsOut',parent:'1005'}
+    {nodeId:'2004',nodeTitle:'医保基金收缴',isLeaf:true,icon:'el-icon-s-custom',url:'/echartsIn',parent:'1005'},
+    {nodeId:'2005',nodeTitle:'医保基金支付',isLeaf:true,icon:'el-icon-s-custom',url:'/echartsOut',parent:'1005'}
 ];
 
 // const rootData=[
@@ -26,7 +23,7 @@ const bizData=[
 //采用异步加载
 const rootData=[
     {nodeId:'1001',nodeTitle:'系统管理',isLeaf:false,icon:'el-icon-menu',url:'/sysManageRoot', parent:'root'},
-    {nodeId:'1005',nodeTitle:'医共体业务',isLeaf:false,icon:'el-icon-menu',url:'/bizManageRoot',parent:'root'}
+    {nodeId:'1005',nodeTitle:'医共体分析',isLeaf:false,icon:'el-icon-menu',url:'/bizManageRoot',parent:'root'}
 ];
 
 let navData=(req)=>{

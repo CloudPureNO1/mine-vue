@@ -145,10 +145,11 @@ export default {
      width:100%;
      padding: 0;
      margin:0;
+     
  }
  .tab-main>.el-tabs--border-card>.el-tabs__content{
      padding:5px;
-    
+    background-color:#101736;
  }
  
  .tab-main>.el-tab-pane{
