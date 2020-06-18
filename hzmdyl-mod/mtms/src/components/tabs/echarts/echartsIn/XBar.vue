@@ -1,5 +1,5 @@
 <template>
-    <div class="echarts-balance-main">
+    <div class="echarts-x-bar-main"  >
         <div class="title box">
             <div class="title-left">
                 <span>累计结余：</span>
@@ -37,7 +37,7 @@
 export default {
     data(){
         return{
-            echartsHeight:'300px',
+            echartsHeight:'180px',
             echartsWidth:'auto'
         }
     },
@@ -102,19 +102,7 @@ export default {
                 } 
             ]
             let option={
-                backgroundColor:  {
-                    type: 'linear',
-                    x: 0,
-                    y: 0,
-                    x2: 0,
-                    y2: 1,
-                    colorStops: [{
-                        offset: 0, color: '#151B39' // 0% 处的颜色
-                    }, {
-                        offset: 1, color: '#101333' // 100% 处的颜色
-                    }],
-                    global: false // 缺省为 false
-                },
+                backgroundColor:'#19265d',
                 legend:{
                     itemWidth:15,
                     itemHeight:8,
@@ -192,3 +180,37 @@ export default {
     }
 }
 </script>
+
+<style>
+    .echarts-x-bar-main{
+        width:100%;
+    }
+    /* 自动居右 */
+    .echarts-x-bar-main .box{
+        display: -webkit-flex; /* Safari */
+        display: flex;
+        align-items: center;
+    }
+    .echarts-x-bar-main .item{
+        margin-left: auto;
+    }
+    .echarts-x-bar-main .title .title-left{
+        font-weight:600;
+        padding:4px;
+    }
+    .echarts-x-bar-main .bottom .bottom-left{
+        font-weight:600;
+        padding:4px;
+    }
+
+    .echarts-x-bar-main .el-divider {
+        background-color: #dcdfe65c;
+        position: relative;
+    }
+    .echarts-x-bar-main .el-divider--horizontal {
+        display: block;
+        height: 1px;
+        width: 100%;
+        margin: 5px 0;
+    }
+</style>

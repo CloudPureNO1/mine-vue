@@ -2,42 +2,29 @@
     <div class="echarts-in-main">
         <el-row>
           <el-col :span="12">
-            <el-card :shadow="cardShadow">
-                <mtms-balance></mtms-balance>
-            </el-card>
+            <mtms-border componentName="Balance" ></mtms-border>
           </el-col>
           <el-col :span="12">
-            <el-card :shadow="cardShadow">
-                <mtms-times></mtms-times>
-            </el-card>
+            <mtms-border componentName="Times" ></mtms-border>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-card :shadow="cardShadow">
-                <mtms-cars></mtms-cars>
-            </el-card>
+            <mtms-border componentName="Cars" ></mtms-border>
           </el-col>
           <el-col :span="12">
-            <el-card :shadow="cardShadow">
-                <mtms-x-bar></mtms-x-bar>
-            </el-card>
+            <mtms-border componentName="XBar" ></mtms-border>
           </el-col>
         </el-row>
+ 
     </div>
 </template>
 
 <script>
-import Balance from './echartsIn/Balance'
-import Times from './echartsIn/Times'
-import Cars from './echartsIn/Cars'
-import XBar from './echartsIn/XBar'
+import Border from './echartsIn/Border'
 export default {
     components:{
-        'mtms-balance':Balance,
-        'mtms-times':Times,
-        'mtms-cars':Cars,
-        'mtms-x-bar':XBar,
+        'mtms-border':Border,
     },
     data(){
         return{
@@ -48,17 +35,17 @@ export default {
 </script>
 <style>
     .echarts-in-main{
-        background-color:#101736;
+        background-color:#19265d;
         color:#ffffff;
     }
         .echarts-in-main .el-card {
         border: 1px solid #93a4e2;
-        background-color: #101736;
+        background-color: #19265d;
         color: #ffffff;
         margin: 4px;
     }
     .echarts-in-main .el-card__body{
         padding:5px 10px 5px 10px;
-        background-color: #101736;
+        background-color: #19265d;
     }
 </style>

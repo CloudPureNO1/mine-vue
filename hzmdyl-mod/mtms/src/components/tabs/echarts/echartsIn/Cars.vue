@@ -1,5 +1,5 @@
 <template>
-    <div class="echarts-balance-main">
+    <div class="echarts-cars-main">
         <div class="title box">
             <div class="title-left">
                 <span>累计结余：</span>
@@ -16,7 +16,7 @@
         </div>
         <el-divider></el-divider>
         <div class="content">
-            <div ref="cars" :style="{height:echartsHeight,width:echartsWidth}"></div>
+            <div ref="cars" :style="{height:echartsHeight,width:echartsWidth}" ></div>
         </div>
         <el-divider></el-divider>
         <div class="bottom box">
@@ -37,7 +37,7 @@
 export default {
     data(){
         return{
-            echartsHeight:'300px',
+            echartsHeight:'180px',
             echartsWidth:'auto'
         }
     },
@@ -154,19 +154,22 @@ export default {
             ];
             var colorArr = ['#4A99FF', '#4BFFFC']; //颜色
             let option = {
-                backgroundColor:  {
-                    type: 'linear',
-                    x: 0,
-                    y: 0,
-                    x2: 0,
-                    y2: 1,
-                    colorStops: [{
-                        offset: 0, color: '#151B39' // 0% 处的颜色
-                    }, {
-                        offset: 1, color: '#101333' // 100% 处的颜色
-                    }],
-                    global: false // 缺省为 false
-                },
+                // backgroundColor:  {
+                //     type: 'linear',
+                //     x: 0,
+                //     y: 0,
+                //     x2: 0,
+                //     y2: 1,
+                //     colorStops: [{
+                //         offset: 0, color: '#151B39' // 0% 处的颜色
+                //     }, {
+                //         offset: 1, color: '#101333' // 100% 处的颜色
+                //     }],
+                //     global: false // 缺省为 false
+                // },
+
+               // backgroundColor:'#19265d',    
+
                 color: colorArr,
                 legend: {
                     orient:'vertical',
@@ -199,12 +202,12 @@ export default {
                     },
                     axisLine: { //指向外圈文本的分隔线样式
                         lineStyle: {
-                            color: '#153269'
+                            color: '#444f84'
                         }
                     },
                     splitLine: {
                         lineStyle: {
-                            color: '#113865', // 分隔线颜色
+                            color: '#364179', // 分隔线颜色
                             width: 1, // 分隔线线宽
                         }
                     },
@@ -224,3 +227,38 @@ export default {
     }
 }
 </script>
+
+<style>
+ 
+    .echarts-cars-main{
+        width:100%;
+    }
+/* 自动居右 */
+    .echarts-cars-main .box{
+        display: -webkit-flex; /* Safari */
+        display: flex;
+        align-items: center;
+    }
+    .echarts-cars-main .item{
+        margin-left: auto;
+    }
+    .echarts-cars-main .title .title-left{
+        font-weight:600;
+        padding:4px;
+    }
+    .echarts-cars-main .bottom .bottom-left{
+        font-weight:600;
+        padding:4px;
+    }
+
+    .echarts-cars-main .el-divider {
+        background-color: #dcdfe65c;
+        position: relative;
+    }
+    .echarts-cars-main .el-divider--horizontal {
+        display: block;
+        height: 1px;
+        width: 100%;
+        margin: 5px 0;
+    }
+</style>

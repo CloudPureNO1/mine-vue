@@ -1,5 +1,5 @@
 <template>
-    <div class="echarts-balance-main">
+    <div class="echarts-times-main">
         <div class="title box">
             <div class="title-left">
                 <span>累计结余：</span>
@@ -37,7 +37,7 @@ export default {
     name:'Balance',
     data(){
         return{
-            echartsHeight:'300px',
+            echartsHeight:'100px',
             echartsWidth:'auto'
         }
     },
@@ -49,17 +49,44 @@ export default {
             let that=this;
             let timesID = this.$echarts.init(this.$refs.timesID);
             let option={
+                backgroundColor:'#19265d', 
                 xAxis:{
                     type:'category',
-                    data:[1,2,3,4,5,6,7]
+                    data:[1,2,3,4,5,6,7],
+                    show:true,
+                    axisLine:{
+                        show:true,
+                         lineStyle:{
+                            color:'#B4B4B4'
+                        }
+                    },
+                    axisTick:{
+                        show:false,
+                    }
                 },
                 yAxis:{
-                    type:'value'
+                    type:'value',
+                    axisLine:{
+                        show:true,
+                        lineStyle:{
+                            color:'#B4B4B4'
+                        }
+                    },
+                    axisTick:{
+                        show:false
+                    },
+                    splitLine: {show: false},
                 },
                 series:{
-
                     type:'line',
-                    data:[112,2342,4545,5656,13,454,5656]
+                    data:[112,2342,4545,5656,13,454,5656],
+                    smooth:true
+                },
+                grid:{
+                    top:'7%',
+                    bottom:'20%',
+                    left:'10%',
+                    right:'1%'
                 }
             }
             timesID.setOption(option);
@@ -73,29 +100,32 @@ export default {
 </script>
 
 <style>
+   .echarts-times-main{
+       width:100%;
+   }
 /* 自动居右 */
-    .echarts-balance-main .box{
+    .echarts-times-main .box{
         display: -webkit-flex; /* Safari */
         display: flex;
         align-items: center;
     }
-    .echarts-balance-main .item{
+    .echarts-times-main .item{
         margin-left: auto;
     }
-    .echarts-balance-main .title .title-left{
+    .echarts-times-main .title .title-left{
         font-weight:600;
         padding:4px;
     }
-    .echarts-balance-main .bottom .bottom-left{
+    .echarts-times-main .bottom .bottom-left{
         font-weight:600;
         padding:4px;
     }
 
-    .echarts-balance-main .el-divider {
+    .echarts-times-main .el-divider {
         background-color: #dcdfe65c;
         position: relative;
     }
-    .echarts-balance-main .el-divider--horizontal {
+    .echarts-times-main .el-divider--horizontal {
         display: block;
         height: 1px;
         width: 100%;
