@@ -92,25 +92,21 @@
             ></animate>
           </polygon>
         </svg>
-        <!--
+      
         <div v-for="(item,index) in echarsItems" :key="index" class="border-box-content" > 
             <component :is="item.component"></component>
         </div>
-        -->
-         <div class="border-box-content" > 
-          <border-line></border-line>
-         </div>
+         
+  
       </div>
     </div>
   </div>
 </template>
 
 <script>
- import BorderLine from './BorderLine'
+ 
 export default {
-    components:{
-      'border-line':BorderLine
-    },
+ 
     props:{
         componentName:{type:String,default:''}
     },

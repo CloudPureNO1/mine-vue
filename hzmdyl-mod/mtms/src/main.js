@@ -55,6 +55,8 @@ Vue.use(GlobleFun);
 import GlobleVariable from '@/utils/global_variable.js'
 Vue.prototype._$G_VARIABLE=GlobleVariable;
 
+Vue.config.devtools = true
+
 //Vuex 
 import store from './store'
 

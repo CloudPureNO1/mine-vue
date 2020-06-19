@@ -8,7 +8,7 @@
             </div>
             <div class="title-right item">
                 <el-button-group>
-                    <el-button type="primary" plain size="mini">总计</el-button>
+                    <el-button type="primary" plain size="mini" @click="drawSvg">总计</el-button>
                     <el-button type="primary"  plain size="mini">职工</el-button>
                     <el-button type="primary" plain size="mini">城乡</el-button>
                 </el-button-group>
@@ -43,8 +43,14 @@ export default {
     },
     mounted(){
         this.drawCars();
+        this.drawSvg();
     },
     methods:{
+        drawSvg(){
+            let divHeight = document.getElementsByClassName('echarts-cars-main')[0].clientHeight;
+            let divWidth = document.getElementsByClassName('echarts-cars-main')[0].clientWidth;
+            this.$emit('drawSvg',{'divHeight':divHeight,'divWidth':divWidth})
+        },
         drawCars(){
             let that=this;
             let cars=this.$echarts.init(this.$refs.cars);
