@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="border-box-contaier">
-      <div class="dv-border-box">
+    <div class="border-box-contaier-1">
+      <div class="dv-border-box-1">
         <svg  height="110" width="300" class="left-top border">
           <polygon
             points="6,76 6,18 12,12 18,12 24,6 27,6 84,6 40.8,7 37.8,10.2 24,10.2 12,21 12,24 9,27 9,51 7.8,54 7.8,63"
@@ -93,7 +93,7 @@
           </polygon>
         </svg>
       
-        <div v-for="(item,index) in echarsItems" :key="index" class="border-box-content" > 
+        <div v-for="(item,index) in echarsItems" :key="index" class="border-box-content-1" > 
             <component :is="item.component"></component>
         </div>
          
@@ -144,43 +144,43 @@ export default {
 </script>
 
 <style>
-.border-box-contaier .dv-border-box{
+.border-box-contaier-1 .dv-border-box-1{
     position: relative;
     height:auto;
 }
-.dv-border-box .border {
+.dv-border-box-1 .border {
   position: absolute;
   display: block;
 }
-.dv-border-box .top-center {
+.dv-border-box-1 .top-center {
   top:0;
   left:30%
 }
-.dv-border-box .right-top {
+.dv-border-box-1 .right-top {
   right: 0;
   transform: rotateY(180deg);
 }
-.dv-border-box .left-bottom {
+.dv-border-box-1 .left-bottom {
   bottom: 0;
   transform: rotateX(180deg);
 }
-.dv-border-box .bottom-center {
+.dv-border-box-1 .bottom-center {
   left:30%;
   bottom:0;
 }
-.dv-border-box .right-bottom {
+.dv-border-box-1 .right-bottom {
   right: 0;
   bottom: 0;
   transform: rotateX(180deg) rotateY(180deg);
 }
-.border-box-contaier .border-box-content {
+.border-box-contaier-1 .border-box-content-1 {
     display: flex;
     /* justify-content: center; */
     align-items: center;
     color: #ffffff;
     font-weight: 700;
 }
-.dv-border-box .border-box-content{
+.dv-border-box-1 .border-box-content-1{
     position: relative;
     width: 100%;
     height: 100%;

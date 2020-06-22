@@ -19,18 +19,18 @@
  
          <el-row>
           <el-col :span="12">
-            <mtms-border-line componentName="Balance"   :borderIndex="1" ></mtms-border-line>
+            <mtms-border-line componentName="Balance"   :orderNum="1" ></mtms-border-line>
           </el-col>
           <el-col :span="12">
-            <mtms-border-line componentName="Times"   :borderIndex="2"></mtms-border-line>
+            <mtms-border-line componentName="Times"   :orderNum="2"></mtms-border-line>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <mtms-border-line componentName="Cars"   :borderIndex="3"></mtms-border-line>
+            <mtms-border-line componentName="Cars"   :orderNum="3"></mtms-border-line>
           </el-col>
           <el-col :span="12">
-            <mtms-border-line componentName="XBar"   :borderIndex="4"></mtms-border-line>
+            <mtms-border-line componentName="XBar"   :orderNum="4"></mtms-border-line>
           </el-col>
         </el-row>
     </div>

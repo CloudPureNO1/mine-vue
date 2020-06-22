@@ -148,8 +148,8 @@ export default {
      
  }
  .tab-main>.el-tabs--border-card>.el-tabs__content{
-     padding:5px;
-    background-color:#19265d;
+     padding:0px;
+    /* background-color:#19265d; */
  }
  
  .tab-main>.el-tab-pane{

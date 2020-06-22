@@ -33,6 +33,7 @@
     </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 export default {
     name:'Balance',
     data(){
@@ -46,8 +47,27 @@ export default {
     },
     mounted(){
         this.drawBlance();
+        this.drawSvg();
+    },
+        watch:{
+        isCollapse:{
+            handler(newVal,oldVal){
+                this.drawSvg();
+            },
+            deep:true
+        }
+    },
+    computed:{
+        ...mapState({
+            isCollapse:state=>state.layout.isCollapse
+        })
     },
     methods:{
+         drawSvg(){
+            let divHeight = document.getElementsByClassName('echarts-balance-main')[0].clientHeight;
+            let divWidth = document.getElementsByClassName('echarts-balance-main')[0].clientWidth;
+            this.$emit('drawSvg',{'divHeight':divHeight,'divWidth':divWidth})
+        },
         drawBlance(){
             let that = this;
             let balanceId = this.$echarts.init(this.$refs.balanceId);
@@ -155,6 +175,8 @@ export default {
             balanceId.setOption(option);
             window.addEventListener('resize',function(){
                 balanceId.resize();
+                console.log('****************************************');
+                that.drawSvg();
             })
         }
     }

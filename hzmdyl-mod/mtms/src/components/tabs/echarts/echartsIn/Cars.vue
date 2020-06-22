@@ -34,6 +34,7 @@
     </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
     data(){
         return{
@@ -44,6 +45,19 @@ export default {
     mounted(){
         this.drawCars();
         this.drawSvg();
+    },
+    watch:{
+        isCollapse:{
+            handler(newVal,oldVal){
+                this.drawSvg();
+            },
+            deep:true
+        }
+    },
+    computed:{
+        ...mapState({
+            isCollapse:state=>state.layout.isCollapse
+        })
     },
     methods:{
         drawSvg(){
@@ -228,6 +242,7 @@ export default {
             cars.setOption(option);
             window.addEventListener('resize',function(){
                 cars.resize();
+                that.drawSvg();
             })
         }
     }
