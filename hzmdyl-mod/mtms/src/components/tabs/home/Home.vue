@@ -2,15 +2,13 @@
     <div>
       
       <div @click="setMsg"><i class="el-icon-eleme"></i><span >{{msg}}</span> </div>
+      <div id="mount-point"></div>
     </div>
 </template>
 <script>
+ 
 export default {
-    data(){
-      return {
-         
-      }
-    },
+ 
     computed:{
       msg:{
         get(){
@@ -27,4 +25,5 @@ export default {
       }
     }
 }
+
 </script>

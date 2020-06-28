@@ -4,7 +4,7 @@ import { $post } from '@/utils/axios_util.js'
 let $loadGroupTypes=(vue)=>{
     $post('getGroupTypes')
     .then(resp=>{
-        debugger
+        
         if(resp.data.code!=0){
             vue.$alert(resp.data.msg,'温馨提示',{type:'warning'});
             return;

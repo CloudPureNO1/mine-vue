@@ -26,7 +26,22 @@ module.exports = {
      */
 
     // https://webpack.js.org/configuration/devtool/#development
-    devtool: 'cheap-module-eval-source-map',
+/* 
+    打开 config/index.js 并找到 devtool property。将其更新为：
+
+如果你使用的是 Vue CLI 2，请设置并更新 config/index.js 内的 devtool property：
+
+devtool: 'source-map',
+如果你使用的是 Vue CLI 3，请设置并更新 vue.config.js 内的 devtool property：
+
+module.exports = {
+  configureWebpack: {
+    devtool: 'source-map'
+  }
+} */
+
+    //devtool: 'cheap-module-eval-source-map',   自动生成
+    devtool:'source-map',//支持vscode 调试 改
 
     // If you have problems debugging vue-files in devtools,
     // set this to false - it *may* help

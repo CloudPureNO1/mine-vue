@@ -55,7 +55,26 @@ Vue.use(GlobleFun);
 import GlobleVariable from '@/utils/global_variable.js'
 Vue.prototype._$G_VARIABLE=GlobleVariable;
 
+//查看vue.js api
 Vue.config.devtools = true
+//指定组件的渲染和观察期间未捕获错误的处理函数。这个处理函数被调用时，可获取错误信息和 Vue 实例。
+Vue.config.errorHandler = function (err, vm, info) {
+  // handle error
+  // `info` 是 Vue 特定的错误信息，比如错误所在的生命周期钩子
+  // 只在 2.2.0+ 可用
+  console.log('err:',err,vm,info);
+}
+//给 v-on 自定义键位别名。
+Vue.config.keyCodes = {
+  v: 86,
+  f1: 112,
+  mediaPlayPause: 179,// camelCase 不可用
+  "media-play-pause": 179,// 取而代之的是 kebab-case 且用双引号括起来
+  up: [38, 87]
+}
+//<input type="text" @keyup.media-play-pause="method">
+
+
 
 //Vuex 
 import store from './store'

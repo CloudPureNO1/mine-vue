@@ -24,7 +24,8 @@ const mutations = {
   },
   togleShow(state){
     state.isCollapse=!state.isCollapse;
-    state.asideWidth=state.isCollapse?'5%':'17%';
+    //state.asideWidth=state.isCollapse?'5%':'17%';
+    state.asideWidth=state.isCollapse?'0':'17%';
   }
 }
 
