@@ -21,36 +21,48 @@ let getTreeData=function(req){
             //根节点，nodeId 未null
             if(nodeId){
                 //根据节点id,加载子节点
-                if('10000'==nodeId){
+                if('1000'==nodeId){
                     result.data=[
                         {
-                            nodeId:'10001',
-                            nodeName:'用户列表',
+                            nodeId:'1001',
+                            nodeName:'用户管理',
                             isLeaf:true,//element ui  中如果有isLeaf 则没有图标
-                            nodeUrl:'http://www.baidu.com',
+                            nodeUrl:'/rbacUsers',
                             icon:'el-icon-s-custom'
                         },{
-                            nodeId:'10002',
-                            nodeName:'用户新增',
+                            nodeId:'1002',
+                            nodeName:'用户组管理',
                             isLeaf:true,
-                            nodeUrl:'http://www.baidu.com',
+                            nodeUrl:'/rbacGroups',
+                            icon:'el-icon-s-custom'
+                        },{
+                            nodeId:'1003',
+                            nodeName:'角色管理',
+                            isLeaf:true,
+                            nodeUrl:'/rbacRoles',
+                            icon:'el-icon-s-custom'
+                        },{
+                            nodeId:'1004',
+                            nodeName:'资源管理',
+                            isLeaf:true,
+                            nodeUrl:'/rbacResources',
                             icon:'el-icon-s-custom'
                         }
                     ];
                 }
-                if('20000'==nodeId){
+                if('2000'==nodeId){
                     result.data=[
                         {
-                            nodeId:'10001',
-                            nodeName:'资源列表',
+                            nodeId:'2001',
+                            nodeName:'医保基金收缴',
                             isLeaf:true,
-                            nodeUrl:'http://www.baidu.com',
+                            nodeUrl:'/echartsIn',
                             icon:'el-icon-s-custom'
                         },{
-                            nodeId:'10002',
-                            nodeName:'资源新增',
+                            nodeId:'2002',
+                            nodeName:'医保基金支付',
                             isLeaf:true,
-                            nodeUrl:'http://www.baidu.com',
+                            nodeUrl:'/echartsOut',
                             icon:'el-icon-s-custom'
                         }
                     ];
@@ -60,15 +72,15 @@ let getTreeData=function(req){
                 //第一次加载树，根目录数据
                 result.data=[
                     {
-                        nodeId: "10000",
-                        nodeName: "用户管理",
+                        nodeId: "1000",
+                        nodeName: "系统管理",
                         isLeaf: false,
                         children: [ ],
                         icon:'el-icon-user'
                       },
                       {
-                        nodeId: "20000",
-                        nodeName: "资源管理",
+                        nodeId: "2000",
+                        nodeName: "医共体分析",
                         isLeaf: false,
                         children: [ ],
                         icon:'el-icon-user'

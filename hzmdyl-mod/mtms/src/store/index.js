@@ -6,7 +6,7 @@ import user from '@/store/modules/user'
 import dept from '@/store/modules/dept'
 import role from '@/store/modules/role'
 import group from '@/store/modules/group'
-
+import resource from '@/store/modules/resource'
 
 Vue.use(Vuex)
 
@@ -19,7 +19,8 @@ const store=new Vuex.Store({
         user,
         dept,
         role,
-        group
+        group,
+        resource
     },
 
     strict: debug 

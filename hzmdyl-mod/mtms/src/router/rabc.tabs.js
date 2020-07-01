@@ -27,6 +27,8 @@ const RoleAddEdit = resolve => require(['@/components/tabs/rbac/role/RoleAddEdit
 const RbacGroups = resolve => require(['@/components/tabs/rbac/group/RbacGroups.vue'], resolve);
 const GroupAddEdit = resolve => require(['@/components/tabs/rbac/group/GroupAddEdit.vue'], resolve);
 
+ 
+
 const rbacRouters = [{
     path: '/rbacUsers',
     name: 'RbacUsers',

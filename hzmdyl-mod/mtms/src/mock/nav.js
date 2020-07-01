@@ -5,14 +5,15 @@ Mock.setup({
 
 
 const sysData=[
-    {nodeId:'1001',nodeTitle:'用户管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacUsers',parent:'1001'},
-    {nodeId:'1002',nodeTitle:'用户组管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacGroups',parent:'1001'},
-    {nodeId:'1003',nodeTitle:'角色管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacRoles',parent:'1001'},
+    {nodeId:'1001',nodeTitle:'用户管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacUsers',parent:'1000'},
+    {nodeId:'1002',nodeTitle:'用户组管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacGroups',parent:'1000'},
+    {nodeId:'1003',nodeTitle:'角色管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacRoles',parent:'1000'},
+    {nodeId:'1004',nodeTitle:'资源管理',isLeaf:true,icon:'el-icon-s-custom',url:'/rbacResources',parent:'1000'},
 ];
 
 const bizData=[
-    {nodeId:'2004',nodeTitle:'医保基金收缴',isLeaf:true,icon:'el-icon-s-custom',url:'/echartsIn',parent:'1005'},
-    {nodeId:'2005',nodeTitle:'医保基金支付',isLeaf:true,icon:'el-icon-s-custom',url:'/echartsOut',parent:'1005'}
+    {nodeId:'2001',nodeTitle:'医保基金收缴',isLeaf:true,icon:'el-icon-s-custom',url:'/echartsIn',parent:'2000'},
+    {nodeId:'2002',nodeTitle:'医保基金支付',isLeaf:true,icon:'el-icon-s-custom',url:'/echartsOut',parent:'2000'}
 ];
 
 // const rootData=[
@@ -22,8 +23,8 @@ const bizData=[
 
 //采用异步加载
 const rootData=[
-    {nodeId:'1001',nodeTitle:'系统管理',isLeaf:false,icon:'el-icon-menu',url:'/sysManageRoot', parent:'root'},
-    {nodeId:'1005',nodeTitle:'医共体分析',isLeaf:false,icon:'el-icon-menu',url:'/bizManageRoot',parent:'root'}
+    {nodeId:'1000',nodeTitle:'系统管理',isLeaf:false,icon:'el-icon-menu',url:'/sysManageRoot', parent:'root'},
+    {nodeId:'2000',nodeTitle:'医共体分析',isLeaf:false,icon:'el-icon-menu',url:'/bizManageRoot',parent:'root'}
 ];
 
 let navData=(req)=>{
@@ -42,10 +43,10 @@ let navData=(req)=>{
         if(nodeId=='root'){
             result.body=rootData;
         }
-        if(nodeId=='1001'){
+        if(nodeId=='1000'){
             result.body=sysData;
         }
-        if(nodeId=='1005'){
+        if(nodeId=='2000'){
             result.body=bizData;
         }
     }
