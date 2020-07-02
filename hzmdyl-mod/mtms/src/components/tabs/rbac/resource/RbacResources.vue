@@ -18,6 +18,7 @@
 <script>
 import RbacResourcesTree from './RbacResourcesTree';
 import RbacResoucesEdit from './RbacResoucesEdit';
+import {mapActions} from 'vuex'
 export default {
     components:{
         'mtms-rbac-resources-tree':RbacResourcesTree,
@@ -29,15 +30,18 @@ export default {
         }
     },
     created() {
+        this.setNodeData({})
         this.$nextTick(function(){
             let tabH=this.$el.parentElement.parentElement.parentElement.offsetHeight;
             let tabHeaderH=document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
             let paginationH=43;
             this.maxHeight=tabH-tabHeaderH-paginationH;
         });
-    },
-    mounted(){
-        this.$store.dispatch('resource/setNodeData',{})
+    }, 
+    methods:{
+      ...mapActions({
+        setNodeData:'resource/setNodeData'
+      }),
     }
 }
 </script>

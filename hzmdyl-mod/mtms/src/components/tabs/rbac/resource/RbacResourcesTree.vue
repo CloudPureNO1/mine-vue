@@ -26,7 +26,7 @@
 <script>
 import axios from 'axios'
 import TreeMock from '@/mock/tree'
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -41,6 +41,7 @@ export default {
       }
     };
   },
+
   methods:{
       ...mapActions({
         setNodeData:'resource/setNodeData'
