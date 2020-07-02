@@ -3,7 +3,34 @@
       <el-row>
         <el-col :span="24">
           <el-card>
-            <el-table :data="groupList" :max-height="maxHeight">
+            <el-table :data="groupList" :max-height="maxHeight" @row-click="handleRowClick" ref="groupTable" >
+                <el-table-column type="expand">
+                    <template slot-scope="props">
+                        <el-card>
+                           <div slot="header" >
+                                <span style="font-size: 1.25rem; color: #909399; font-weight: 600;">拥有的角色</span>
+                                <el-button style="float: right; padding: 3px 0" type="text" icon="el-icon-plus" @click="addGroupRoles(props.row.groupId)">添加角色</el-button>
+                            </div>
+                            <div >
+                                <el-table :data="props.row.roles" fit>
+                                    <el-table-column label="序号" type="index" fixed="left"  align="center"></el-table-column>
+                                    <el-table-column label="角色ID" prop="roleId"  align="center"></el-table-column>
+                                    <el-table-column label="角色名称" prop="roleName"   align="center"></el-table-column>
+                                    <el-table-column label=""  align="right">
+                                        <template slot="header" slot-scope="scope">
+                                            <span>
+                                                <el-button  type="text" icon="el-icon-delete" @click="deleteAllRoles(props.row.groupId)">清空角色</el-button>
+                                            </span>
+                                        </template>
+                                        <template slot-scope="scope">
+                                            <el-button size="mini" circle icon="el-icon-minus" type="danger" @click="deleteGroupRoles(props.row.groupId,scope.row.roleId)"></el-button>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                            </div>
+                        </el-card>
+                    </template>
+                </el-table-column>
                 <el-table-column label="序号" type="index" fixed="left"></el-table-column>
                 <el-table-column label="用户组ID" prop="groupId" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
                 <el-table-column label="用户组名称" prop="groupName" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
@@ -48,9 +75,12 @@
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import groupApi from '@/api/rbac/group.js'
 import commApi from '@/api/comm.js'
+import axios from 'axios'
+import role from '@/mock/role.js'
 export default {
   data(){
     return{
+           groupRoles:[],
             maxHeight:100,
             showOverflowTooltip: true,
             fixed: 'right',
@@ -86,6 +116,7 @@ export default {
       if(this.groupList.length==0){
         groupApi.$loadGroups(this,{pageSize:this.pageSize,currentPage:this.currentPage});
       }
+       
   },
   methods: {
         ...mapActions({
@@ -127,8 +158,27 @@ export default {
             this.setCurrentPage(val).then(()=>{
                  groupApi.$loadGroups(vue, {currentPage:this.currentPage,pageSize:this.pageSize});
             });
+        },
+ 
+        //添加角色
+        addGroupRoles(groupId){
+            console.log('>>>>>addGroupRoles:',groupId)
+        },
+        //清空角色
+        deleteAllRoles(groupId){
+            console.log('>>>>>deleteAllRoles:',groupId)
+        },
+        //删除角色
+        deleteGroupRoles(groupId,roleId){
+            console.log('>>>>>deleteGroupRoles:',groupId,roleId)
+        },
+        handleRowClick(row, column, event){
+            this.$refs['groupTable'].toggleRowExpansion(row);
         } 
+      
     }
 }
 </script>
+
+ 
  

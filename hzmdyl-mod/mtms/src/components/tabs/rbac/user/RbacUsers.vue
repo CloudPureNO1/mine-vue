@@ -3,6 +3,7 @@
     <!--只要在el-table元素中定义了height属性，即可实现固定表头的表格，而不需要额外的代码。-->
     <el-table :data="userList" :max-height="maxHeight">
         <!-- <el-table :data="userList" :border="true">-->
+
         <el-table-column label="序号" type="index" fixed="left"></el-table-column>
         <el-table-column label="用户ID" prop="userId" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
         <el-table-column label="用户名" prop="userName" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
@@ -12,6 +13,7 @@
         <el-table-column label="创建者" prop="creator" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
         <el-table-column label="更新时间" prop="updateTime" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
         <el-table-column label="描述" prop="userDesc" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
+        <el-table-column label="所属用户组" prop="groupName" :align="align" :show-overflow-tooltip="showOverflowTooltip"  :fixed="fixed"></el-table-column>
         <el-table-column :fixed="fixed" :width="opWidth" :align="align">
             <template slot="header" slot-scope="scope">
                 <span>操作&nbsp;&nbsp;</span>
@@ -27,15 +29,15 @@
         </el-table-column>
     </el-table>
 
-    <el-pagination 
-        :current-page="currentPage" 
-        :page-sizes="pageSizes" 
-        :page-size="pageSize" 
-        :layout="pglayout" 
-        :total="total" 
-        :hide-on-single-page="isSiglePageHide" 
-        background 
-        @size-change="handleSizeChange" 
+    <el-pagination
+        :current-page="currentPage"
+        :page-sizes="pageSizes"
+        :page-size="pageSize"
+        :layout="pglayout"
+        :total="total"
+        :hide-on-single-page="isSiglePageHide"
+        background
+        @size-change="handleSizeChange"
         @current-change="handleCurrentChange">
     </el-pagination>
 </div>
@@ -57,7 +59,7 @@ export default {
             //currentPage: 1, //当前页码
             pageSizes: [10, 20, 50, 100, 200, 300, 400, 500], //每页记录数选项
             //pageSize: 10, //当前每页记录数
-            //total: 0, //总记录数 
+            //total: 0, //总记录数
             isSiglePageHide: false, //如果只有一页时，隐藏pagination,
             pglayout: 'total, sizes, prev, pager,  next, jumper' //分页工具栏上显示的内容
         }
@@ -69,8 +71,8 @@ export default {
             let paginationH=43;
             this.maxHeight=tabH-tabHeaderH-paginationH;
         });
-     
-        
+
+
     },
     computed:{
         ...mapState({
@@ -90,10 +92,10 @@ export default {
         ...mapActions({
             setPageSize:'user/setPageSize',
             setCurrentPage:'user/setCurrentPage' ,
-            loadUserList:'user/setUsersData' 
+            loadUserList:'user/setUsersData'
         }),
         formatUserRate(row, column){
-            
+
             if(this.rates.length==0){
                 commApi.$loadRates(this);
             }
@@ -103,6 +105,7 @@ export default {
             }
             return row.userRate;
         },
+
         handleAdd() {
             this.$router.push('/userAdd');
         },
@@ -131,4 +134,3 @@ export default {
     }
 }
 </script>
- 

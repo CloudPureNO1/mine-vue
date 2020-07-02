@@ -11,7 +11,8 @@ let user1 = {
     createTime: '2020-02-02 02:02:02',
     creator: 'admin',
     updateTime: '2020-02-02 02:02:02',
-    userDesc: '高级用户'
+    userDesc: '高级用户',
+    groupName:'超级管理员用户组'
 }
 let user2 = {
     userId: 10002,
@@ -21,7 +22,8 @@ let user2 = {
     createTime: '2020-02-02 02:02:02',
     creator: 'admin',
     updateTime: '2020-02-02 02:02:02',
-    userDesc: '高级用户'
+    userDesc: '高级用户' ,
+    groupName:'管理员用户组'
 }
 let userDelete = {
     userId: 10003,
@@ -31,7 +33,8 @@ let userDelete = {
     createTime: '2020-02-02 02:02:02',
     creator: 'admin',
     updateTime: '2020-02-02 02:02:02',
-    userDesc: '高级用户'
+    userDesc: '高级用户',
+    groupName:'前台用户组'
 }
 user0.push(userDelete);
 

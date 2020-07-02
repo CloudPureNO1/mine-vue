@@ -10,7 +10,27 @@ let group1 = {
     createTime: '2020-02-02 02:02:02',
     creator: 'admin',
     updateTime: '2020-02-02 02:02:02',
-    groupDesc: '超级管理员用户组'
+    groupDesc: '超级管理员用户组',
+    roles:[
+        {
+            roleId: 10001,
+            roleName: '超级管理员角色',
+            roleType: 'admin',
+            createTime: '2020-02-02 02:02:02',
+            creator: 'admin',
+            updateTime: '2020-02-02 02:02:02',
+            roleDesc: '超级管理员角色'
+        },
+        {
+            roleId: 10003,
+            roleName: '用户',
+            roleType: 'user',
+            createTime: '2020-02-02 02:02:02',
+            creator: 'admin',
+            updateTime: '2020-02-02 02:02:02',
+            roleDesc: '用户'
+        }
+    ]
 }
 let group2 = {
     groupId: 10002,
@@ -19,7 +39,27 @@ let group2 = {
     createTime: '2020-02-02 02:02:02',
     creator: 'admin',
     updateTime: '2020-02-02 02:02:02',
-    groupDesc: '普通管理员用户组'
+    groupDesc: '普通管理员用户组',
+    roles:[
+        {
+            roleId: 10002,
+            roleName: '普通管理员角色',
+            roleType: 'manager',
+            createTime: '2020-02-02 02:02:02',
+            creator: 'admin',
+            updateTime: '2020-02-02 02:02:02',
+            roleDesc: '普通管理员角色'
+        },
+        {
+            roleId: 10003,
+            roleName: '用户',
+            roleType: 'user',
+            createTime: '2020-02-02 02:02:02',
+            creator: 'admin',
+            updateTime: '2020-02-02 02:02:02',
+            roleDesc: '用户'
+        }
+    ]
 }
 let groupDelete = {
     groupId: 10003,
@@ -28,7 +68,18 @@ let groupDelete = {
     createTime: '2020-02-02 02:02:02',
     creator: 'admin',
     updateTime: '2020-02-02 02:02:02',
-    groupDesc: '用户组'
+    groupDesc: '用户组',
+    roles:[
+        {
+            roleId: 10003,
+            roleName: '用户',
+            roleType: 'user',
+            createTime: '2020-02-02 02:02:02',
+            creator: 'admin',
+            updateTime: '2020-02-02 02:02:02',
+            roleDesc: '用户'
+        }
+    ]
 }
 group0.push(groupDelete);
 

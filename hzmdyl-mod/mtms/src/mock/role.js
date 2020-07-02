@@ -140,3 +140,27 @@ let updateRole=(req)=>{
     return result;
 }
 Mockjs.mock(/\/mtms\/api\/updateRole/,updateRole); 
+
+
+let getGroupRoles=(req)=>{
+    //debugger;
+    let result={};
+    result.code=0;
+    let type=req.type;
+    if(type!='POST'){
+        result.code=-9;
+        result.msg='请使用POST请求';
+        return result;
+    }
+    if(req.body){
+       // debugger;
+        let param=JSON.parse(req.body);
+        let groupId=param.groupId;
+        result.body=[role1,role2];
+        debugger
+        result.msg="成功";
+    }
+
+    return result;
+}
+Mockjs.mock(/\/mtms\/api\/getGroupRoles/,getGroupRoles); 

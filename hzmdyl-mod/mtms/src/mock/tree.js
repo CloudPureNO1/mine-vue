@@ -237,7 +237,84 @@ let addOrEditResource=(req)=>{
     }
     return result;
 }
+
+let loadAllTree=(req)=>{
+    let result={};
+    result.code='0';
+ 
+    let type=req.type;
+    switch(type){
+        case 'GET':
+            result.code=-9;
+            result.msg='请使用POST请求';
+            break;
+        case 'POST':
+            result.body=[
+                {
+                    nodeId: "1000",
+                    nodeName: "系统管理",
+                    isLeaf: false,
+                    children: [
+                        {
+                            nodeId:'1001',
+                            nodeName:'用户管理',
+                            isLeaf:true,//element ui  中如果有isLeaf 则没有图标
+                            nodeUrl:'/rbacUsers',
+                            icon:'el-icon-s-custom'
+                        },{
+                            nodeId:'1002',
+                            nodeName:'用户组管理',
+                            isLeaf:true,
+                            nodeUrl:'/rbacGroups',
+                            icon:'el-icon-s-custom'
+                        },{
+                            nodeId:'1003',
+                            nodeName:'角色管理',
+                            isLeaf:true,
+                            nodeUrl:'/rbacRoles',
+                            icon:'el-icon-s-custom'
+                        },{
+                            nodeId:'1004',
+                            nodeName:'资源管理',
+                            isLeaf:true,
+                            nodeUrl:'/rbacResources',
+                            icon:'el-icon-s-custom'
+                        }
+                    ],
+                    icon:'el-icon-user'
+                  },
+                  {
+                    nodeId: "2000",
+                    nodeName: "医共体分析",
+                    isLeaf: false,
+                    children: [
+                        {
+                            nodeId:'2001',
+                            nodeName:'医保基金收缴',
+                            isLeaf:true,
+                            nodeUrl:'/echartsIn',
+                            icon:'el-icon-s-custom'
+                        },{
+                            nodeId:'2002',
+                            nodeName:'医保基金支付',
+                            isLeaf:true,
+                            nodeUrl:'/echartsOut',
+                            icon:'el-icon-s-custom'
+                        }
+                    ],
+                    icon:'el-icon-user'
+                  }
+            ];
+            break;
+        default:
+            result.code=-9;
+            result.msg='请使用POST请求';
+            break;
+    }
+    return result;
+}
 Mock.mock(/\/mtms\/api\/loadTree/,getTreeData);
+Mock.mock(/\/mtms\/api\/loadAllTree/,loadAllTree);
 Mock.mock(/\/mtms\/api\/getNodeData/,getNodeData);
 Mock.mock(/\/mtms\/api\/addOrEditResource/,addOrEditResource);
 

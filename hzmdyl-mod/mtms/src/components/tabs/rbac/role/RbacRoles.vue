@@ -20,7 +20,7 @@
                         </span>
                     </template>
                     <template slot-scope="scope">
-                        <el-button size="mini" circle icon="el-icon-view" @click="handleClick(scope.$index,scope.row)"></el-button>
+                        <el-button size="mini" circle icon="el-icon-paperclip" @click="setResources(scope.$index,scope.row)"></el-button>
                         <el-button size="mini" circle icon="el-icon-edit" type="primary" @click="handleEdit(scope.$index, scope.row)"></el-button>
                         <el-button size="mini" circle icon="el-icon-delete" type="danger" @click="handleDelete(scope.$index, scope.row)"></el-button>
                     </template>
@@ -41,6 +41,17 @@
           </el-card>
         </el-col>
       </el-row>
+
+      <!--抽屉-->
+      <el-drawer
+        title="配置角色的资源"
+        :visible.sync="drawer"
+        direction="rtl"
+        size="40%"
+        :show-close="false"
+        @close="beforCloseDrawer">
+            <role-resource-tree></role-resource-tree>
+        </el-drawer>
     </div>
 </template>
 
@@ -48,9 +59,14 @@
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import roleApi from '@/api/rbac/role.js'
 import commApi from '@/api/comm.js'
+import RoleResourceTree from './RoleResourceTree'
 export default {
+    components:{
+        'role-resource-tree':RoleResourceTree
+    },
   data(){
     return{
+            drawer:false,
             maxHeight:100,
             showOverflowTooltip: true,
             fixed: 'right',
@@ -106,8 +122,8 @@ export default {
         handleAdd() {
             this.$router.push({path:'/roleAddEdit',query:{roleData:{}}});
         },
-        handleClick(index, row) { //index 从0开始
-            this.$router.push({path:'/roleInfo',query:{roleData:row}});
+        setResources(index, row) { //index 从0开始
+            this.drawer=true
         },
         handleEdit(index, row) {
            this.$router.push({path:'/roleAddEdit',query:{roleData:row}});
@@ -127,7 +143,12 @@ export default {
             this.setCurrentPage(val).then(()=>{
                  roleApi.$loadRoles(vue, {currentPage:this.currentPage,pageSize:this.pageSize});
             });
-        } 
+        },
+        beforCloseDrawer(){//阻止关闭
+            console.log('<<<<<<<<<<<<<<<<<<<<<<>>>>>beforCloseDrawer')
+
+            this.drawer=false;//关闭
+        }
     }
 }
 </script>

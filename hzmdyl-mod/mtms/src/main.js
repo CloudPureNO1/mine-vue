@@ -74,7 +74,7 @@ Vue.config.keyCodes = {
 }
 //<input type="text" @keyup.media-play-pause="method">
 
-
+import 'default-passive-events'
 
 //Vuex 
 import store from './store'

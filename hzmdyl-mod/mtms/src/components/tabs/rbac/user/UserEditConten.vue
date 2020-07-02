@@ -19,7 +19,12 @@
 
             <el-row>
                 <el-col :span="7">
-                    <el-form-item label="用户ID" prop="userId">
+                    <el-form-item label="所属用户组">
+                        <el-select v-model="userForm.groupId" placeholder="选择用户组" style="width:100%;">
+                        <el-option v-for="groupItem in groupList" :key="groupItem.groupId" :label="groupItem.groupName" :value="groupItem.groupId" ></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="用户ID" prop="userId" style="display:none;">
                         <el-input v-model="userForm.userId" readonly></el-input>
                     </el-form-item>
                 </el-col>
@@ -171,6 +176,7 @@ import deptApi from '@/api/rbac/dept.js'
 import commApi from '@/api/comm.js'   
 import userApi from '@/api/rbac/user.js'    
 import userValidate from './userValidate.js'
+import groupApi from '@/api/rbac/group.js'
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
     name: "UserEdit",
@@ -203,6 +209,7 @@ export default {
         ...mapState({
             sexs:state=>state.comm.sexList,
             rates:state=>state.comm.rates,
+            groupList:state=>state.group.groupList,
         }),
         ...mapGetters({
             deptList:'dept/getDeptDropDown'
@@ -221,6 +228,9 @@ export default {
         }
         if(this.deptList==undefined||this.deptList.length==0){
             deptApi.$loadDeptList(this);
+        }
+        if(this.groupList.length==0){
+            groupApi.$loadGroups(this,{pageSize:this.pageSize,currentPage:this.currentPage});
         }
     },
     watch:{
