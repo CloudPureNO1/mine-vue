@@ -14,9 +14,9 @@
                 <el-table-column label="角色描述" prop="roleDesc" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
                 <el-table-column :fixed="fixed" :width="opWidth" :align="align">
                     <template slot="header" slot-scope="scope">
-                        <span>操作&nbsp;&nbsp;</span>
+                        <!--<span>操作&nbsp;&nbsp;</span>-->
                         <span>
-                            <el-button size="mini" round icon="el-icon-circle-plus" type="primary" @click="handleAdd">新增</el-button>
+                            <el-button size="mini" round icon="el-icon-plus" type="primary" @click="handleAdd">新增</el-button>
                         </span>
                     </template>
                     <template slot-scope="scope">
@@ -36,7 +36,8 @@
         :hide-on-single-page="isSiglePageHide" 
         background 
         @size-change="handleSizeChange" 
-        @current-change="handleCurrentChange">
+        @current-change="handleCurrentChange"
+        style="float:right;padding:4px;">
     </el-pagination>
           </el-card>
         </el-col>
@@ -44,13 +45,19 @@
 
       <!--抽屉-->
       <el-drawer
-        title="配置角色的资源"
+        
         :visible.sync="drawer"
         direction="rtl"
-        size="40%"
+        size="25%"
         :show-close="false"
-        @close="beforCloseDrawer">
-            <role-resource-tree></role-resource-tree>
+        :before-close="handleClose">
+            <slot name="title">
+                <span class="drwaer-title-cls">
+                    配置<i class="el-icon-arrow-right"></i>{{currentRoleName}}<i class="el-icon-arrow-right"></i>资源
+                </span>
+                <el-button type="primary" size="mini" style="float:right;margin-right:10px;" @click="saveRoleResources">保存</el-button>
+            </slot>
+           <role-resource-tree  ref="roleResourceTreeP"></role-resource-tree>
         </el-drawer>
     </div>
 </template>
@@ -66,8 +73,8 @@ export default {
     },
   data(){
     return{
+            currentRoleName:'',
             drawer:false,
-            maxHeight:100,
             showOverflowTooltip: true,
             fixed: 'right',
             opWidth: '200',
@@ -81,40 +88,44 @@ export default {
             pglayout: 'total, sizes, prev, pager,  next, jumper' //分页工具栏上显示的内容 
     }
   },
-  created(){
-      this.$nextTick(function(){
-            let tabH=this.$el.parentElement.parentElement.parentElement.offsetHeight;
-            let tabHeaderH=document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
-            let paginationH=43;
-            this.maxHeight=tabH-tabHeaderH-paginationH;
-      });
-  },
+ 
   computed:{
     ...mapState({
       roleTypes:state=>state.comm.roleTypes,
       roleList:state=>state.role.roleList,
       total:state=>state.role.total,
       pageSize:state=>state.role.pageSize,
-      currentPage:state=>state.role.currentPage
-    })
+      currentPage:state=>state.role.currentPage,
+      tabContentHeight:state=>state.layout.tabContentHeight
+    }),
+    maxHeight(){
+        return this.tabContentHeight;
+    }
   },
   mounted(){
       if(this.roleList.length==0){
         roleApi.$loadRoles(this,{pageSize:this.pageSize,currentPage:this.currentPage});
       }
-      let that=this;
-      window.addEventListener("resize",function(){
-            let tabH=that.$el.parentElement.parentElement.parentElement.offsetHeight;
-            let tabHeaderH=document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
-            let paginationH=43;
-            that.maxHeight=tabH-tabHeaderH-paginationH;
-      })
   },
   methods: {
         ...mapActions({
           setPageSize:'role/setPageSize',
           setCurrentPage:'role/setCurrentPage'
         }),
+        saveRoleResources(){
+            //(leafOnly, includeHalfChecked) 接收两个 boolean 类型的参数，1. 是否只是叶子节点，默认值为 false 2. 是否包含半选节点，默认值为 false
+            //this.$refs['roleResourceTree'].getCheckedNodes(false,false);
+            let checkedKeys=this.$refs["roleResourceTreeP"].$refs["roleResourceTree"].getCheckedKeys();
+            this.$alert('成功',{
+                type:'success',
+                confirmButtonText: '确定',
+                callback:(action)=>{
+                    //console.log('...action...',action);
+                    this.drawer=false;
+                }
+            });
+            console.log('checkedKeys:>>>>>',checkedKeys);
+        },
         formatRoleTypes(row, column){
             
             if(this.roleTypes.length==0){
@@ -130,6 +141,7 @@ export default {
             this.$router.push({path:'/roleAddEdit',query:{roleData:{}}});
         },
         setResources(index, row) { //index 从0开始
+            this.currentRoleName=row.roleName;
             this.drawer=true
         },
         handleEdit(index, row) {
@@ -151,12 +163,46 @@ export default {
                  roleApi.$loadRoles(vue, {currentPage:this.currentPage,pageSize:this.pageSize});
             });
         },
-        beforCloseDrawer(){//阻止关闭
-            console.log('<<<<<<<<<<<<<<<<<<<<<<>>>>>beforCloseDrawer')
-
-            this.drawer=false;//关闭
+        handleClose(done){//阻止关闭
+            // console.log('<<<<<<<<<<<<<<<<<<<<<<>>>>>beforCloseDrawer')
+            // this.drawer=false;//关闭
+            this.$confirm('没有变动，是否退出?' , {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning',
+                center: false
+                 }
+            ).then(() => {
+                done();
+            }).catch(() => {
+                
+            });
         }
     }
 }
 </script>
- 
+ <style>
+ .el-drawer__header {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #3e89e6;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 0;
+    padding: 20px 20px 0;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+  :focus { /**祛除抽屉打开时的边框 */
+    outline: 0;
+  }
+  .drwaer-title-cls{
+    color: #3e89e6;
+    font-size: 1.15rem;
+    font-weight: 400;
+    float: left;
+    padding: 5px 0 15px 15px;
+  }
+ </style>

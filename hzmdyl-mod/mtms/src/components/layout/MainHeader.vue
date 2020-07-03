@@ -7,16 +7,6 @@
             </el-col>
         </el-row>
         <el-row style="height:45%;" >
-        <!--
-            <el-col :span="24" style="display:flex">
-                <div @click="exchange" class="main-exchange" style="align-self:center;">
-                    <span v-show="this.isCollapse" class="icon iconfont icon-zhankai icon-style" />
-                    <span v-show="!this.isCollapse" class="icon iconfont icon-shouqi icon-style" />
-                </div>
-                 
-                <mtms-breadcrumb style="align-self:center;"></mtms-breadcrumb>
-            </el-col>
-            -->
             <el-col :span="24" >
                 <el-row  >
                     <el-col :span="1" >
@@ -93,16 +83,5 @@ export default {
 .main-exchange:hover {
     background-color: #dfffff;
 }
-
-.box{
-    display: flex;
-    display: -webkit-flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-}
-.item{
-   align-self:center;
-
-}
+ 
 </style>

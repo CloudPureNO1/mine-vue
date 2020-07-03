@@ -1,6 +1,6 @@
 <template>
-  <div class="rbac-resource-tree-main">
-    <el-tree 
+  <div class="rbac-resource-tree-main" :style="{height:treeMaxHeight}">
+    <el-tree ref="roleResourceTree"
       :data="roleResourceTreeData"
       node-key="nodeId"
       :show-checkbox="showCheckbox"
@@ -47,6 +47,14 @@ export default {
   mounted(){
       this.loadTreeNode();
   },
+  computed:{
+    ...mapState({
+      tabContentHeight:state=>state.layout.tabContentHeight
+    }),
+    treeMaxHeight(){
+      return this.tabContentHeight;
+    }
+  },
   methods:{
       loadTreeNode(){
                 this.params.nodeId=null;
@@ -71,9 +79,14 @@ export default {
 <style scoped>
   .rbac-resource-tree-main{
    /* border-right: 1px solid #b9ceec;*/
-    height: calc(84vh);
     width: 100%;
-    padding:4px 0 0 0; 
+    padding:4px 0 0 0;
+    overflow:auto; 
+  }
+  .rbac-resource-tree-main .custom-tree-node span{
+    font-size:1.10rem;
+    font-weight: 400;
+    color: #3e89e6;
   }
 </style>
  

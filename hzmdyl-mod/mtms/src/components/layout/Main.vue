@@ -148,9 +148,5 @@ export default {
  .cls-main-container .el-header ,.cls-main-container .el-footer{
         line-height: 26px;
  }
-
-.main .icon-style {
-    // font-size:20px;
-    color: #303133
-}
+ 
 </style>

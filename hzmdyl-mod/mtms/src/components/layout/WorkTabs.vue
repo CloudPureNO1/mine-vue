@@ -36,11 +36,17 @@ export default {
         };
     },
     mounted() {
+        let that=this;
         //刷新前存储打开的tab，也可以在created 中存放
         window.addEventListener('beforeunload', e => {
             sessionStorage.setItem("tabs", JSON.stringify(this.tabs));
             sessionStorage.setItem("activeName", this.activeName);
         });
+        window.addEventListener('resize',e=>{
+            let tabHeight = document.getElementsByClassName('el-tabs el-tabs--top el-tabs--border-card')[0].offsetHeight;
+            let tabHeaderHeight = document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
+            that.setTabContentHeight(tabHeight-tabHeaderHeight);
+        })
     },
      
     created() {
@@ -65,9 +71,14 @@ export default {
                             item.component=MyComponent
                         }
                 }
-               
+
         });
-         
+        let that=this;
+        this.$nextTick(function(){
+                let tabHeight = document.getElementsByClassName('el-tabs el-tabs--top el-tabs--border-card')[0].offsetHeight;
+                let tabHeaderHeight = document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
+                that.setTabContentHeight(tabHeight-tabHeaderHeight-43);
+        })
     },
     destroyed() {
         //界面销毁时，取消监听beforeunload
@@ -84,6 +95,9 @@ export default {
         })
     },
     methods: {
+        ...mapActions({
+            setTabContentHeight:'layout/setTabContentHeight'
+        }),
         addTab() {
             //首页默认显示欢迎tab 单独处理
             if (this.$route.name === 'Home') {

@@ -7,7 +7,7 @@
                 <el-card>
                     <el-button type="primary" icon="el-icon-plus" size="small" @click="addResource">添加</el-button>
                    <!-- <el-button type="warning" icon="el-icon-edit" size="small" @click="editResource">编辑</el-button>-->
-                    <el-button type="success" icon="el-icon-delete" size="small" @click="addOrEditResource">保存</el-button>
+                    <el-button type="success" icon="el-icon-finished" size="small" @click="addOrEditResource">保存</el-button>
                     <el-button type="danger" icon="el-icon-delete" size="small" @click="deleteResource" >删除</el-button>
                 </el-card>
              </div>
@@ -75,6 +75,8 @@
                 </el-card>
           </el-col>
         </el-row>
+  
+     
     </div>
 </template>
 
@@ -205,5 +207,9 @@ export default {
     height: 36px;
     line-height: 36px;
     text-align: left;
+}
+
+.icon-huji:before {
+    content: "\e64c";
 }
 </style>

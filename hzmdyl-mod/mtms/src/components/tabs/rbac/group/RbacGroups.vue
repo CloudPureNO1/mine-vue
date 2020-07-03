@@ -41,13 +41,13 @@
                 <el-table-column label="用户组描述" prop="groupDesc" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
                 <el-table-column :fixed="fixed" :width="opWidth" :align="align">
                     <template slot="header" slot-scope="scope">
-                        <span>操作&nbsp;&nbsp;</span>
+                       <!-- <span>操作&nbsp;&nbsp;</span> -->
                         <span>
-                            <el-button size="mini" round icon="el-icon-circle-plus" type="primary" @click="handleAdd">新增</el-button>
+                            <el-button size="mini" round icon="el-icon-plus" type="primary" @click="handleAdd">新增</el-button>
                         </span>
                     </template>
                     <template slot-scope="scope">
-                        <el-button size="mini" circle icon="el-icon-view" @click="handleClick(scope.$index,scope.row)"></el-button>
+                        <!--<el-button size="mini" circle icon="el-icon-view" @click="handleClick(scope.$index,scope.row)"></el-button>-->
                         <el-button size="mini" circle icon="el-icon-edit" type="primary" @click="handleEdit(scope.$index, scope.row)"></el-button>
                         <el-button size="mini" circle icon="el-icon-delete" type="danger" @click="handleDelete(scope.$index, scope.row)"></el-button>
                     </template>
@@ -63,7 +63,8 @@
         :hide-on-single-page="isSiglePageHide" 
         background 
         @size-change="handleSizeChange" 
-        @current-change="handleCurrentChange">
+        @current-change="handleCurrentChange"
+        style="float:right;padding:4px;">
     </el-pagination>
           </el-card>
         </el-col>
@@ -81,7 +82,6 @@ export default {
   data(){
     return{
            groupRoles:[],
-            maxHeight:100,
             showOverflowTooltip: true,
             fixed: 'right',
             opWidth: '200',
@@ -95,22 +95,19 @@ export default {
             pglayout: 'total, sizes, prev, pager,  next, jumper' //分页工具栏上显示的内容 
     }
   },
-  created(){
-      this.$nextTick(function(){
-            let tabH=this.$el.parentElement.parentElement.parentElement.offsetHeight;
-            let tabHeaderH=document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
-            let paginationH=43;
-            this.maxHeight=tabH-tabHeaderH-paginationH;
-      });
-  },
+ 
   computed:{
     ...mapState({
       groupTypes:state=>state.comm.groupTypes,
       groupList:state=>state.group.groupList,
       total:state=>state.group.total,
       pageSize:state=>state.group.pageSize,
-      currentPage:state=>state.group.currentPage
-    })
+      currentPage:state=>state.group.currentPage,
+      tabContentHeight:state=>state.layout.tabContentHeight
+    }),
+    maxHeight(){
+        return this.tabContentHeight;
+    }
   },
   mounted(){
       if(this.groupList.length==0){

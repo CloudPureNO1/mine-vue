@@ -31,6 +31,24 @@ Vue.use(ElementUI);
 import Fragment from 'vue-fragment'
 Vue.use(Fragment.Plugin)
 
+//引入 fortawesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fortawesome/vue-fontawesome'
+library.add(fas, far, fab)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('font-awesome-layers', FontAwesomeLayers)
+Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
+
+/* 上面提到 Font Awosome 为我们提供了三种免费的样式，使用时分别对应不同的前缀。
+solid 样式，前缀为：fas
+regular 样式，前缀为：far
+brands 样式，前缀为：fab
+（2）它们提供的所有图标可以进入官方的图标搜索页进行查看：
+https://fontawesome.com/icons?d=gallery&m=free */
+
 //全局引入css
 import '@/assets/css/home.css'
 import './styles/index.scss'
@@ -47,7 +65,7 @@ import {$launchFullScreen,$exitFullScreen} from '@/utils/browser.js'
 Vue.prototype.$launchFullScreen=$launchFullScreen;
 Vue.prototype.$exitFullScreen=$exitFullScreen;
 
-// //引入全局方法2
+//引入全局方法2
 import GlobleFun from '@/utils/global_fun.js'
 Vue.use(GlobleFun);
 
