@@ -13,7 +13,7 @@ const sysData=[
 
 const bizData=[
     {nodeId:'2001',nodeTitle:'医保基金收缴',isLeaf:true,icon:'el-icon-s-custom',url:'/echartsIn',parent:'2000'},
-    {nodeId:'2002',nodeTitle:'医保基金支付',isLeaf:true,icon:'el-icon-s-custom',url:'/echartsOut',parent:'2000'}
+    {nodeId:'2002',nodeTitle:'医保基金支付',isLeaf:true,icon:'el-icon-s-custom',url:'/echartsOut',parent:'2000'} 
 ];
 
 // const rootData=[
@@ -24,7 +24,8 @@ const bizData=[
 //采用异步加载
 const rootData=[
     {nodeId:'1000',nodeTitle:'系统管理',isLeaf:false,icon:'el-icon-menu',url:'/sysManageRoot', parent:'root'},
-    {nodeId:'2000',nodeTitle:'医共体分析',isLeaf:false,icon:'el-icon-menu',url:'/bizManageRoot',parent:'root'}
+    {nodeId:'2000',nodeTitle:'医共体分析',isLeaf:false,icon:'el-icon-menu',url:'/bizManageRoot',parent:'root'},
+    {nodeId:'3000',nodeTitle:'Excel',isLeaf:true,icon:'el-icon-menu',url:'/excel',parent:'root'}
 ];
 
 let navData=(req)=>{

@@ -8,7 +8,7 @@ import router from './router'
 import Router from 'vue-router'
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err => err)
+  return originalPush.call(this, location).catch(err => err)
 }
  
 Vue.config.productionTip = false
@@ -21,6 +21,9 @@ import './assets/iconfont/iconfont.css'
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts;
 
+//引入xlsx-style  \node_modules\xlsx-style\dist\cpexcel.js 807行 的 var cpt = require(’./cpt’ + ‘able’); 改成 var cpt = cptable;
+import XLSX from 'xlsx-style'
+Vue.prototype.$XLSX = XLSX;
 
 //引入Element UI
 import ElementUI from 'element-ui';
