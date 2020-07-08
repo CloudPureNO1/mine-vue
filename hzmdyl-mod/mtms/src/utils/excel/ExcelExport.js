@@ -1,3 +1,10 @@
+/** 
+ * Excel 导出JS
+ * @author 王森明
+ * @Date 2020-07-08
+ */
+
+import XLSX from 'xlsx-style'
 const wopts = { bookType: "xlsx", bookSST: true, type: "binary", cellStyles: true }
  
 //细边框
@@ -78,9 +85,6 @@ const excelStyles=[
     }
 ]
  
-export function exportExcel() {
-    downloadExl(this.jsonData);
-}
 
 export function saveAs(obj, fileName) {
       let tmpa = document.createElement("a");
@@ -98,14 +102,19 @@ export function saveAs(obj, fileName) {
       }, 100);
     }
 
-export function downloadExl(dataObj, type) {
+export function downloadExl2(dataObj, type) {
       let result = bulidData(dataObj); //用来保存转换好的json
       let tmpdata=result.resultData;
-      let merges=result.merges;
-      var outputPos = Object.keys(tmpdata); //设置区域,比如表格从A1到D10
-      tmpdata["!merges"] = merges//合并单元格
-      tmpdata["!cols"] =  colsWidth;//设置列宽
-      tmpdata["!rows"] =  rowsHeight;//设置行高
+      let outputPos = Object.keys(tmpdata); //设置区域,比如表格从A1到D10
+      let rowCount=result.rowCount;//cexel 内容qu 总行数
+      let maxColV='A';//最大列值
+      outputPos.forEach((item,index)=>{
+          let ary=[...item];
+          maxColV=ary[0]>maxColV?ary[0]:maxColV;  
+      });
+      tmpdata["!merges"] = result.merges//合并单元格
+      tmpdata["!cols"] =  result.colsWidth;//设置列宽
+      tmpdata["!rows"] =  result.rowsHeight;//设置行高
       var tmpWB = {
         SheetNames: ["发票申请单"], //保存的表标题
         Sheets: {
@@ -113,15 +122,15 @@ export function downloadExl(dataObj, type) {
             {},
             tmpdata, //内容
             {
-              "!ref": outputPos[0] + ":" + outputPos[outputPos.length - 1] //设置填充区域
+              "!ref": "A1:" +maxColV+rowCount //设置填充区域
             }
           )
         }
       };
       var tmpDown = new Blob(
         [
-          this.s2ab(
-            this.$XLSX.write(
+          s2ab(
+            XLSX.write(
               tmpWB,
               {
                 bookType: type == undefined ? "xlsx" : type,
@@ -135,8 +144,63 @@ export function downloadExl(dataObj, type) {
           type: ""
         }
       );
-      this.saveAs( tmpDown, "下载文件名称." + (this.wopts.bookType == "biff2" ? "xls" : this.wopts.bookType) );
+      saveAs( tmpDown, "下载文件名称." + (wopts.bookType == "biff2" ? "xls" :wopts.bookType) );
     } 
+
+
+    /**
+     * 
+     * @param {*} dataObj 
+     * @param {*} param1 
+     */
+    export function downloadExl(dataObj, {stNames=[],type='xlsx'}={}) {
+        let result = bulidData(dataObj); //用来保存转换好的json
+        let tmpdata=result.resultData;
+        let outputPos = Object.keys(tmpdata); //设置区域,比如表格从A1到D10
+        let rowCount=result.rowCount;//cexel 内容qu 总行数
+        let maxColV='A';//最大列值
+        outputPos.forEach((item,index)=>{
+            let ary=[...item];
+            maxColV=ary[0]>maxColV?ary[0]:maxColV;  
+        });
+        tmpdata["!merges"] = result.merges//合并单元格
+        tmpdata["!cols"] =  result.colsWidth;//设置列宽
+        tmpdata["!rows"] =  result.rowsHeight;//设置行高
+
+
+        let sheets={};
+        stNames.forEach((itemSt,inSt)=>{
+            sheets[itemSt]= Object.assign( {},
+                                tmpdata, //内容
+                                {
+                                "!ref": "A1:" +maxColV+rowCount //设置填充区域
+                                }
+                            )
+        })
+        var tmpWB = {
+          SheetNames:stNames, //保存的表标题
+          Sheets:sheets
+        };
+        var tmpDown = new Blob(
+          [
+            s2ab(
+              XLSX.write(
+                tmpWB,
+                {
+                  bookType: type == undefined ? "xlsx" : type,
+                  bookSST: false,
+                  type: "binary"
+                } //这里的数据是用来定义导出的格式类型
+              )
+            )
+          ],
+          {
+            type: ""
+          }
+        );
+        saveAs( tmpDown, "下载文件名称." + (wopts.bookType == "biff2" ? "xls" :wopts.bookType) );
+      } 
+
 export function getCharCol(n) {
       (s = ""), (m = 0);
       while (n > 0) {
@@ -232,6 +296,7 @@ export function s2ab(s) {
 
 		console.log(bulidData({title,titleCtn, th, data, footer ,titleStyles, titleCtnStyles, thStyles, dataStyles, footerStyles}));
 */ 
+ 
 export function bulidData(
     {
         title=[],
@@ -240,10 +305,10 @@ export function bulidData(
         data=[],
         footer=[],
 
-        titleCols=[],
-        titleCtnCols=[],
-		dataCols={},
-        footerCols=[],
+        titleMerges=[],
+        titleCtnMerges=[],
+		dataMerges={},
+        footerMerges=[],
 
 		titleStyles=[],
 		titleCtnStyles=[],
@@ -252,7 +317,7 @@ export function bulidData(
 		footerStyles=[]
     }={}
 ){
-    let headerCols=titleCols.concat(titleCtnCols);
+    let headerMerges=titleMerges.concat(titleCtnMerges);
 	let headerStyles=titleStyles.concat(titleCtnStyles);
 	let thd={};
 	Object.keys(data[0]).forEach((k,i)=>{
@@ -262,13 +327,18 @@ export function bulidData(
     let jsonData=title.concat(titleCtn).concat(data).concat(footer);
 	let merges=[];//合并
 	let rowsHeight=[];
-	let colsWidth=[];
+    let colsWidth=[];
 	let result=jsonData.map((item,index)=>{
 		let headerIndex=index-title.length-titleCtn.length;
 		let footerIndex=index-title.length-titleCtn.length-data.length;
-		let tempI=0;
-		let tempPreCols=0;
-		let colStyle=excelStyles[0];
+		let sc=0;//列开始位置,下标从0开始
+		let tempI=0;//元素列开始位置，与sc比较 取最大值
+        let tempPreCols=0;//数据开始位置
+        let tempCol=1;//默认列数1
+        let tempRow=1;//默认行数1
+        let colWidth=100;//默认每列的宽度
+        let colKeyWidth=[];//原数的所有列宽度
+		let colStyle=excelStyles[0];//列样式
 		if(headerIndex<0&&headerStyles[index]&&headerStyles[index]['hpt']){//header 
 			rowsHeight.push({"hpt":headerStyles[index]['hpt']});
 		}
@@ -282,16 +352,34 @@ export function bulidData(
 		if(footerIndex>=0&&footerStyles[index]&&footerStyles[index]['hpt']){//footer 
 			rowsHeight.push({"hpt":footerStyles[index]['hpt']});
 		}
-		return  Object.keys(item).map((k,i)=>{
 
+		let rowDatas=[];
+		Object.keys(item).forEach((k,i)=>{
+            colKeyWidth=[];
 			//header  
 			if(headerIndex<0){
+ 
 				tempI=tempI+tempPreCols;
-				if(headerCols[index]&&headerCols[index][k]){//所占列数
-					tempPreCols=headerCols[index][k];
-				}
+				if(headerMerges[index]&&headerMerges[index][k]){//所占列数
+					if(headerMerges[index][k]["c"]){
+                        tempPreCols=headerMerges[index][k]["c"];
+                        tempCol=headerMerges[index][k]["c"];
+					}else{
+                        tempPreCols=1;
+                        tempCol=1;
+                    }
+					if(headerMerges[index][k]["sc"]){
+						sc=headerMerges[index][k]["sc"];//有sc属性，则取其值
+					}
+					if(headerMerges[index][k]["r"]){
+						tempRow=headerMerges[index][k]["r"];
+					}
+				}else{
+                    tempPreCols=1;
+                    tempCol=1;
+                }
 				
-				if(headerStyles[index]&&headerStyles[index][k]){//数据样式
+				if(headerStyles[index]&&headerStyles[index][k]&&headerStyles[index][k]['styleNum']){//数据样式
 					colStyle=excelStyles[headerStyles[index][k]['styleNum']];
 				}
 				
@@ -299,43 +387,106 @@ export function bulidData(
 			}
 			//body
 			if(headerIndex>=0&&footerIndex<0){
+              
 				tempI=tempI+tempPreCols;
-				if(dataCols[k]){
-					tempPreCols=dataCols[k];
-				}
+				if(dataMerges[k]){
+					if(dataMerges[k]['c']){
+                        tempPreCols=dataMerges[k]['c'];
+                        tempCol=dataMerges[k]['c'];
+					}else{
+                        tempPreCols=1;
+                        tempCol=1;
+                    }
+					if(dataMerges[k]["sc"]){
+						sc=dataMerges[k]["sc"];//有sc属性，则取其值
+					}
+					if(dataMerges[k]["r"]){
+						tempRow=dataMerges[k]["r"];
+					}
+				}else{
+                    tempPreCols=1;
+                    tempCol=1;
+                }
 				
-				if(headerIndex==0&&thStyles[k]){
-					colStyle=excelStyles[thStyles[i]['styleNum']];
+				 
+				if(headerIndex==0){
+                    if(thStyles[i]&&thStyles[i]['styleNum']){
+                        colStyle=excelStyles[thStyles[i]['styleNum']];
+                    }
+                    if(dataStyles[k]&&dataStyles[k]['wpx']){
+                        colKeyWidth=dataStyles[k]['wpx'];
+                    }else{
+                        colKeyWidth.push(colWidth);
+                    }
 				}else if(dataStyles[k]){
-					colStyle=excelStyles[dataStyles[k]['styleNum']];
-					//excel 的宽度，应该是根据一个基本的行中的列来确定，这里以list 的列确定
-					colsWidth.push({"wpx":dataStyles[k]['wpx']});
-				}
+                    if(dataStyles[k]['styleNum']){
+                        colStyle=excelStyles[dataStyles[k]['styleNum']];
+                    }
+				}		
+				 
+
 			}
 			//footer  
 			if(footerIndex>=0){
 				tempI=tempI+tempPreCols;
-				if(footerCols[footerIndex]&&footerCols[footerIndex][k]){
-					tempPreCols=footerCols[footerIndex][k];
-				}
+				if(footerMerges[footerIndex]&&footerMerges[footerIndex][k]){
+
+					if(footerMerges[footerIndex][k]["c"]){
+                        tempPreCols=footerMerges[footerIndex][k]["c"];
+                        tempCol=footerMerges[footerIndex][k]["c"];
+					}else{
+                        tempPreCols=1;
+                        tempCol=1;
+                    }
+					if(footerMerges[footerIndex][k]["sc"]){
+						sc=footerMerges[footerIndex][k]["sc"];//有sc属性，则取其值
+					}
+					if(footerMerges[footerIndex][k]["r"]){
+						tempRow=footerMerges[footerIndex][k]["r"];
+					}
+				}else{
+                    tempPreCols=1;
+                    tempCol=1;
+                }
  
-				if(footerStyles[footerIndex]&&footerStyles[footerIndex][k]){
+				if(footerStyles[footerIndex]&&footerStyles[footerIndex][k]&&footerStyles[footerIndex][k]['styleNum']){
 					colStyle=excelStyles[footerStyles[footerIndex][k]['styleNum']];
 				}
 			}
-			let mergesObj={s:{c:0,r:0},e:{c:0,r:0}};
-			mergesObj.s.c=tempI;
-			mergesObj.e.c=tempI+(tempPreCols>0?tempPreCols-1:0);
-			mergesObj.s.r=index;
-			mergesObj.e.r=index;
-			merges.push(mergesObj);
+ 
+			tempI=tempI>sc?tempI:sc;//计算的值
+			
+			if(tempCol>1||tempRow>1){
+				let mergesObj={s:{c:0,r:0},e:{c:0,r:0}};
+				mergesObj.s.c=tempI;
+				mergesObj.s.r=index;
+				mergesObj.e.c=tempI+tempPreCols-1;
+				mergesObj.e.r=(tempRow==1?index:(index+tempRow));
+				merges.push(mergesObj);
+			}
 
-			return Object.assign({},{
-				value: item[k],
-                position: (tempI > 25 ? this.getCharCol(tempI) : String.fromCharCode(65 + tempI)) + (index + 1),
-				style:colStyle
-			});
+            for(var tabCol=0;tabCol<sc-tempI;tabCol++){
+               //excel 的宽度，应该是根据一个基本的行中的列来确定，这里以list 的列确定，其他没有设置的列的宽度都是默认值100
+               if(colKeyWidth.length>0&&colKeyWidth[tabCol]){
+                    colsWidth.push({"wpx":colKeyWidth[tabCol]});
+                }
+            }
+			for(var colN=0;colN<tempCol;colN++){
+               //excel 的宽度，应该是根据一个基本的行中的列来确定，这里以list 的列确定，其他没有设置的列的宽度都是默认值100
+                if(colKeyWidth.length>0&&colKeyWidth[colN]){
+                   colsWidth.push({"wpx":colKeyWidth[colN]});
+                }
+
+                let rcn=tempI+colN;
+				let colData={
+					value: colN==0?item[k]:"",
+					position: (rcn > 25 ? this.getCharCol(rcn) : String.fromCharCode(65 + rcn)) + (index + 1),
+					style:colStyle
+				};
+				rowDatas.push(colData);
+            }
 		});
+		return rowDatas;
 	});
 	console.log('列合并',merges);
 	console.log(result);
@@ -349,5 +500,7 @@ export function bulidData(
         }
     });
     console.log(resultData);
-    return {"resultData":resultData,"merges":merges,"rowsHeight":rowsHeight,"colsWidth":colsWidth};
+    return {"resultData":resultData,"merges":merges,"rowsHeight":rowsHeight,"colsWidth":colsWidth,"rowCount":result.length};
 }
+
+ 
