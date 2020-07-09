@@ -59,7 +59,7 @@ export default {
             
             let title=[{"title":"发布系统"}];
             let titleMerges=[{"title":{"c":6,"r":1}}];
-            let titleStyles=[{"title":{"styleNum":3,"wpx":180},"hpt":50}];
+            let titleStyles=[{"title":{"styleNum":3,"wpx":180},"hpx":150}];
 
 
             let titleCtn=[
@@ -71,8 +71,8 @@ export default {
         {"printerLabel":{"c":2,"r":1} ,"printTime":{"c":2,"r":1,"sc":4}}
 			];
             let titleCtnStyles=[
-              {"orgCodeLabel":{"styleNum":1,"wpx":180},"orgCode":{"styleNum":0,"wpx":180},"orgNameLabel":{"styleNum":1,"wpx":180},"orgName":{"styleNum":0,"wpx":180},"hpt":45},
-              {"printerLabel":{"styleNum":1,"wpx":180},"printer":{"styleNum":0,"wpx":180},"printTimeLabel":{"styleNum":1,"wpx":180},"printTime":{"styleNum":0,"wpx":180},"hpt":45}	
+              {"orgCodeLabel":{"styleNum":1,"wpx":180},"orgCode":{"styleNum":0,"wpx":180},"orgNameLabel":{"styleNum":1,"wpx":180},"orgName":{"styleNum":0,"wpx":180},"hpx":45},
+              {"printerLabel":{"styleNum":1,"wpx":180},"printer":{"styleNum":0,"wpx":180},"printTimeLabel":{"styleNum":1,"wpx":180},"printTime":{"styleNum":0,"wpx":180},"hpx":45}	
             ]
 
           
@@ -86,7 +86,7 @@ export default {
               {"author":"wangsm","date":"2020-02-02","copyRihgt":"浙江网新恩普软件有限公司"}
             ];
 			      let dataMerges={"author":{"c":2,"r":1},"copyRihgt":{"c":3,"r":1,"sc":3}};
-            let dataStyles={"author":{"styleNum":0,"wpx":[120,100]},"date":{"styleNum":0},"copyRihgt":{"styleNum":0,"wpx":[70,77,70]},"hpt":30}
+            let dataStyles={"author":{"styleNum":0,"wpx":[120,100]},"date":{"styleNum":0},"copyRihgt":{"styleNum":0,"wpx":[70,77,70]},"hpx":30}
           
 
 
@@ -97,11 +97,11 @@ export default {
               {"confirmPerson":{"c":2,"r":2,"sc":1},"confirmDate":{"c":2,"r":1,"sc":4}}
             ]
             let footerStyles=[
-              {"confirmPersonLabel":{"styleNum":1,"wpx":180},"confirmPerson":{"styleNum":0,"wpx":180},"confirmDateLabel":{"styleNum":1,"wpx":180},"confirmDate":{"styleNum":0,"wpx":180},"hpt":40}
+              {"confirmPersonLabel":{"styleNum":1,"wpx":180},"confirmPerson":{"styleNum":0,"wpx":180},"confirmDateLabel":{"styleNum":1,"wpx":180},"confirmDate":{"styleNum":0,"wpx":180},"hpx":40}
             ]
 
 let stNames=['发票','地址']
- downloadExl2({title,titleCtn, th, data, footer, titleMerges, titleCtnMerges, dataMerges, footerMerges,	titleStyles, titleCtnStyles, thStyles, dataStyles, footerStyles},{stNames});
+ downloadExl({title,titleCtn, th, data, footer, titleMerges, titleCtnMerges, dataMerges, footerMerges,	titleStyles, titleCtnStyles, thStyles, dataStyles, footerStyles},{stNames});
     }
   }
 }

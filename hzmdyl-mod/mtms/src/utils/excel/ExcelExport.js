@@ -166,7 +166,7 @@ export function downloadExl2(dataObj, type) {
         tmpdata["!merges"] = result.merges//合并单元格
         tmpdata["!cols"] =  result.colsWidth;//设置列宽
         tmpdata["!rows"] =  result.rowsHeight;//设置行高
-
+   
 
         let sheets={};
         stNames.forEach((itemSt,inSt)=>{
@@ -339,18 +339,18 @@ export function bulidData(
         let colWidth=100;//默认每列的宽度
         let colKeyWidth=[];//原数的所有列宽度
 		let colStyle=excelStyles[0];//列样式
-		if(headerIndex<0&&headerStyles[index]&&headerStyles[index]['hpt']){//header 
-			rowsHeight.push({"hpt":headerStyles[index]['hpt']});
+		if(headerIndex<0&&headerStyles[index]&&headerStyles[index]['hpx']){//header 
+			rowsHeight.push({"hpx":headerStyles[index]['hpx']});
 		}
 		if(headerIndex>=0&&footerIndex<0){//body
 				if(headerIndex==0&&thStyles.length-1>=0&&thStyles[thStyles.length-1]){
-					rowsHeight.push({"hpt":thStyles[thStyles.length-1]});
-				}else if(dataStyles['hpt']){
-					rowsHeight.push({"hpt":dataStyles['hpt']});
+					rowsHeight.push({"hpx":thStyles[thStyles.length-1]});
+				}else if(dataStyles['hpx']){
+					rowsHeight.push({"hpx":dataStyles['hpx']});
 				}
 		}		 
-		if(footerIndex>=0&&footerStyles[index]&&footerStyles[index]['hpt']){//footer 
-			rowsHeight.push({"hpt":footerStyles[index]['hpt']});
+		if(footerIndex>=0&&footerStyles[index]&&footerStyles[index]['hpx']){//footer 
+			rowsHeight.push({"hpx":footerStyles[index]['hpx']});
 		}
 
 		let rowDatas=[];

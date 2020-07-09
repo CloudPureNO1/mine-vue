@@ -182,7 +182,7 @@ export default {
               v: item.value
             }  
         });
-debugger
+ 
       var outputPos = Object.keys(tmpdata); //设置区域,比如表格从A1到D10
       tmpdata["!merges"] = [
         {
@@ -329,10 +329,10 @@ debugger
       ];
       tmpdata["!rows"] = [
         //设置行高度
-        { hpt: 50 }, //序号
-        { hpt: 150 }, //发票抬头
-        { hpt: 100 }, //开票内容
-        { hpt: 100 } //发票金额
+        { hpx: 450 }, //序号
+        { hpx: 100 }, //发票抬头
+        { hpx: 400 }, //开票内容
+        { hpx: 100 } //发票金额
       ];
       var tmpWB = {
         SheetNames: ["发票申请单"], //保存的表标题
