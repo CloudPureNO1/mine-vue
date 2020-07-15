@@ -164,6 +164,14 @@ export default {
             console.log('>>>>>deleteGroupRoles:',groupId,roleId)
         },
         handleRowClick(row, column, event){
+             
+            this.userList.forEach((item,index)=>{
+                //console.log('.......',item,row,column);
+                //console.log('.....',row.userId,item.userId,row.userId==item.userId);
+                ///if(item['userId']==row['userId']){
+                    this.$refs['userTable'].toggleRowExpansion(item,false);
+                //}
+            });
             this.$refs['userTable'].toggleRowExpansion(row);
         } 
     }

@@ -170,6 +170,9 @@ export default {
             console.log('>>>>>deleteGroupRoles:',groupId,roleId)
         },
         handleRowClick(row, column, event){
+            this.groupList.forEach((item)=>{
+                this.$refs['groupTable'].toggleRowExpansion(item,false);
+            });
             this.$refs['groupTable'].toggleRowExpansion(row);
         } 
       
