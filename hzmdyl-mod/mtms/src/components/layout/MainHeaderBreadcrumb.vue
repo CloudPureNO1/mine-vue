@@ -1,10 +1,12 @@
 <template>
-    <div class="box" style="height:26px;">
-        <el-breadcrumb separator-class="el-icon-arrow-right" class="item">
+    <div >
+        <el-breadcrumb separator-class="el-icon-arrow-right" >
             <transition-group name="breadcrumb">
                 <el-breadcrumb-item v-for="item in levelList" :key="item.name">
-                    <a v-if="isLeafPath(item)" @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
-                    <span v-else>{{item.meta.title }}</span>
+                    <a v-if="isLeafPath(item)" @click.prevent="handleLink(item)">
+                        <span :class="breadCrumbSize">{{ item.meta.title }}</span>
+                    </a>
+                    <span v-else  :class="breadCrumbSize">{{item.meta.title }}</span>
                 </el-breadcrumb-item>
             </transition-group>
         </el-breadcrumb>
@@ -12,6 +14,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
     export default {
         name: 'Navbar',
         data() {
@@ -26,6 +29,14 @@
         },
         created(){
             this.getData()
+        },
+        computed:{
+            ...mapState({
+                sizeType:state=>state.layout.sizeType
+            }),
+            breadCrumbSize(){
+                return 'bread-crumb-cls-'+this.sizeType
+            }
         },
         methods:{
             getData() {

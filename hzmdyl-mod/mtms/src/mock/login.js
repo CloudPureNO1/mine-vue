@@ -37,10 +37,10 @@ req;: Object
 
 let tokenResult=function(req){
     let result={};
-    console.log('>>>>>请求类型：'+req.type);
-    console.log('>>>>>请求参数：'+JSON.parse(req.body));
-    console.log('>>>>>请求clientId：'+JSON.parse(req.body).clientId);
-    console.log('>>>>>请求secretKey：'+JSON.parse(req.body).secretKey);
+    // console.log('>>>>>请求类型：'+req.type);
+    // console.log('>>>>>请求参数：'+JSON.parse(req.body));
+    // console.log('>>>>>请求clientId：'+JSON.parse(req.body).clientId);
+    // console.log('>>>>>请求secretKey：'+JSON.parse(req.body).secretKey);
     let type=req.type;
     switch(type){
         case 'GET':

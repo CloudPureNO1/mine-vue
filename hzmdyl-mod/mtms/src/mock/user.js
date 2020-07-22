@@ -116,7 +116,7 @@ let saveUser=(req)=>{
        // debugger;
         let userList=[];
         let param=JSON.parse(req.body);
-        console.log(param);
+        //console.log(param);
         user0.push(param);
         total=total+1;
         result.msg="成功";
@@ -143,7 +143,7 @@ let deleteUser=(req)=>{
         let userList=[];
         let param=JSON.parse(req.body);
         debugger
-        console.log(param);
+       // console.log(param);
         user0.pop(param);
         total=total-1;
         result.msg="成功";
@@ -168,7 +168,7 @@ let updateUser=(req)=>{
     if(req.body){
        // debugger;
         let param=JSON.parse(req.body);
-        console.log(param);
+        //console.log(param);
         user1=param;
         result.msg="成功";
     }

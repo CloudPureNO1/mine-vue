@@ -1,0 +1,21 @@
+.el-table--mini td, .el-table--mini th {
+    padding: 0;
+}
+.el-table--mini{
+    font-size:12px;
+}
+.el-button--mini.is-circle {
+    padding: 7px;
+}
+
+.el-button--mini, .el-button--mini.is-round {
+    padding: 7px 15px;
+}
+.el-button--mini {
+    font-size: 12px;
+    border-radius: 3px;
+}
+.el-card__body {
+    padding: 2px;
+}
+ 

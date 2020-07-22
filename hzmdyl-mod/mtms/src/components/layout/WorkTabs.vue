@@ -11,13 +11,13 @@
 -->
 <div class="tab-main"  >
 <el-tabs v-model="activeName" type="border-card" closable @tab-remove="removeTab" @tab-click="chooseTab">
-    <el-tab-pane label="首页" name="Home" :closable="false">
-        <mtms-home></mtms-home>
-    </el-tab-pane>
-    <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.label" :name="item.name" :closable="item.closable" :disabled="item.disabled">
-        <!--通过component  接入自定义组件，如果item.content 为welcome 则引入<welcome></welcome>组件-->
-        <component :is="item.component"></component>
-    </el-tab-pane>
+        <el-tab-pane label="首页" name="Home" :closable="false">
+            <mtms-home></mtms-home>
+        </el-tab-pane>
+        <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.label" :name="item.name" :closable="item.closable" :disabled="item.disabled">
+            <!--通过component  接入自定义组件，如果item.content 为welcome 则引入<welcome></welcome>组件-->
+            <component :is="item.component"></component>
+        </el-tab-pane>
 </el-tabs>
 </div>
 </template>
@@ -169,4 +169,13 @@ export default {
  .tab-main>.el-tab-pane{
      height: 100%;
  }
+
+
+ .component-fade-enter-active, .component-fade-leave-active {
+  transition: opacity .3s ease;
+}
+.component-fade-enter, .component-fade-leave-to
+/* .component-fade-leave-active for below version 2.1.8 */ {
+  opacity: 0;
+}
 </style>

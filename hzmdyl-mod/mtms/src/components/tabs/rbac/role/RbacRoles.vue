@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="rbac-rols-main">
       <el-row>
         <el-col :span="24">
           <el-card>
-            <el-table :data="roleList" :max-height="maxHeight">
+            <el-table :data="roleList" :max-height="maxHeight"  stripe :size="sizeType">
                 <el-table-column label="序号" type="index" fixed="left"></el-table-column>
                 <el-table-column label="角色ID" prop="roleId" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
                 <el-table-column label="角色名称" prop="roleName" :align="align" :show-overflow-tooltip="showOverflowTooltip"></el-table-column>
@@ -45,7 +45,6 @@
 
       <!--抽屉-->
       <el-drawer
-        
         :visible.sync="drawer"
         direction="rtl"
         size="25%"
@@ -96,7 +95,8 @@ export default {
       total:state=>state.role.total,
       pageSize:state=>state.role.pageSize,
       currentPage:state=>state.role.currentPage,
-      tabContentHeight:state=>state.layout.tabContentHeight
+      tabContentHeight:state=>state.layout.tabContentHeight,
+      sizeType:state=>state.layout.sizeType
     }),
     maxHeight(){
         return this.tabContentHeight;
@@ -112,6 +112,7 @@ export default {
           setPageSize:'role/setPageSize',
           setCurrentPage:'role/setCurrentPage'
         }),
+        
         saveRoleResources(){
             //(leafOnly, includeHalfChecked) 接收两个 boolean 类型的参数，1. 是否只是叶子节点，默认值为 false 2. 是否包含半选节点，默认值为 false
             //this.$refs['roleResourceTree'].getCheckedNodes(false,false);
@@ -124,7 +125,7 @@ export default {
                     this.drawer=false;
                 }
             });
-            console.log('checkedKeys:>>>>>',checkedKeys);
+            //console.log('checkedKeys:>>>>>',checkedKeys);
         },
         formatRoleTypes(row, column){
             
@@ -182,7 +183,7 @@ export default {
 }
 </script>
  <style>
- .el-drawer__header {
+  .rbac-rols-main .el-drawer__header {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -198,7 +199,7 @@ export default {
   :focus { /**祛除抽屉打开时的边框 */
     outline: 0;
   }
-  .drwaer-title-cls{
+  .rbac-rols-main .drwaer-title-cls{
     color: #3e89e6;
     font-size: 1.15rem;
     font-weight: 400;

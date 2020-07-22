@@ -131,7 +131,7 @@ let saveGroup=(req)=>{
     if(req.body){
         let groupList=[];
         let param=JSON.parse(req.body);
-        console.log(param);
+        //console.log(param);
         group0.push(param);
         total=total+1;
         result.msg="成功";
@@ -157,7 +157,7 @@ let deleteGroup=(req)=>{
        // debugger;
         let groupList=[];
         let param=JSON.parse(req.body);
-        console.log(param);
+        ///console.log(param);
         group0.pop(param);
         total=total-1;
         result.msg="成功";
@@ -182,7 +182,7 @@ let updateGroup=(req)=>{
     if(req.body){
        // debugger;
         let param=JSON.parse(req.body);
-        console.log(param);
+        //log(param);
         group1=param;
         result.msg="成功";
     }
@@ -190,3 +190,34 @@ let updateGroup=(req)=>{
     return result;
 }
 Mockjs.mock(/\/mtms\/api\/updateGroup/,updateGroup); 
+
+
+
+let loadUserGroups=(req)=>{
+    //debugger;
+    let result={};
+    result.code=0;
+    result.body={}
+    let type=req.type;
+    if(type!='POST'){
+        result.code=-9;
+        result.msg='请使用POST请求';
+        return result;
+    }
+    if(req.body){
+        //debugger;
+        let groupList=[];
+        let param=JSON.parse(req.body);
+        if(param.dType=='1'){//查询用户没有参加的用户组
+            groupList.push(group1);
+            groupList.push(group2);
+        }else{//查询用户所在的用户组
+            groupList.push(group0);
+        }
+        result.body.data=groupList; 
+    }
+
+    return result;
+}
+
+Mockjs.mock(/\/mtms\/api\/loadUserGroups/,loadUserGroups);

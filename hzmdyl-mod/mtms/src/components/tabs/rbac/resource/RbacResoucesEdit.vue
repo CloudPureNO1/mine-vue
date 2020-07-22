@@ -5,10 +5,10 @@
           <el-col :span="24">
              <div class="top-bar">
                 <el-card>
-                    <el-button type="primary" icon="el-icon-plus" size="small" @click="addResource">添加</el-button>
+                    <el-button type="primary" icon="el-icon-plus" :size="sizeType" @click="addResource">添加</el-button>
                    <!-- <el-button type="warning" icon="el-icon-edit" size="small" @click="editResource">编辑</el-button>-->
-                    <el-button type="success" icon="el-icon-finished" size="small" @click="addOrEditResource">保存</el-button>
-                    <el-button type="danger" icon="el-icon-delete" size="small" @click="deleteResource" >删除</el-button>
+                    <el-button type="success" icon="el-icon-finished" :size="sizeType" @click="addOrEditResource">保存</el-button>
+                    <el-button type="danger" icon="el-icon-delete" :size="sizeType" @click="deleteResource" >删除</el-button>
                 </el-card>
              </div>
           </el-col>
@@ -16,7 +16,7 @@
         <el-row>
           <el-col :span="24">
                 <el-card>
-                    <el-form :model="resourceFormData" :size="size" :label-width="labelWidth" :label-position="labelPosition">
+                    <el-form :model="resourceFormData" :size="sizeType" :label-width="labelWidth" :label-position="labelPosition">
                         <el-row>
                             <el-col :span="22" :offset="1">
                                 <el-form-item label="父资源" prop="parentResourceName">
@@ -151,7 +151,8 @@ export default {
     },
     computed:{
         ...mapState({
-            nodeData:state=>state.resource.nodeData
+            nodeData:state=>state.resource.nodeData,
+            sizeType:state=>state.layout.sizeType
         }) 
     },
     methods:{

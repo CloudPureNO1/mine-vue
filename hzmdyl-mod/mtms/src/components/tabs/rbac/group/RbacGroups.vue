@@ -1,34 +1,32 @@
 <template>
-    <div>
+    <div class="rbac-group-main">
       <el-row>
         <el-col :span="24">
           <el-card>
-            <el-table :data="groupList" :max-height="maxHeight" @row-click="handleRowClick" ref="groupTable" >
+            <el-table :data="groupList" :max-height="maxHeight" @row-click="handleRowClick" stripe  :size="sizeType" ref="groupTable" >
                 <el-table-column type="expand">
                     <template slot-scope="props">
-                        <el-card>
-                           <div slot="header" >
-                                <span style="font-size: 1.25rem; color: #909399; font-weight: 600;">拥有的角色</span>
-                                <el-button style="float: right; padding: 3px 0" type="text" icon="el-icon-plus" @click="addGroupRoles(props.row.groupId)">添加角色</el-button>
-                            </div>
-                            <div >
-                                <el-table :data="props.row.roles" fit>
-                                    <el-table-column label="序号" type="index" fixed="left"  align="center"></el-table-column>
-                                    <el-table-column label="角色ID" prop="roleId"  align="center"></el-table-column>
-                                    <el-table-column label="角色名称" prop="roleName"   align="center"></el-table-column>
-                                    <el-table-column label=""  align="right">
-                                        <template slot="header" slot-scope="scope">
-                                            <span>
-                                                <el-button  type="text" icon="el-icon-delete" @click="deleteAllRoles(props.row.groupId)">清空角色</el-button>
-                                            </span>
+                                <el-table :data="props.row.roles"  :size="sizeType">
+                                    <el-table-column label="拥有的角色">
+                                        <template slot="header">
+                                            <span class="sub-tb-title">所属的用户组</span>
+                                             <el-button class="right-text-btn" type="text" :size="sizeType" icon="el-icon-plus" @click="addGroupRoles(props.row)">添加角色</el-button>
                                         </template>
-                                        <template slot-scope="scope">
-                                            <el-button size="mini" circle icon="el-icon-minus" type="danger" @click="deleteGroupRoles(props.row.groupId,scope.row.roleId)"></el-button>
-                                        </template>
+                                        <el-table-column label="序号" type="index" fixed="left"  align="center"></el-table-column>
+                                        <el-table-column label="角色ID" prop="roleId"  align="center"></el-table-column>
+                                        <el-table-column label="角色名称" prop="roleName"   align="center"></el-table-column>
+                                        <el-table-column label=""  align="center">
+                                            <template slot="header" slot-scope="scope">
+                                                <span>
+                                                    <el-button :size="sizeType"  type="text" icon="el-icon-delete" @click="deleteAllRoles(props.row.groupId)">清空角色</el-button>
+                                                </span>
+                                            </template>
+                                            <template slot-scope="scope">
+                                                <el-button :size="sizeType"   icon="el-icon-minus" type="text" @click="deleteGroupRoles(props.row.groupId,scope.row.roleId)">删除角色</el-button>
+                                            </template>
+                                        </el-table-column>
                                     </el-table-column>
                                 </el-table>
-                            </div>
-                        </el-card>
                     </template>
                 </el-table-column>
                 <el-table-column label="序号" type="index" fixed="left"></el-table-column>
@@ -43,13 +41,13 @@
                     <template slot="header" slot-scope="scope">
                        <!-- <span>操作&nbsp;&nbsp;</span> -->
                         <span>
-                            <el-button size="mini" round icon="el-icon-plus" type="primary" @click="handleAdd">新增</el-button>
+                            <el-button :size="sizeType" round icon="el-icon-plus" type="primary" @click="handleAdd">新增</el-button>
                         </span>
                     </template>
                     <template slot-scope="scope">
                         <!--<el-button size="mini" circle icon="el-icon-view" @click="handleClick(scope.$index,scope.row)"></el-button>-->
-                        <el-button size="mini" circle icon="el-icon-edit" type="primary" @click="handleEdit(scope.$index, scope.row)"></el-button>
-                        <el-button size="mini" circle icon="el-icon-delete" type="danger" @click="handleDelete(scope.$index, scope.row)"></el-button>
+                        <el-button :size="sizeType" circle  icon="el-icon-edit" type="primary" @click="handleEdit(scope.$index, scope.row)"></el-button>
+                        <el-button :size="sizeType" circle icon="el-icon-delete" type="danger" @click="handleDelete(scope.$index, scope.row)"></el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -69,18 +67,42 @@
           </el-card>
         </el-col>
       </el-row>
+
+
+                <!--抽屉-->
+      <el-drawer
+        :visible.sync="drawer"
+        direction="rtl"
+        size="30%"
+        :show-close="false"
+        :before-close="handleClose">
+            <slot name="title">
+                <span class="drwaer-title-cls">
+                    配置<i class="el-icon-arrow-right"></i>{{currentGroupName}}<i class="el-icon-arrow-right"></i>用户组
+                </span>
+                <el-button type="primary" :size="sizeType" style="float:right;margin-right:10px;" @click="saveGroupRoles">保存</el-button>
+            </slot>
+           <group-role-tb  ref="groupRoleTbP" :groupId="currentGroupId"></group-role-tb>
+        </el-drawer>
     </div>
 </template>
 
 <script>
+import GroupRoleTb from './GroupRoleTb'
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import groupApi from '@/api/rbac/group.js'
 import commApi from '@/api/comm.js'
 import axios from 'axios'
 import role from '@/mock/role.js'
 export default {
+    components:{
+        'group-role-tb':GroupRoleTb
+    },
   data(){
     return{
+            drawer:false,
+            currentGroupName:'',
+            currentGroupId:'',
            groupRoles:[],
             showOverflowTooltip: true,
             fixed: 'right',
@@ -103,7 +125,8 @@ export default {
       total:state=>state.group.total,
       pageSize:state=>state.group.pageSize,
       currentPage:state=>state.group.currentPage,
-      tabContentHeight:state=>state.layout.tabContentHeight
+      tabContentHeight:state=>state.layout.tabContentHeight,
+      sizeType:state=>state.layout.sizeType
     }),
     maxHeight(){
         return this.tabContentHeight;
@@ -158,27 +181,91 @@ export default {
         },
  
         //添加角色
-        addGroupRoles(groupId){
-            console.log('>>>>>addGroupRoles:',groupId)
+        addGroupRoles(row){
+            //console.log('>>>>>addGroupRoles:',groupId)
+            this.drawer=true;
+            this.currentGroupId=row.groupId;
+            this.currentGroupName=row.groupName;
         },
         //清空角色
         deleteAllRoles(groupId){
-            console.log('>>>>>deleteAllRoles:',groupId)
+            //console.log('>>>>>deleteAllRoles:',groupId)
         },
         //删除角色
         deleteGroupRoles(groupId,roleId){
-            console.log('>>>>>deleteGroupRoles:',groupId,roleId)
+            //console.log('>>>删除角色>>deleteGroupRoles:',groupId,roleId)
         },
         handleRowClick(row, column, event){
-            this.groupList.forEach((item)=>{
-                this.$refs['groupTable'].toggleRowExpansion(item,false);
-            });
+            // this.groupList.forEach((item)=>{
+            //     this.$refs['groupTable'].toggleRowExpansion(item,false);
+            // });
             this.$refs['groupTable'].toggleRowExpansion(row);
-        } 
+        } ,
+        handleClose(done){//阻止关闭
+            // console.log('<<<<<<<<<<<<<<<<<<<<<<>>>>>beforCloseDrawer')
+            // this.drawer=false;//关闭
+            this.$confirm('没有变动，是否退出?' , {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning',
+                center: false
+                 }
+            ).then(() => {
+                done();
+            }).catch(() => {
+                
+            });
+        },
+         saveGroupRoles(){
+            let selectionRows=this.$refs["groupRoleTbP"].$refs["groupRoleTb"].selection;
+            //console.log('选中：',selectionRows);
+            this.$alert('成功',{
+                type:'success',
+                confirmButtonText: '确定',
+                callback:(action)=>{
+                    //console.log('...action...',action);
+                    this.drawer=false;
+                }
+            });
+        },
       
     }
 }
 </script>
-
+<style scoped>
+.sub-tb-title{
+    font-size: 1rem; 
+    color: #909399; 
+    font-weight: 600;
+}
+.right-text-btn{
+    float: right; 
+    padding: 3px 15px;
+}
+</style>
  
- 
+ <style>
+  .rbac-group-main .el-drawer__header {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #3e89e6;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 0;
+    padding: 20px 20px 0;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+  :focus { /**祛除抽屉打开时的边框 */
+    outline: 0;
+  }
+  .rbac-group-main .drwaer-title-cls{
+    color: #3e89e6;
+    font-size: 1.15rem;
+    font-weight: 400;
+    float: left;
+    padding: 5px 0 15px 15px;
+  }
+</style>

@@ -16,15 +16,13 @@ export default {
              return false;
         };
         Vue.prototype.$isEmptyArray=(ary)=>{
-            debugger;
             if(!ary||!Array.isArray(ary)||ary.length<1){
                 return true;
             }
             return false;
         }
         Vue.prototype.$sayHello=(msg)=>{
-            console.log('>>>>>>>>>>>>>>>>'+msg);
+           // console.log('>>>>>>>>>>>>>>>>'+msg);
         } 
     }
-    
 }

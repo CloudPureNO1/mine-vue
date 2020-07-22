@@ -41,8 +41,8 @@ export default {
   },
   methods:{
       loadTreeNode(node, resolve){
-            console.log(">>>>>>>>>>start>>>>>>>>>>>>");
-            console.log(">>>>node.level="+node.level);
+            //console.log(">>>>>>>>>>start>>>>>>>>>>>>");
+            //console.log(">>>>node.level="+node.level);
              
             if(node.level==0){//根root
                 this.params.nodeId=null;
@@ -84,7 +84,7 @@ export default {
                  }
             }
  
-            console.log('>>>>>>>>>>>>end>>>>>>>>>>>>')
+            //console.log('>>>>>>>>>>>>end>>>>>>>>>>>>')
       } 
   }
 };

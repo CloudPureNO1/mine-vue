@@ -8,13 +8,13 @@ let $loadGroups=(vue,param)=>{
         if(res.data.code==0){
             vue.$store.dispatch('group/setGroupList',res.data.body);
         }else{
-            console.log(res);
+            //console.log(res);
             vue.$alert(res.data.msg,'温馨提示',{type:'warning'});
             return;
         }
     })
     .catch(err=>{
-        console.log('接口调用异常：' + err);
+        //console.log('接口调用异常：' + err);
         vue.$alert(err,'温馨提示',{type:'warning'});
         return;
     })
@@ -42,7 +42,7 @@ let $saveGroup = function (vue, param) {
         }
       })
       .catch(err => {
-        console.log('接口调用异常：' + err);
+        //console.log('接口调用异常：' + err);
         vue.$alert(err, "温馨提示", {
           type: 'error'
         });
@@ -70,7 +70,7 @@ let $saveGroup = function (vue, param) {
         }
       })
       .catch(err => {
-        console.log('接口调用异常：' + err);
+        //console.log('接口调用异常：' + err);
         vue.$alert(err, "温馨提示", {
           type: 'error'
         });
@@ -99,7 +99,7 @@ let $deleteGroup=function(vue,param){
       }
     })
     .catch(err=>{
-      console.log('接口调用异常：' + err);
+      //console.log('接口调用异常：' + err);
       vue.$alert(err,"温馨提示",{type:'error'});
     })
   }

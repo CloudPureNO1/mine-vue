@@ -488,10 +488,10 @@ export function bulidData(
 		});
 		return rowDatas;
 	});
-	console.log('列合并',merges);
-	console.log(result);
+	//console.log('列合并',merges);
+	//console.log(result);
 	let reduceResult=result.reduce((prev, next) => prev.concat(next));
-	console.log(reduceResult);
+//	console.log(reduceResult);
 	let resultData=[];
 	reduceResult.forEach((item, i) =>{
         resultData[item.position] = {
@@ -499,7 +499,7 @@ export function bulidData(
 		   s: item.style
         }
     });
-    console.log(resultData);
+   // console.log(resultData);
     return {"resultData":resultData,"merges":merges,"rowsHeight":rowsHeight,"colsWidth":colsWidth,"rowCount":result.length};
 }
 

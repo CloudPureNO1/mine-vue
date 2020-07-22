@@ -78,10 +78,10 @@ let saveRole=(req)=>{
         return result;
     }
     if(req.body){
-        debugger;
+       // debugger;
         let roleList=[];
         let param=JSON.parse(req.body);
-        console.log(param);
+       // console.log(param);
         role0.push(param);
         total=total+1;
         result.msg="成功";
@@ -107,7 +107,7 @@ let deleteRole=(req)=>{
        // debugger;
         let roleList=[];
         let param=JSON.parse(req.body);
-        console.log(param);
+        //console.log(param);
         role0.pop(param);
         total=total-1;
         result.msg="成功";
@@ -132,7 +132,7 @@ let updateRole=(req)=>{
     if(req.body){
        // debugger;
         let param=JSON.parse(req.body);
-        console.log(param);
+        //log(param);
         role1=param;
         result.msg="成功";
     }
@@ -164,3 +164,34 @@ let getGroupRoles=(req)=>{
     return result;
 }
 Mockjs.mock(/\/mtms\/api\/getGroupRoles/,getGroupRoles); 
+
+
+let loadGroupRoles=(req)=>{
+    //debugger;
+    let result={};
+    result.code=0;
+    result.body={}
+    let type=req.type;
+    if(type!='POST'){
+        result.code=-9;
+        result.msg='请使用POST请求';
+        return result;
+    }
+    if(req.body){
+        //debugger;
+        let roleList=[];
+        let param=JSON.parse(req.body);
+        //param.groupId;
+        if(param.dType=='1'){//查询用户组没有的角色
+            roleList.push(role1);
+            roleList.push(role2);
+        }else{//查询用户组已经拥有的角色
+            roleList.push(roleDelete);
+        }
+ 
+        result.body.data=roleList;
+    }
+    return result;
+}
+
+Mockjs.mock(/\/mtms\/api\/loadGroupRoles/,loadGroupRoles);

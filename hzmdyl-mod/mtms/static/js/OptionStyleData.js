@@ -196,7 +196,7 @@ function getVisualMapStyle(data,conf) {
 		}
 		bubbleOption.push(markOpt);
 	}
-	//console.log(bubbleOption);
+	console.log(bubbleOption);
     return bubbleOption;
 }
 

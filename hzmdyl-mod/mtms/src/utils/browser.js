@@ -46,3 +46,44 @@
       }
       return false;
     }
+
+    export function toggleFullScreen(isFullScreen){
+      let element = document.documentElement;
+      // 判断是否已经是全屏
+      // 如果是全屏，退出
+      if (isFullScreen) {
+          if (document.exitFullscreen) {
+              document.exitFullscreen();
+          } else if (document.webkitCancelFullScreen) {
+              document.webkitCancelFullScreen();
+          } else if (document.mozCancelFullScreen) {
+              document.mozCancelFullScreen();
+          } else if (document.msExitFullscreen) {
+              document.msExitFullscreen();
+          }else if (typeof window.ActiveXObject !== "undefined") {
+              //for IE11一下，这里和fullScreen相同，模拟按下F11键退出全屏
+              var wscript = new ActiveXObject("WScript.Shell");
+              if (wscript != null) {
+                  wscript.SendKeys("{F11}");
+              }
+          }
+      } else {    // 否则，进入全屏
+    
+          if (element.requestFullscreen) {
+              element.requestFullscreen();
+          } else if (element.webkitRequestFullScreen) {
+              element.webkitRequestFullScreen();
+          } else if (element.mozRequestFullScreen) {
+              element.mozRequestFullScreen();
+          } else if (element.msRequestFullscreen) {
+              // IE11
+              element.msRequestFullscreen();
+          }else if (typeof window.ActiveXObject !== "undefined") {
+              //for IE11一下，这里和fullScreen相同，模拟按下F11键退出全屏
+              var wscript = new ActiveXObject("WScript.Shell");
+              if (wscript != null) {
+                  wscript.SendKeys("{F11}");
+              }
+          }
+      }
+  }

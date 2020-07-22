@@ -55,10 +55,10 @@ export default {
     },
   
     mounted(){
-      console.log('&&&&&&&&&&&&&&',this.pathData);
+      //console.log('&&&&&&&&&&&&&&',this.pathData);
       let myComponent = resolve => require([`@/components/tabs/echarts/echartsIn/${this.componentName}`], resolve);
-      console.log('>>>>>>>>>>>>>>>>>.');
-      console.log(myComponent);
+      //console.log('>>>>>>>>>>>>>>>>>.');
+      //console.log(myComponent);
       let obj={
         component:myComponent
       }

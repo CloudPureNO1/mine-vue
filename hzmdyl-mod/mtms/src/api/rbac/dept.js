@@ -14,7 +14,7 @@ let $loadDeptList=(vue)=>{
        }
     })
     .catch(err=>{
-        console.log('接口调用异常：' + err);
+       // console.log('接口调用异常：' + err);
         vue.$alert(err,"温馨提示",{type:'error'});
     })
 }

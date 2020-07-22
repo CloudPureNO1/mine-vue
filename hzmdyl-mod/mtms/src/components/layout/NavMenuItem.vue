@@ -3,8 +3,10 @@
         <fragment v-for="item in menuDatas" :key="item.nodeId">
             <el-menu-item v-if="item.isLeaf" :index="item.url">
                 <template slot="title">
-                    <i :class="item.icon"></i>
-                    <span>{{item.nodeTitle}}</span>
+                    <span class="nav-menu-cls">
+                        <i :class="item.icon"></i>
+                        <span>{{item.nodeTitle}}</span>
+                    </span>
                 </template>
             </el-menu-item>
             <el-submenu  v-else :index="item.nodeId">
@@ -40,7 +42,7 @@ export default {
           if(chd){
               len=chd.length;
           }
-          console.log('>>>>>>>>>>>'+(len>0));
+          //console.log('>>>>>>>>>>>'+(len>0));
         return  len>0
       }
     }
@@ -49,11 +51,17 @@ export default {
         //应用类型
         menuDatas:{
             handler(newVal, oldVal) {
-                console.info('改变后的值：');
-                console.info(newVal);
+                //console.info('改变后的值：');
+                //console.info(newVal);
             },
             deep: true
         } 
     }
 }
 </script>
+
+<style >
+.nav-menu-cls{
+    font-size:8px;
+}
+</style>

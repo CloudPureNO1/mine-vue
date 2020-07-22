@@ -175,7 +175,7 @@ export default {
             balanceId.setOption(option);
             window.addEventListener('resize',function(){
                 balanceId.resize();
-                console.log('****************************************');
+                ///console.log('****************************************');
                 that.drawSvg();
             })
         }

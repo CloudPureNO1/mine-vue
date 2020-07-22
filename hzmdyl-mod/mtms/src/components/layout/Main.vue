@@ -6,7 +6,7 @@
         </el-aside>
         <el-main class="cls-main">
             <el-container class="cls-main-container">
-                <el-header class="header" ref="headerRef" style="line-height:auto;">
+                <el-header class="header" ref="headerRef" >
                     <mtms-header></mtms-header>
                 </el-header>
                 <el-main class="middler">
@@ -44,9 +44,7 @@ export default {
     },
     created() {
         this.$nextTick(function () {
-            // Code that will run only after the
-            // entire view has been rendered
-            this.avatarSize = Number.parseFloat(this.$refs.headerRef.height.replace('px', '')) - 5;
+           this.$refs.headerRef.$el.removeAttribute('style');
         })
     }
 
@@ -132,20 +130,21 @@ export default {
 }
 
 .cls-main-container .header {
-    height: 10%;
+   // height: 10%;
+    height: auto;
     padding: 0px;
     box-shadow: 0 1px 4px #5b5e6126;
     background-color: #f5f7fa;
 }
 
 .cls-main-container .middler {
-    height: 95%;
+    min-height: 90%;
     //    border-bottom: solid 1px #dfffff;
     //    border-top: solid 1px #dfffff;
     padding: 1px;
 }
 
- .cls-main-container .el-header ,.cls-main-container .el-footer{
+ .cls-main-container  .cls-main-container .el-footer{
         line-height: 26px;
  }
  

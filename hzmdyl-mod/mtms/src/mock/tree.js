@@ -6,9 +6,9 @@ let getTreeData=function(req){
     result.code='0';
     result.data=[];
     
-    console.log('>>>>>请求类型：'+req.type);
-    console.log('>>>>>请求参数：'+JSON.parse(req.body));
-    console.log('>>>>>请求clientId：'+JSON.parse(req.body).nodeId);
+    // console.log('>>>>>请求类型：'+req.type);
+    // console.log('>>>>>请求参数：'+JSON.parse(req.body));
+    // console.log('>>>>>请求clientId：'+JSON.parse(req.body).nodeId);
     let type=req.type;
     switch(type){
         case 'GET':

@@ -119,14 +119,14 @@ function s2ab(s) {
 
 export function export_table_to_excel(id) {
   var theTable = document.getElementById(id);
-  console.log('a')
+  //console.log('a')
   var oo = generateArray(theTable);
   var ranges = oo[1];
 
   /* original data */
   var data = oo[0];
   var ws_name = "SheetJS";
-  console.log(data);
+  //console.log(data);
 
   var wb = new Workbook(),
     ws = sheet_from_array_of_arrays(data);
@@ -151,7 +151,7 @@ export function export_table_to_excel(id) {
 }
 
 function formatJson(jsonData) {
-  console.log(jsonData)
+  //console.log(jsonData)
 }
 export function export_json_to_excel(th, jsonData, defaultTitle) {
 
