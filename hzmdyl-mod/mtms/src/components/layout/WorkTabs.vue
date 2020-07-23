@@ -15,8 +15,10 @@
             <mtms-home></mtms-home>
         </el-tab-pane>
         <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.label" :name="item.name" :closable="item.closable" :disabled="item.disabled">
+        <transition name="tabCt-transform">
             <!--通过component  接入自定义组件，如果item.content 为welcome 则引入<welcome></welcome>组件-->
             <component :is="item.component"></component>
+        </transition>
         </el-tab-pane>
 </el-tabs>
 </div>

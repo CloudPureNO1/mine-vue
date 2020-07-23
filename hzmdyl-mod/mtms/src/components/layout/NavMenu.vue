@@ -2,6 +2,7 @@
    <div class="main">
        <el-row>
            <el-col :span="span">
+              <transition name="nav-transform">
                <el-menu 
                 :collapse="isCollapse"
                 background-color="#314358"
@@ -11,8 +12,11 @@
                 @open="handleOpen"
                 @select="handleSelect"
                 > 
+                 
                    <nav-menu-item :menuDatas="navDatas"></nav-menu-item>  
+                   
                </el-menu>
+              </transition>
            </el-col>
        </el-row>
    </div> 
