@@ -294,7 +294,8 @@ export function exportExcelFile({
     dataStyles = {},
     footer = [],
     footerMerges = [],
-    footerStyles = []
+    footerStyles = [],
+    notHJ=[]
 } = {}) {
     downloadExl({
         dataObj: {
@@ -311,7 +312,8 @@ export function exportExcelFile({
             titleCtnStyles,
             thStyles,
             dataStyles,
-            footerStyles
+            footerStyles,
+            notHJ
         },
         fileName: fileName
     });
@@ -354,22 +356,19 @@ export function sumBigData(a,b){
 export function sum(a,b){
   let lenA = trim(a).split('.')[1]==undefined?0:trim(a).split('.')[1].length;
   let lenB = trim(b).split('.')[1]==undefined?0:trim(b).split('.')[1].length;
-
- 
   if(lenA>lenB){
-    
-  let temA=a.replace('.','');
-  let temB=b.replace('.','')+(Math.pow(10,lenA-lenB)+'').substring(1);
-  let temRS=sumBigData(temA,temB);
-  return temRS.substring(0,temRS.length-lenA)+'.'+temRS.substring(temRS.length-lenA);
+    let temA=a.replace('.','');
+    let temB=b.replace('.','')+(Math.pow(10,lenA-lenB)+'').substring(1);
+    let temRS=sumBigData(temA,temB);
+    return temRS.substring(0,temRS.length-lenA)+'.'+temRS.substring(temRS.length-lenA);
   }else if(lenA<lenB){
-  let temA=a.replace('.','')+(Math.pow(10,lenB-lenA)+'').substring(1);
-  let temB=b.replace('.','');
-  let temRS=sumBigData(temA,temB);
-  return temRS.substring(0,temRS.length-lenB)+'.'+temRS.substring(temRS.length-lenB);
+    let temA=a.replace('.','')+(Math.pow(10,lenB-lenA)+'').substring(1);
+    let temB=b.replace('.','');
+    let temRS=sumBigData(temA,temB);
+    return temRS.substring(0,temRS.length-lenB)+'.'+temRS.substring(temRS.length-lenB);
   }else{
-  let temRS=sumBigData(a.replace('.',''),b.replace('.',''));
-  return temRS.substring(0,temRS.length-lenA)+(lenA>0?'.'+temRS.substring(temRS.length-lenA):'');
+    let temRS=sumBigData(a.replace('.',''),b.replace('.',''));
+    return temRS.substring(0,temRS.length-lenA)+(lenA>0?'.'+temRS.substring(temRS.length-lenA):'');
   }
  }
 
@@ -387,59 +386,43 @@ export function bulidData({
     th = {},
     data = [],
     footer = [],
-
     titleMerges = [],
     titleCtnMerges = [],
     dataMerges = {},
     footerMerges = [],
-
     titleStyles = [],
     titleCtnStyles = [],
     thStyles = [],
     dataStyles = [],
-    footerStyles = []
+    footerStyles = [],
+    notHJ=[]
 } = {}) {
     let headerMerges = titleMerges.concat(titleCtnMerges);
     let headerStyles = titleStyles.concat(titleCtnStyles);
     let rData = [];
-    
     let thN = [];
     let rsObj = {};
     if (data.length > 0) {
         let keyNot = [];
-        if (th) {
-            keyNot = Object.keys(data[0]).filter((dKey) => !Object.keys(th).includes(dKey));
-        }
+        if (th) { keyNot = Object.keys(data[0]).filter((dKey) => !Object.keys(th).includes(dKey)); }
         let aryhj=[];
         data.forEach((item, i) => {
-          
             keyNot.forEach((nK) => {
                 delete item[nK];
             });
-            
-             
-            let obj = {
-                xh: i + 1,
-                ...item
-            };
+            let obj = { xh: i + 1, ...item };
             let aryd=[];
-            
             Object.keys(th).forEach((key,di)=>{
               let nObj={};
               nObj[key]=obj[key];
               aryd.push(nObj);
-               
-              if (key == 'xh') {
-                rsObj[key] = '合计';
-                return;
-              }
-               
-              if (obj[key]!=undefined && !isNumber(trim(obj[key]+''))) {
-                  rsObj[key] = '';
-                  return;
-              }
+              if (key == 'xh') { rsObj[key] = '合计'; return; }
+              if (obj[key]!=undefined && !isNumber(trim(obj[key]+''))) { rsObj[key] = ''; return; }
               if (obj[key]!=undefined && isNumber(trim(obj[key]+''))) {
-                  rsObj[key]=isNumber(rsObj[key])?sum(obj[key]+'',rsObj[key]+''):trim(obj[key]+'');
+                  if(notHJ&&notHJ.includes(key)){
+                    rsObj[key] = ''; return;
+                  }
+                   rsObj[key]=isNumber(rsObj[key])?sum(obj[key]+'',rsObj[key]+''):trim(obj[key]+'');
               }
             })
             rData.push(aryd);
@@ -449,7 +432,6 @@ export function bulidData({
           let bojth={};
           bojth[thk]=th[thk];
           thN.push(bojth);
-
           let boj={}
           boj[thk]=rsObj[thk];
           aryhj.push(boj);
@@ -511,9 +493,7 @@ export function bulidData({
         }
 
         let rowDatas = [];
-        
             colKeyWidth = [];
-
             if (headerIndex < 0) {
               Object.keys(item).forEach((k, i) => {
                 tempI = tempI + tempPreCols;
@@ -602,7 +582,6 @@ export function bulidData({
             }
 
             if (footerIndex > 1) {
-               debugger
               Object.keys(item).forEach((k, i) => {
                 tempI = tempI + tempPreCols;
                 if (footerMerges[footerIndex] && footerMerges[footerIndex][k]) {
@@ -646,17 +625,31 @@ export function bulidData({
             s: item.style
         }
     });
-    console.log(resultData);
     return {
         "resultData": resultData,
         "merges": merges,
         "rowsHeight": rowsHeight,
         "colsWidth": colsWidth,
-        "rowCount": result.length
+        "rowCount": result.length,
+        "title":title
     };
 }
 
-
+/**
+ * @author wangsm
+ * @param {*} tempI 
+ * @param {*} sc 
+ * @param {*} tempCol 
+ * @param {*} index 
+ * @param {*} tempPreCols 
+ * @param {*} tempRow 
+ * @param {*} colKeyWidth 
+ * @param {*} colStyle 
+ * @param {*} item 
+ * @param {*} k 
+ * @param {*} merges 
+ * @param {*} colsWidth 
+ */
 export function buildRs(tempI,sc,tempCol,index,tempPreCols,tempRow,colKeyWidth,colStyle,item,k,merges,colsWidth){
   tempI = tempI > sc ? tempI : sc;
 
@@ -700,6 +693,23 @@ export function buildRs(tempI,sc,tempCol,index,tempPreCols,tempRow,colKeyWidth,c
       return colData;
   }
 }
+
+/**
+ * @author wangsm
+ * @param {*} tempI 
+ * @param {*} sc 
+ * @param {*} tempCol 
+ * @param {*} index 
+ * @param {*} tempPreCols 
+ * @param {*} tempRow 
+ * @param {*} colKeyWidth 
+ * @param {*} colStyle 
+ * @param {*} item 
+ * @param {*} k 
+ * @param {*} i 
+ * @param {*} merges 
+ * @param {*} colsWidth 
+ */
 export function buildRsTb(tempI,sc,tempCol,index,tempPreCols,tempRow,colKeyWidth,colStyle,item,k,i,merges,colsWidth){
   tempI = tempI > sc ? tempI : sc;
 
@@ -744,3 +754,76 @@ export function buildRsTb(tempI,sc,tempCol,index,tempPreCols,tempRow,colKeyWidth
       return colData;
   }
 }
+
+export function bulidMultiData({parmasList=[]}={}){
+    let rs=[];
+    if(parmasList&&parmasList.length>0){
+        parmasList.forEach((params,index)=>{
+           rs.push(bulidData(params));
+        });
+    }
+    return rs;
+}
+
+/**
+ * wangsm
+ * @param {} param0 
+ */
+export function exportMultiExcelFile({parmasList=[],fileName='下载的文件名',type="xlsx"}={}) {
+    downloadMultiExl({
+        parmasList: parmasList,
+        fileName: fileName,
+        type: type
+    });
+}
+ 
+export function downloadMultiExl({
+    parmasList,
+    fileName,
+    type
+} = {}) {
+    let resultList = bulidMultiData({parmasList});
+    let sheetNames=[];
+    let sheets={};
+    resultList.forEach((result,rsIndex)=>{
+        let tmpdata = result.resultData;
+        let outputPos = Object.keys(tmpdata);
+        let rowCount = result.rowCount;
+        let maxColV = 'A';
+        outputPos.forEach((item, index) => {
+            let ary = [...item];
+            maxColV = ary[0] > maxColV ? ary[0] : maxColV;
+        });
+        tmpdata["!merges"] = result.merges
+        tmpdata["!cols"] = result.colsWidth;
+        tmpdata["!rows"] = result.rowsHeight;
+        sheetNames.push(result.title[0].title);
+        sheets[result.title[0].title]=Object.assign({},
+                    tmpdata, {
+                        "!ref": "A1:" + maxColV + rowCount
+                    }
+                )
+         
+    });
+    var tmpWB = {
+        SheetNames: sheetNames,
+        Sheets: sheets
+    };
+    var tmpDown = new Blob(
+        [
+            s2ab(
+                XLSX.write(
+                    tmpWB, {
+                        bookType: type == undefined ? "xlsx" : type,
+                        bookSST: false,
+                        type: "binary"
+                    }
+                )
+            )
+        ], {
+            type: ""
+        }
+    );
+    saveAs(tmpDown, (fileName || "下载文件名称") + "." + (wopts.bookType == "biff2" ? "xls" : wopts.bookType));
+}
+ 

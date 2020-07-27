@@ -23,6 +23,8 @@
     "element-theme": "^2.0.1",
     "element-ui": "^2.13.1",
     "file-saver": "^2.0.2",
+    "html2canvas": "^1.0.0-rc.5",
+    "jspdf": "^1.5.3",
     "mockjs": "^1.1.0",
     "vue": "^2.5.2",
     "vue-fragment": "^1.5.1",

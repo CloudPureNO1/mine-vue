@@ -1,9 +1,11 @@
 <template>
 <div class="main">
-    <el-container class="main-container">
-        <el-aside :width="asideWidth" class="main-asider">
+   <el-container class="main-container">
+         
+        <el-aside :width="asideWidth" :class="['main-asider',amnitCls]" >
             <mtms-menu/>
         </el-aside>
+       
         <el-main class="cls-main">
             <el-container class="cls-main-container">
                 <el-header class="header" ref="headerRef" >
@@ -12,10 +14,12 @@
                 <el-main class="middler">
                     <mtms-work></mtms-work>
                 </el-main>
-                <!-- <el-footer class="footer">底部</el-footer> -->
+                 
             </el-container>
         </el-main>
     </el-container>
+ 
+ 
 </div>
 </template>
 
@@ -33,18 +37,21 @@ export default {
         'mtms-header': MainHeader
     },
     computed: {
-         asideWidth:{
-             get(){
-                 return this.$store.state.layout.asideWidth;
-             },
-             set(nVal){
-                 this.$store.state.layout.asideWidth=nVal;
-             }
-         } 
+         ...mapState({
+             asideWidth:state=>state.layout.asideWidth
+         }),
+         amnitCls(){
+             return this.asideWidth=='17%'?'main-asider-5-17':'main-asider-17-5'
+         },
+         asiderSpan(){
+             return this.asideWidth=='17%'?4:1
+         }
+        
     },
     created() {
         this.$nextTick(function () {
            this.$refs.headerRef.$el.removeAttribute('style');
+            
         })
     }
 
@@ -117,9 +124,94 @@ export default {
 }
 
 .main .main-asider {
+    width: 5%;
     height: 100%;
     color: #b8bcd8;
     background-color: #314358;
+    
+}
+
+.main .main-asider-5-17 {
+ 
+    animation:myfirst-5-17 .5s;
+    //transform-origin:0% 0%;
+	/* Firefox: */
+	-moz-animation:myfirst-5-17 .5s;
+   // -moz-transform-origin:0% 0%;
+	/* Safari and Chrome: */
+	-webkit-animation:myfirst-5-17 .5s;
+    //-webkit-transform-origin:0% 0%;
+	/* Opera: */
+	-o-animation:myfirst-5-17 .5s;
+    //-o-transform-origin:0% 0%;
+}
+
+@keyframes myfirst-5-17 
+{
+	// 0% {transform:scaleX(.29);}
+	// 100% {transform:scaleX(1);}
+    0% {width: 5%;}
+    100% {width: 17%;}
+}
+
+@-moz-keyframes myfirst-5-17  
+{
+    0% {width: 5%;}
+    100% {width: 17%;}
+}
+
+@-webkit-keyframes myfirst-5-17 
+{
+    0% {width: 5%;}
+    100% {width: 17%;}
+}
+
+@-o-keyframes myfirst-5-17 
+{
+    0% {width: 5%;}
+    100% {width: 17%;}
+}
+
+
+.main .main-asider-17-5 {
+     
+    animation:myfirst-17-5 .5s;
+    //transform-origin:0% 0%;
+	/* Firefox: */
+	-moz-animation:myfirst-17-5 .5s;
+    //-moz-transform-origin:0% 0%;
+	/* Safari and Chrome: */
+	-webkit-animation:myfirst-17-5 .5s;
+    //-webkit-transform-origin:0% 0%;
+	/* Opera: */
+	-o-animation:myfirst-17-5 .5s;
+    //-o-transform-origin:0% 0%;
+}
+
+@keyframes myfirst-17-5
+{
+	// from {transform:scaleX(3.4);}
+	// to {transform:scaleX(1);}
+    0% {width: 17%;}
+    100% {width: 5%;}
+}
+
+@-moz-keyframes myfirst-17-5  
+{
+    0% {width: 17%;}
+    100% {width: 5%;}
+}
+
+@-webkit-keyframes myfirst-17-5
+{
+    0% {width: 17%;}
+    100% {width: 5%;}
+}
+
+@-o-keyframes myfirst-17-5
+{
+    0% {width: 17%;}
+    100% {width: 5%;}
 }
 
 .main .cls-main,

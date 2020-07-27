@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="home-main" id="pdfDom">
   
     <!-- 
     列表渲染，使用 <transition-group> 组件
@@ -9,6 +9,8 @@
     4.CSS 过渡的类将会应用在内部的元素中，而不是这个组/容器本身。
      -->
 
+
+              <el-button type="primary" @click="handleDown">jsPDF方式下载</el-button>
 
      
    <el-button @click="show=!show">切换</el-button>
@@ -23,7 +25,7 @@
                        <el-button @click="show2=!show2">click</el-button>
                        <transition name="mtms">
                           <div v-show="show2">
-                          <p v-for="item in data2" :key="item.id">{{item.address}}-{{item.mobileNum}}--{{item.email}}</p>
+                          <p v-for="(item ,index) in data2" :key="item.id+index">{{item.address}}-{{item.mobileNum}}--{{item.email}}</p>
                           </div>
                        </transition>
                
@@ -31,6 +33,7 @@
                     </template>
                     
                   </el-table-column>
+                  <el-table-column label="序号" type="index"></el-table-column>
                   <el-table-column label="用户名" prop="username"></el-table-column>
                   <el-table-column label="密码" prop="password"></el-table-column>
               </el-table>
@@ -39,16 +42,18 @@
  
     <transition name="fade-transform">
        <el-table :data="data" v-show="show" size="mini">
+       <el-table-column label="序号" type="index"></el-table-column>
           <el-table-column label="用户名" prop="username"></el-table-column>
           <el-table-column label="密码" prop="password"></el-table-column>
        </el-table>
     </transition>
  
+
  
     </div>
 </template>
 <script>
- 
+ import html2pdf from '@/utils/html2pdf'
 export default {
     data(){
       return{
@@ -56,18 +61,15 @@ export default {
         show2:false,
         count:0,
         listD:[111,222,333],
-        data:[
-          {username:'wangsm',password:'wangsm8888888'},
-          {username:'wangsm',password:'wangsm8888888'},
-          {username:'wangsm',password:'wangsm8888888'},
-          {username:'wangsm',password:'wangsm8888888'}
-        ],
-        data2:[
-          {id:1,address:'杭州市西湖区西溪北苑',mobleNum:'12122222222',email:'123@123.com'},
-          {id:2,address:'杭州市西湖区西溪北苑',mobleNum:'12122222222',email:'123@123.com'},
-          {id:3,address:'杭州市西湖区西溪北苑',mobleNum:'12122222222',email:'123@123.com'}
-        ]
+        data:[],
+        data2:[]
       }
+    },
+    mounted(){
+      let obj1= {username:'wangsm',password:'wangsm8888888'};
+      this.data=new Array(120).fill(obj1);
+      let obj2={id:1,address:'杭州市西湖区西溪北苑',mobleNum:'12122222222',email:'123@123.com'};
+      this.data2=new Array(120).fill(obj2);
     },
     computed:{
       msg:{
@@ -87,6 +89,10 @@ export default {
             this.$refs['userTable'].toggleRowExpansion(row);
             this.show2=!this.show2;
         },
+            handleDown(){
+                //导出PDF
+                html2pdf.downloadPDF( document.querySelector('#pdfDom'),'我的PDF');
+            },
     }
 }
 </script>

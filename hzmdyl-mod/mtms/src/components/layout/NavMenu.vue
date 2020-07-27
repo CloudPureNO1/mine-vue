@@ -1,10 +1,10 @@
 <template>
-   <div class="main">
+   <div class="nav-menu-main" >
        <el-row>
            <el-col :span="span">
-              <transition name="nav-transform">
                <el-menu 
                 :collapse="isCollapse"
+                :collapse-transition="true"
                 background-color="#314358"
                 active-text-color="#409eff"
                 text-color="#b8bcd8"
@@ -12,23 +12,24 @@
                 @open="handleOpen"
                 @select="handleSelect"
                 > 
-                 
                    <nav-menu-item :menuDatas="navDatas"></nav-menu-item>  
-                   
                </el-menu>
-              </transition>
+            
            </el-col>
        </el-row>
    </div> 
 </template>
 <script>
+import TestMenu from './TestMenu'
+
 import axios from 'axios'
 import nav from '@/mock/nav.js'
 import NavMenuItem from '@/components/layout/NavMenuItem'
 export default {
     name:'NavMenu',
     components:{
-        'nav-menu-item':NavMenuItem
+        'nav-menu-item':NavMenuItem,
+        'test-menu':TestMenu
     },
     data(){
         return{
@@ -105,3 +106,5 @@ export default {
     }
 }
 </script>
+
+ 

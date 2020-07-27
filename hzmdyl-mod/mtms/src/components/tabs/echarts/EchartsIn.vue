@@ -1,5 +1,6 @@
 <template>
     <div class="echarts-in-main">
+      <el-button type="primary" @click="handleDown">PDF</el-button>
         <el-row>
           <el-col :span="12">
             <mtms-border componentName="Balance" ></mtms-border>
@@ -37,6 +38,7 @@
 </template>
 
 <script>
+ import html2pdf from '@/utils/html2pdf'
 import Border from './echartsIn/Border'
 import BorderLine from './echartsIn/BorderLine'
 export default {
@@ -48,6 +50,12 @@ export default {
         return{
             cardShadow:'never'
         }
+    },
+    methods:{
+            handleDown(){
+                //导出PDF
+                html2pdf.downloadPDF( document.querySelector('.echarts-in-main'),'echars');
+            },
     }
 }
 </script>
