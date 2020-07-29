@@ -9,8 +9,8 @@
             </el-avatar>
         </div>
         <div>
-            <div style="height:50%;">
-                <el-dropdown placement="bottom">
+            <div >
+                <el-dropdown placement="bottom" class="dropdown-font-size">
                     <i class="el-icon-setting" style="margin-right: 15px"></i>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>个人中心</el-dropdown-item>
@@ -18,12 +18,12 @@
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
-            <div style="height:50%;">
-                <el-dropdown placement="bottom" @command="commandLayout">
+            <div  >
+                <el-dropdown placement="bottom" @command="commandLayout" class="dropdown-font-size">
                     <i class="el-icon-caret-bottom" style="margin-right: 15px"></i>
                     <el-dropdown-menu slot="dropdown">
                         <!--command  Number/String/Object-->
-                        <el-dropdown-item v-for="(item,index) in layoutList" :key="index" :command="item.type">{{item.name}}</el-dropdown-item>
+                        <el-dropdown-item v-for="(item,index) in layoutList" :key="index" :command="item.type" :class="item.type==sizeType?'font-blue':'font-defualt'">{{item.name}}</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -51,15 +51,16 @@ export default {
     computed:{
         ...mapState({
             isFullScreen:state=>state.layout.isFullScreen,
-            avatarSize:state=>state.layout.avatarSize
+            avatarSize:state=>state.layout.avatarSize,
+            sizeType:state=>state.layout.sizeType
         }),
         screenIconfont(){
             return this.isFullScreen?'icon-ln_quanpingtuichu':'icon-ln_quanping'
         },
         fullScreenImgSize(){
-            return 'iconfont-'+this.avatarSize;
+            return 'iconfont-'+this.sizeType;
         }
-
+         
     },
     methods:{
         ...mapActions({
@@ -82,11 +83,15 @@ export default {
                     this.setAvatarSize('medium');
                     break;
             }
+            this.$store.dispatch('layout/setAsideWidth');
+            this.$ELEMENT.size=command;
+            sessionStorage.setItem('size',command)
         }
     }
 }
 </script>
-<style >
+<style scoped>
+ 
     .header-avatar-main>div:nth-child(1){
         padding:0;
     }
@@ -95,6 +100,17 @@ export default {
     }
     .header-avatar-main>div:nth-child(3){
         padding: 0;
+    }
+    
+     .font-blue{
+        color:#409eff;
+        font-size:1.1rem;
+    }
+     .font-defualt{
+        font-size:1rem;
+    }
+    .dropdown-font-size{
+        font-size:1rem;
     }
 </style>
  

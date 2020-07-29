@@ -1,5 +1,6 @@
 <template>
-    <div class="echarts-in-main">
+    <div class="echarts-in-main vof-cls" :style="{'height':dHeight}" ref="dHeight">
+    
       <el-button type="primary" @click="handleDown">PDF</el-button>
         <el-row>
           <el-col :span="12">
@@ -34,6 +35,7 @@
             <mtms-border-line componentName="XBar"   :orderNum="4"></mtms-border-line>
           </el-col>
         </el-row>
+   
     </div>
 </template>
 
@@ -41,6 +43,7 @@
  import html2pdf from '@/utils/html2pdf'
 import Border from './echartsIn/Border'
 import BorderLine from './echartsIn/BorderLine'
+import { mapState } from 'vuex'
 export default {
     components:{
         'mtms-border':Border,
@@ -48,8 +51,24 @@ export default {
     },
     data(){
         return{
-            cardShadow:'never'
+            cardShadow:'never',
+            dHeight:'100px'
         }
+    },
+    created(){
+      let _this=this;
+      this.$nextTick(function(){
+        _this.dHeight = (_this.$parent.$parent.$el.offsetHeight-_this.$parent.$parent.$children[0].$el.offsetHeight)+'px';
+      })
+       
+    },
+    computed:{
+      ...mapState({
+        tabContentHeight:state=>state.layout.tabContentHeight
+      }),
+      // dHeight(){
+      //   return this.tabContentHeight+'px';
+      // }
     },
     methods:{
             handleDown(){
@@ -62,7 +81,11 @@ export default {
 <style>
     .echarts-in-main{
         background-color:#19265d;
-        color:#ffffff;
+        color:#ffffff; 
+ 
+    }
+    .vof-cls{
+      overflow-y:auto;
     }
         .echarts-in-main .el-card {
         border: 1px solid #93a4e2;

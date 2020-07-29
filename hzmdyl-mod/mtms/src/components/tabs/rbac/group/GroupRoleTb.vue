@@ -43,7 +43,7 @@ export default {
                 }
             })
             .catch(err=>{
-                this.alert(err,'提示',{type:'err'});
+                this.alert(String(err),'提示',{type:'err'});
             })
         },
         formatRoleTypes(row, column){

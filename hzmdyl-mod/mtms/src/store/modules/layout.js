@@ -21,6 +21,9 @@ const actions = {
   setTabContentHeight({commit},payload){
     commit('setTabContentHeight',payload)
   },
+  setAsideWidth({commit},payload){
+    commit('setAsideWidth',payload);
+  },
   toggleIsFullScreen({commit},payload){
     commit('toggleIsFullScreen',payload)
   },
@@ -42,8 +45,10 @@ const mutations = {
   },
   togleShow(state){
     state.isCollapse=!state.isCollapse;
-    state.asideWidth=state.isCollapse?'5%':'17%';
-    //state.asideWidth=state.isCollapse?'0':'17%';
+  },
+  setAsideWidth(state){
+    sessionStorage.setItem('lastTimeAsideWidth',state.asideWidth);
+    state.asideWidth=state.sizeType=='mini'?(state.isCollapse?'2%':'15%'):(state.isCollapse?'5%':'17%')
   },
   setTabContentHeight(state,payload){
     state.tabContentHeight=payload

@@ -12,14 +12,16 @@
 <div class="tab-main"  >
 <el-tabs v-model="activeName" type="border-card" closable @tab-remove="removeTab" @tab-click="chooseTab">
         <el-tab-pane label="首页" name="Home" :closable="false">
-            <mtms-home></mtms-home>
+            <mtms-home v-show="activeName=='Home'"></mtms-home>
         </el-tab-pane>
-        <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.label" :name="item.name" :closable="item.closable" :disabled="item.disabled">
+         
+        <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.label" :name="item.name" :closable="item.closable" :disabled="item.disabled"  >
         <transition name="tabCt-transform">
             <!--通过component  接入自定义组件，如果item.content 为welcome 则引入<welcome></welcome>组件-->
-            <component :is="item.component"></component>
+            <component :is="item.component" v-show="activeName==item.name"></component>
         </transition>
         </el-tab-pane>
+         
 </el-tabs>
 </div>
 </template>
@@ -38,17 +40,9 @@ export default {
         };
     },
     mounted() {
-        let that=this;
         //刷新前存储打开的tab，也可以在created 中存放
-        window.addEventListener('beforeunload', e => {
-            sessionStorage.setItem("tabs", JSON.stringify(this.tabs));
-            sessionStorage.setItem("activeName", this.activeName);
-        });
-        window.addEventListener('resize',e=>{
-            let tabHeight = document.getElementsByClassName('el-tabs el-tabs--top el-tabs--border-card')[0].offsetHeight;
-            let tabHeaderHeight = document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
-            that.setTabContentHeight(tabHeight-tabHeaderHeight);
-        })
+        window.addEventListener('beforeunload',this.setDataBeforeunload);
+        window.addEventListener('resize',this.setRisize)
     },
      
     created() {
@@ -77,14 +71,17 @@ export default {
         });
         let that=this;
         this.$nextTick(function(){
-                let tabHeight = document.getElementsByClassName('el-tabs el-tabs--top el-tabs--border-card')[0].offsetHeight;
-                let tabHeaderHeight = document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
-                that.setTabContentHeight(tabHeight-tabHeaderHeight-43);
+                // let tabHeight = document.getElementsByClassName('el-tabs el-tabs--top el-tabs--border-card')[0].offsetHeight;
+                // let tabHeaderHeight = document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
+                // that.setTabContentHeight(tabHeight-tabHeaderHeight-43);
+                let tabHeight = that.$el.offsetHeight-that.$children[0].$children[0].$el.offsetHeight;
+                that.setTabContentHeight(tabHeight);
         })
     },
     destroyed() {
         //界面销毁时，取消监听beforeunload
-        window.removeEventListener('beforeunload', e => {});
+        window.removeEventListener('beforeunload', this.setDataBeforeunload);
+        window.removeEventListener('resize',this.setRisize);
     },
     watch: {
         $route() {
@@ -150,8 +147,18 @@ export default {
             this.$router.push({
                 name: tab.name
             });
-        } 
-
+        } ,
+        setDataBeforeunload(e){
+            sessionStorage.setItem("tabs", JSON.stringify(this.tabs));
+            sessionStorage.setItem("activeName", this.activeName);
+        },
+        setRisize(e){
+            // let tabHeight = document.getElementsByClassName('el-tabs el-tabs--top el-tabs--border-card')[0].offsetHeight;
+            // let tabHeaderHeight = document.getElementsByClassName('el-tabs__header is-top')[0].offsetHeight;
+            // this.setTabContentHeight(tabHeight-tabHeaderHeight);
+            let tabHeight = this.$el.offsetHeight-this.$children[0].$children[0].$el.offsetHeight;
+            this.setTabContentHeight(tabHeight);
+        }
     }
 };
 </script>

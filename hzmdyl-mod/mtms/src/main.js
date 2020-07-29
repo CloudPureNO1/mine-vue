@@ -31,11 +31,13 @@ import './styles/index.scss'
 
 //引入Element UI  默认中文
 import ElementUI from 'element-ui';
-//import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/index.css';
 //自定义主题样式
-import '@/styles/themes/element-mini-theme.scss'
-Vue.use(ElementUI);
-
+//import '@/styles/themes/element-mini-theme.scss'
+//Vue.use(ElementUI);
+Vue.use(ElementUI,{
+   size:'small'
+})
 
 // 完整引入 Element
 // import ElementUI from 'element-ui'

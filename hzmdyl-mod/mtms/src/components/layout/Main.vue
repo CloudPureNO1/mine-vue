@@ -38,14 +38,28 @@ export default {
     },
     computed: {
          ...mapState({
-             asideWidth:state=>state.layout.asideWidth
+             asideWidth:state=>state.layout.asideWidth,
+             sizeType:state=>state.layout.sizeType
          }),
          amnitCls(){
-             return this.asideWidth=='17%'?'main-asider-5-17':'main-asider-17-5'
+            // return this.asideWidth=='17%'?'main-asider-5-17':'main-asider-17-5'
+            let lastTimeAsideWidth = sessionStorage.getItem('lastTimeAsideWidth')||'';
+            switch(this.asideWidth){
+                case '17%':  //this.sizeType====> small   如果是sizeType 变化引起的，说明是  17%-15%,2%-5% 之间的变化,菜单收缩则是：5%-17%，2%-15%
+                  return  lastTimeAsideWidth=='15%'?'main-asider-15-17':'main-asider-5-17';
+                  break;
+                case '5%':
+                    return lastTimeAsideWidth=='2%'?'main-asider-2-5':'main-asider-17-5'
+                    break;
+                case '15%':
+                    return lastTimeAsideWidth=='17%'?'main-asider-17-15':'main-asider-2-15';
+                    break;
+                case '2%':
+                    return lastTimeAsideWidth=='5%'?'main-asider-5-2':'main-asider-15-2';
+                    break;
+
+            }
          },
-         asiderSpan(){
-             return this.asideWidth=='17%'?4:1
-         }
         
     },
     created() {
@@ -213,6 +227,261 @@ export default {
     0% {width: 17%;}
     100% {width: 5%;}
 }
+
+
+
+
+
+.main .main-asider-15-2 {
+     
+    animation:myfirst-15-2 .5s;
+    //transform-origin:0% 0%;
+	/* Firefox: */
+	-moz-animation:myfirst-15-2 .5s;
+    //-moz-transform-origin:0% 0%;
+	/* Safari and Chrome: */
+	-webkit-animation:myfirst-15-2 .5s;
+    //-webkit-transform-origin:0% 0%;
+	/* Opera: */
+	-o-animation:myfirst-15-2 .5s;
+    //-o-transform-origin:0% 0%;
+}
+
+@keyframes myfirst-15-2
+{
+	// from {transform:scaleX(3.4);}
+	// to {transform:scaleX(1);}
+    0% {width: 15%;}
+    100% {width: 2%;}
+}
+
+@-moz-keyframes myfirst-15-2 
+{
+    0% {width: 15%;}
+    100% {width: 2%;}
+}
+
+@-webkit-keyframes myfirst-15-2
+{
+    0% {width: 15%;}
+    100% {width: 2%;}
+}
+
+@-o-keyframes myfirst-15-2
+{
+    0% {width: 15%;}
+    100% {width: 2%;}
+}
+
+
+.main .main-asider-2-15 {
+ 
+    animation:myfirst-2-15 .5s;
+    //transform-origin:0% 0%;
+	/* Firefox: */
+	-moz-animation:myfirst-2-15 .5s;
+   // -moz-transform-origin:0% 0%;
+	/* Safari and Chrome: */
+	-webkit-animation:myfirst-2-15 .5s;
+    //-webkit-transform-origin:0% 0%;
+	/* Opera: */
+	-o-animation:myfirst-2-15 .5s;
+    //-o-transform-origin:0% 0%;
+}
+
+@keyframes myfirst-2-15 
+{
+	// 0% {transform:scaleX(.29);}
+	// 100% {transform:scaleX(1);}
+    0% {width: 2%;}
+    100% {width: 15%;}
+}
+
+@-moz-keyframes myfirst-2-15 
+{
+    0% {width: 2%;}
+    100% {width: 15%;}
+}
+
+@-webkit-keyframes myfirst-2-15
+{
+    0% {width: 2%;}
+    100% {width: 15%;}
+}
+
+@-o-keyframes myfirst-2-15 
+{
+    0% {width: 2%;}
+    100% {width: 15%;}
+}
+
+
+.main .main-asider-5-2 {
+ 
+    animation:myfirst-5-2 .5s;
+    //transform-origin:0% 0%;
+	/* Firefox: */
+	-moz-animation:myfirst-5-2 .5s;
+   // -moz-transform-origin:0% 0%;
+	/* Safari and Chrome: */
+	-webkit-animation:myfirst-5-2 .5s;
+    //-webkit-transform-origin:0% 0%;
+	/* Opera: */
+	-o-animation:myfirst-5-2 .5s;
+    //-o-transform-origin:0% 0%;
+}
+
+@keyframes myfirst-5-2 
+{
+	// 0% {transform:scaleX(.29);}
+	// 100% {transform:scaleX(1);}
+    0% {width: 5%;}
+    100% {width: 2%;}
+}
+
+@-moz-keyframes myfirst-5-2  
+{
+    0% {width: 5%;}
+    100% {width: 2%;}
+}
+
+@-webkit-keyframes myfirst-5-2 
+{
+    0% {width: 5%;}
+    100% {width: 2%;}
+}
+
+@-o-keyframes myfirst-5-2 
+{
+    0% {width: 5%;}
+    100% {width: 2%;}
+}
+
+
+.main .main-asider-2-5 {
+ 
+    animation:myfirst-2-5 .5s;
+    //transform-origin:0% 0%;
+	/* Firefox: */
+	-moz-animation:myfirst-2-5 .5s;
+   // -moz-transform-origin:0% 0%;
+	/* Safari and Chrome: */
+	-webkit-animation:myfirst-2-5 .5s;
+    //-webkit-transform-origin:0% 0%;
+	/* Opera: */
+	-o-animation:myfirst-2-5 .5s;
+    //-o-transform-origin:0% 0%;
+}
+
+@keyframes myfirst-2-5
+{
+	// 0% {transform:scaleX(.29);}
+	// 100% {transform:scaleX(1);}
+    0% {width: 2%;}
+    100% {width: 5%;}
+}
+
+@-moz-keyframes myfirst-2-5 
+{
+    0% {width: 2%;}
+    100% {width: 5%;}
+}
+
+@-webkit-keyframes myfirst-2-5
+{
+    0% {width: 2%;}
+    100% {width: 5%;}
+}
+
+@-o-keyframes myfirst-2-5 
+{
+    0% {width: 2%;}
+    100% {width: 5%;}
+}
+
+.main .main-asider-17-15 {
+ 
+    animation:myfirst-2-5 .5s;
+    //transform-origin:0% 0%;
+	/* Firefox: */
+	-moz-animation:myfirst-17-15.5s;
+   // -moz-transform-origin:0% 0%;
+	/* Safari and Chrome: */
+	-webkit-animation:myfirst-17-15 .5s;
+    //-webkit-transform-origin:0% 0%;
+	/* Opera: */
+	-o-animation:myfirst-17-15 .5s;
+    //-o-transform-origin:0% 0%;
+}
+
+@keyframes myfirst-17-15
+{
+	// 0% {transform:scaleX(.29);}
+	// 100% {transform:scaleX(1);}
+    0% {width: 17%;}
+    100% {width: 15%;}
+}
+
+@-moz-keyframes myfirst-17-15 
+{
+    0% {width: 17%;}
+    100% {width: 15%;}
+}
+
+@-webkit-keyframes myfirst-17-15
+{
+    0% {width: 17%;}
+    100% {width: 15%;}
+}
+
+@-o-keyframes myfirst-17-15 
+{
+    0% {width: 17%;}
+    100% {width: 15%;}
+}
+
+.main .main-asider-15-17 {
+ 
+    animation:myfirst-2-5 .5s;
+    //transform-origin:0% 0%;
+	/* Firefox: */
+	-moz-animation:myfirst-15-17.5s;
+   // -moz-transform-origin:0% 0%;
+	/* Safari and Chrome: */
+	-webkit-animation:myfirst-15-17 .5s;
+    //-webkit-transform-origin:0% 0%;
+	/* Opera: */
+	-o-animation:myfirst-15-17 .5s;
+    //-o-transform-origin:0% 0%;
+}
+
+@keyframes myfirst-15-17
+{
+	// 0% {transform:scaleX(.29);}
+	// 100% {transform:scaleX(1);}
+    0% {width: 15%;}
+    100% {width: 17%;}
+}
+
+@-moz-keyframes myfirst-15-17 
+{
+    0% {width: 15%;}
+    100% {width: 17%;}
+}
+
+@-webkit-keyframes myfirst-15-17
+{
+    0% {width: 15%;}
+    100% {width: 17%;}
+}
+
+@-o-keyframes myfirst-15-17 
+{
+    0% {width: 15%;}
+    100% {width: 17%;}
+}
+
+
 
 .main .cls-main,
 .cls-main-container {

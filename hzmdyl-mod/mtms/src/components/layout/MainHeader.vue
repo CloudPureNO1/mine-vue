@@ -1,25 +1,11 @@
 <template>
  <span @dblclick="toggleFullScreen">
-<el-row >
-    <el-col :span="20" class="box">
-        <span style="height:100%;">
+<el-row class="box">
+    <el-col :span="20" class="item">
+         <span class="box">
             <span @click="exchange" :class="['icon iconfont', collapse ,isCollapseImgSize,'item']" ></span>
-        </span>
-        <span>&nbsp;</span>
-        <span class="item">
-            <el-row >
-                <el-col :span="24" :class="titleSize">
-                    <span><i  class="el-icon-user-solid"></i>浙江网新恩普软件有限公司</span>
-                </el-col>
-            </el-row>
-            <el-row >
-                <el-col :span="24" >
-                    <span class="box">
-                    <i class="el-icon-s-flag item" ></i>
-                    <mtms-breadcrumb class="item"></mtms-breadcrumb>
-                    </span>
-                </el-col>
-            </el-row>
+             <span class="item">&nbsp;&nbsp;&nbsp;</span>
+            <mtms-breadcrumb class="item"></mtms-breadcrumb>
         </span>
     </el-col>
     <el-col :span="4" >
@@ -82,6 +68,7 @@ export default {
         }),
         exchange() {
             this.$store.commit('layout/togleShow');
+            this.$store.dispatch('layout/setAsideWidth');
         },
        toggleFullScreen(){
            this.$toggleFullScreen(this.isFullScreen);

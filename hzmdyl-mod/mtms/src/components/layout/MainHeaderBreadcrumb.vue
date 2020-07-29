@@ -35,7 +35,7 @@ import { mapState } from 'vuex'
                 sizeType:state=>state.layout.sizeType
             }),
             breadCrumbSize(){
-                return 'bread-crumb-cls-'+this.sizeType
+                return 'bread-crumb-cls-'+(this.sizeType=='small'?'nomal':'small')
             }
         },
         methods:{

@@ -231,6 +231,18 @@ export default {
                 }
             });
         },
+    },
+    beforeDestroy(){
+        console.log('>>>>>>beforeDestroy');
+    },
+    destroyed(){
+        console.log('>>>>>>destroyed');
+    },
+    activated(){
+        console.log('>>>>>>activated');
+    },
+    deactivated(){
+        console.log('>>>>>>deactivated');
     }
 }
 </script>
@@ -253,6 +265,7 @@ export default {
     -ms-flex-align: center;
     align-items: center;
     color: #3e89e6;
+    background-color:red;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
